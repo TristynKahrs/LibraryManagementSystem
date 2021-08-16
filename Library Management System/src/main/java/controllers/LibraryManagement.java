@@ -79,4 +79,8 @@ public class LibraryManagement {
         }
         return books;
     }
+
+    public static ArrayList<double[]> checkFees(String username) {
+       return DatabaseOperations.checkForFees(new User(DatabaseOperations.getUser(username)));
+    }
 }

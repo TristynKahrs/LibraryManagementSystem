@@ -332,7 +332,7 @@ public class DatabaseOperations {
 
             while(rs.next()) {
                 bookFeeInfo = new double[2];
-                bookFeeInfo[0] = rs.getInt(3);
+                bookFeeInfo[0] = rs.getInt(2);
                 bookFeeInfo[1] = rs.getDouble(4);
                 bookFees.add(bookFeeInfo);
             }

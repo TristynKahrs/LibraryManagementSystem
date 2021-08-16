@@ -33,7 +33,6 @@ public class AccountManagement {
     public static User login(String username, String password) throws SecurityException {
         User activeUser = new User(DatabaseOperations.getUser(username));
         if (activeUser.passwordMatches(password)) {
-            //TODO check for fees here using the method Tristyn will make in LibraryManagement.java
             return activeUser;
         }
         throw new SecurityException();
