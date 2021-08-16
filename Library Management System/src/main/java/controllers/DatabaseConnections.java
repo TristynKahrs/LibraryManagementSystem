@@ -8,10 +8,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class DatabaseConnections { //TODO split up this class into DatabaseConnections and DatabaseOperations
+public class DatabaseConnections { //TODO split this class into two classes
 
     private static Connection connection = null;
     private static String url = "jdbc:mysql://localhost:3306/"
@@ -35,11 +35,11 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
 
     public static void createDatabase() {
         String schemaSQL = "CREATE SCHEMA IF NOT EXISTS lmsdatabase;";
-        String sqlBooks = "CREATE TABLE IF NOT EXISTS books(book_id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(255), genre VARCHAR(255));";
-        String sqlUsers = "CREATE TABLE IF NOT EXISTS users(user_id INT AUTO_INCREMENT PRIMARY KEY, full_name VARCHAR(255), username VARCHAR(255), password VARCHAR(255), email VARCHAR(255));";
-        String sqlCheckout = "CREATE TABLE IF NOT EXISTS checkout(checkout_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
+        String sqlBooks = "CREATE TABLE IF NOT EXISTS books(book_id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(255));";
+        String sqlUsers = "CREATE TABLE IF NOT EXISTS users(user_id INT AUTO_INCREMENT PRIMARY KEY, full_name VARCHAR(255), username VARCHAR(255), password VARBINARY(255));";
+        String sqlCheckout = "CREATE TABLE IF NOT EXISTS checkout(checkout_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, checkOutDate DATE, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
         String sqlLost = "CREATE TABLE IF NOT EXISTS lost_books(lost_book_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
-        String sqlFees = "CREATE TABLE IF NOT EXISTS fees(fee_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, fee_amount DECIMAL(5,2), FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
+        String sqlFees = "CREATE TABLE IF NOT EXISTS fees(fee_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, fee_amount DOUBLE PRECISION(5,2), FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
         String url2 = "jdbc:mysql://localhost:3306/"
                 + "?allowPublicKeyRetrieval=true&useSSL=false";
 
@@ -62,7 +62,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
     }
 
     private static void insertBooks() {
-        File bookList = new File("src//main//data.bookData//books.csv");
+        File bookList = new File("src//main//java//data.bookData//books.csv");
         String insertBook  = "INSERT INTO books(title, author) Values(?,?)";
         PreparedStatement pst = null;
         if (bookList.exists()) {
@@ -105,7 +105,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
      * @param _fullName String _fullname to set fullname
      */
     public static void createUser(String _fullName, String _username, String _password) {
-        String insertUser = "INSERT INTO users(full_name, username, password) Values(?,?,?)";
+        String insertUser = "INSERT INTO users(full_name, username, password) Values(?, ?, aes_encrypt(?, 'pass1234!'))";
         try {
             Connection con = SQLConnection();
             PreparedStatement pst = con.prepareStatement(insertUser);
@@ -126,7 +126,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
      * @return Returns true if a match is found within database, otherwise false
      */
     public static ArrayList<String[]> getUsers(String field) {
-        String checkUser = "SELECT * FROM lmsdatabase.users WHERE full_name=(?) OR password=(?);";
+        String checkUser = "SELECT * FROM lmsdatabase.users WHERE full_name=(?);";
         ArrayList<String[]> users = new ArrayList<>();
         String[] userInfo = new String[4];
 
@@ -134,7 +134,6 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
             Connection con = SQLConnection();
             PreparedStatement pst = con.prepareStatement(checkUser);
             pst.setString(1, field);
-            pst.setString(2, field);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
@@ -153,7 +152,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
     }
 
     public static String[] getUser(String username) {
-        String checkUser = "SELECT * FROM lmsdatabase.users WHERE username=(?);";
+        String checkUser = "SELECT *, cast(aes_decrypt(password, 'pass1234!') as char) FROM lmsdatabase.users WHERE username=(?);";
         String[] userInfo = new String[4];
 
         try {
@@ -166,7 +165,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
                 userInfo[0] = rs.getString(1);
                 userInfo[1] = rs.getString(2);
                 userInfo[2] = rs.getString(3);
-                userInfo[3] = rs.getString(4);
+                userInfo[3] = rs.getString(5);
             }
             con.close();
         } catch (SQLException SQLe) {
@@ -176,7 +175,7 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
     }
 
     public static void changeUserPassword(String username, String newPassword) {
-        String newPassQuery = "UPDATE users SET password=(?) WHERE username=(?);";
+        String newPassQuery = "UPDATE users SET password=aes_encrypt(?, 'pass1234!') WHERE username=(?);";
 
         try {
             Connection con = SQLConnection();
@@ -190,14 +189,13 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
         }
     }
 
-    public static void changeFullName(String newFullName, String username, String password) {
-        String newUserName = "UPDATE users SET full_name=(?) WHERE username=(?) AND password=(?);";
+    public static void changeFullName(String newFullName, String username) {
+        String newUserName = "UPDATE users SET full_name=(?) WHERE username=(?)";
         try {
             Connection con = SQLConnection();
             PreparedStatement pst = con.prepareStatement(newUserName);
             pst.setString(1, newFullName);
             pst.setString(2, username);
-            pst.setString(3, password);
             pst.executeUpdate();
             con.close();
         } catch (SQLException SQLe) {
@@ -313,12 +311,13 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
     }
 
     public static boolean checkOutBook(Book book, User user){
-        String checkedOutBook = "INSERT INTO checkout (book_id, user_id) Values(?,?)";
+        String checkedOutBook = "INSERT INTO checkout (book_id, user_id, checkOutDate) Values(?,?,?)";
         try{
             Connection con = SQLConnection();
             PreparedStatement pst = con.prepareStatement(checkedOutBook);
             pst.setInt(1, book.getPrimaryKey());
             pst.setInt(2, user.getPrimaryKey());
+            pst.setDate(3, Date.valueOf(LocalDate.now()));
             pst.executeUpdate();
             con.close();
             return true;
@@ -343,4 +342,94 @@ public class DatabaseConnections { //TODO split up this class into DatabaseConne
         }
         return false;
     }
+
+    public static boolean createLostBook(Book book, User user) {
+        String createLostBook = "INSERT INTO lost_books(book_id, user_id) VALEUS(?, ?)";
+
+        try {
+            Connection con = SQLConnection();
+            PreparedStatement pst = con.prepareStatement(createLostBook);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            pst.executeUpdate();
+            con.close();
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean deleteLostBook(Book book, User user) {
+        String foundLostBook = "DELETE FROM lost_books WHERE book_id=(?) AND user_id=(?)";
+        try {
+            Connection con = SQLConnection();
+            PreparedStatement pst = con.prepareStatement(foundLostBook);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            pst.executeUpdate();
+            con.close();
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean createFee(Book book, User user, double fee) {
+        String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount) VALUES(?, ?, ?)";
+        try {
+            Connection con = SQLConnection();
+            PreparedStatement pst = con.prepareStatement(insertFee);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            pst.setDouble(3, fee);
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+        return false;
+    }
+
+    public static double getCurrentFee(Book book, User user) {
+        String getFeeAmount = "SELECT fee_amount FROM fees WHERE book_id=(?) AND user_id=(?)";
+        double currentFee = 0;
+        try {
+            Connection con = SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getFeeAmount);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                currentFee = rs.getDouble(1);
+                return currentFee;
+            }
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return currentFee;
+    }
+
+    public static boolean updateFee(Book book, User user, double payment) {
+        String updateFee = "UPDATE fees SET fee_amount=? WHERE book_id=? AND user_id=?";
+        try {
+            Connection con = SQLConnection();
+            PreparedStatement pst = con.prepareStatement(updateFee);
+            pst.setDouble(1, getCurrentFee(book, user) + payment);
+            pst.setInt(2, book.getPrimaryKey());
+            pst.setInt(3, user.getPrimaryKey());
+            pst.executeUpdate();
+
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return false;
+    }
 }
+
