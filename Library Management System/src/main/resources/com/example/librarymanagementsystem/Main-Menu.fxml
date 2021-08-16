@@ -14,7 +14,7 @@
       <TextField fx:id="LoginUsername" layoutX="226.0" layoutY="108.0" promptText="Username" />
       <PasswordField fx:id="LoginPassword" layoutX="226.0" layoutY="153.0" promptText="Password" />
       <Button fx:id="LogInBtn" layoutX="275.0" layoutY="200.0" mnemonicParsing="false" onAction="#onButtonClick" text="Log In" />
-      <Label fx:id="CreateAccountBtn" layoutX="258.0" layoutY="288.0" text="Create Account" textFill="#4e77f4" underline="true" />
-      <Label fx:id="ForgotPasswordBtn" layoutX="255.0" layoutY="317.0" text="Forgot Password" textFill="#4e77f4" underline="true" />
+      <Label fx:id="CreateAccountLbl" layoutX="258.0" layoutY="288.0" text="Create Account" textFill="#4e77f4" underline="true" />
+      <Label fx:id="ForgotPasswordLbl" layoutX="255.0" layoutY="317.0" text="Forgot Password" textFill="#4e77f4" underline="true" />
    </children>
 </AnchorPane>
