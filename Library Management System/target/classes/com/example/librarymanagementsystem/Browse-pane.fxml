@@ -4,20 +4,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagementsystem.BrowsePane">
-   <children>
-      <Label layoutX="223.0" layoutY="29.0" text="Browse Books">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <TextField layoutX="181.0" layoutY="77.0" promptText="Search For Book" />
-      <Button layoutX="350.0" layoutY="77.0" mnemonicParsing="false" text="Search" />
-      <TextArea fx:id="bookDisplay" layoutX="32.0" layoutY="130.0" prefHeight="200.0" prefWidth="535.0" />
-      <Button layoutX="471.0" layoutY="348.0" mnemonicParsing="false" text="Next" />
-      <Button layoutX="104.0" layoutY="348.0" mnemonicParsing="false" text="Previous" />
-      <TextField layoutX="210.0" layoutY="348.0" prefHeight="25.0" prefWidth="136.0" promptText="Number to Check Out" />
-      <Button layoutX="363.0" layoutY="348.0" mnemonicParsing="false" text="Check Out" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="BrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <Pane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="NextBtn" layoutX="443.0" layoutY="18.0" mnemonicParsing="false" onAction="#onButtonClick" text="Next" />
+            <Button fx:id="PreviousBtn" layoutX="132.0" layoutY="18.0" mnemonicParsing="false" onAction="#onButtonClick" text="Previous" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane fx:id="BookDisplay" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <Pane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="224.0" layoutY="14.0" text="Browse Books">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <TextField fx:id="SearchBooks" layoutX="172.0" layoutY="50.0" promptText="Search books" />
+            <Button fx:id="SearchBtn" layoutX="340.0" layoutY="50.0" mnemonicParsing="false" onAction="#onButtonClick" text="Search" />
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
