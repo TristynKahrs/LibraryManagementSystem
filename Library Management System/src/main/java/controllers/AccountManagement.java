@@ -16,10 +16,10 @@ public class AccountManagement {
      * @param password preferred password
      */
     public static void createAccount(String fullName, String username, String password) throws SecurityException {
-        if (DatabaseConnections.getUser(username)[1] != null) {
+        if (DatabaseOperations.getUser(username)[1] != null) {
             throw new SecurityException();
         }
-        DatabaseConnections.createUser(fullName, username, password);
+        DatabaseOperations.createUser(fullName, username, password);
     }
 
     /**
@@ -31,7 +31,7 @@ public class AccountManagement {
      * @param password account access
      */
     public static User login(String username, String password) throws SecurityException {
-        User activeUser = new User(DatabaseConnections.getUser(username));
+        User activeUser = new User(DatabaseOperations.getUser(username));
         if (activeUser.passwordMatches(password)) {
             //TODO check for fees here using the method Tristyn will make in LibraryManagement.java
             return activeUser;
@@ -47,8 +47,8 @@ public class AccountManagement {
      * @param username account access
      */
     public static User verifiedAccount(String fullName, String username) throws SecurityException {
-        User activeUser = new User(DatabaseConnections.getUser(username));
-        for (String[] userInfo : DatabaseConnections.getUsers(fullName)) {
+        User activeUser = new User(DatabaseOperations.getUser(username));
+        for (String[] userInfo : DatabaseOperations.getUsers(fullName)) {
             if (activeUser.passwordMatches(new User(userInfo))) {
                 return activeUser;
             }
@@ -81,7 +81,7 @@ public class AccountManagement {
     public static void changePassword(User activeUser, String oldPassword, String newPassword) throws Exception {
         if (!activeUser.passwordMatches(newPassword)) {
             if (activeUser.passwordMatches(oldPassword)) {
-                DatabaseConnections.changeUserPassword(activeUser.getUsername(), newPassword);
+                DatabaseOperations.changeUserPassword(activeUser.getUsername(), newPassword);
             } else {
                 throw new SecurityException();
             }

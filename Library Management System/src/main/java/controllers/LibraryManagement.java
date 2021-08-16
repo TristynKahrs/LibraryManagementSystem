@@ -11,9 +11,9 @@ public class LibraryManagement {
     */
     public static ArrayList<Book> usersCheckedOutBooks(User user) {
         ArrayList<Book> foundBooks = new ArrayList<>();
-        for(int[] checkOut : DatabaseConnections.getAllCheckedOut()) {
+        for(int[] checkOut : DatabaseOperations.getAllCheckedOut()) {
             if(checkOut[2] == user.getPrimaryKey()) {
-                Book book = new Book(DatabaseConnections.getBook(checkOut[1]));
+                Book book = new Book(DatabaseOperations.getBook(checkOut[1]));
                 foundBooks.add(book);
             }
         }
@@ -27,7 +27,7 @@ public class LibraryManagement {
         ArrayList<Book> checkCheckedOut = usersCheckedOutBooks(user);
         for(Book checkedOutBook : checkCheckedOut) {
             if(checkedOutBook.getPrimaryKey() == book.getPrimaryKey()) {
-                return DatabaseConnections.checkInBook(book, user);
+                return DatabaseOperations.checkInBook(book, user);
             }
         }
 
@@ -36,7 +36,7 @@ public class LibraryManagement {
 
     public static boolean checkOut(User user, Book book) throws Exception {
         if(usersCheckedOutBooks(user).size() <= bookLimit) {
-            ArrayList<int[]> checkedOut = DatabaseConnections.getAllCheckedOut();
+            ArrayList<int[]> checkedOut = DatabaseOperations.getAllCheckedOut();
             for (int[] books : checkedOut) {
                 if (books[1] == book.getPrimaryKey()) {
                     return false;
@@ -45,7 +45,7 @@ public class LibraryManagement {
             if (book == null) {
                 throw new NullPointerException();
             }
-            return DatabaseConnections.checkOutBook(book, user);
+            return DatabaseOperations.checkOutBook(book, user);
         }else {
             throw new SizeLimitExceededException();
         }
@@ -57,7 +57,7 @@ public class LibraryManagement {
      */
     public static ArrayList<Book> search(String searchBooks) {
         ArrayList<Book> books = new ArrayList<>();
-        for (String[] bookInfo : DatabaseConnections.search(searchBooks)) {
+        for (String[] bookInfo : DatabaseOperations.search(searchBooks)) {
             Book currentBook = new Book(bookInfo);
             if(!currentBook.isCheckedOut()) {
                 books.add(currentBook);
@@ -71,7 +71,7 @@ public class LibraryManagement {
     */
     public static ArrayList<Book> allBooks() {
         ArrayList<Book> books = new ArrayList<>();
-        for (String[] bookInfo : DatabaseConnections.getAllBooks()) {
+        for (String[] bookInfo : DatabaseOperations.getAllBooks()) {
             Book currentBook = new Book(bookInfo);
             if(!currentBook.isCheckedOut()) {
                 books.add(currentBook);

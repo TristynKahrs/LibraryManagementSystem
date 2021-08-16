@@ -1,6 +1,7 @@
 package models;
 
 import controllers.DatabaseConnections;
+import controllers.DatabaseOperations;
 
 public class Book {
     public int primaryKey;
@@ -46,7 +47,7 @@ public class Book {
     }
 
     public boolean isCheckedOut() {
-        for(int[] checkedOutInfo : DatabaseConnections.getAllCheckedOut()) {
+        for(int[] checkedOutInfo : DatabaseOperations.getAllCheckedOut()) {
             if(getPrimaryKey() == checkedOutInfo[1]) {
                 return true;
             }

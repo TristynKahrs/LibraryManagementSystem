@@ -1,6 +1,7 @@
 package models;
 
 import controllers.DatabaseConnections;
+import controllers.DatabaseOperations;
 
 import java.util.Objects;
 
@@ -82,7 +83,7 @@ public class User {
 
     public int numOfBooksCheckedOut(User user){
         int counter = 0;
-        for(int[] numBooks : DatabaseConnections.getAllCheckedOut()){
+        for(int[] numBooks : DatabaseOperations.getAllCheckedOut()){
             if (numBooks[2] == user.getPrimaryKey()) {
                 counter++;
             }
