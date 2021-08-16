@@ -11,8 +11,8 @@ public class Main  extends Application {
     public static void main(String[] args){
         System.out.println("Hello Chris_1");
         try {
-            CLI.startupMenu();
-            //launch();
+//            CLI.startupMenu();
+            launch();
         }catch(Exception e){
             e.printStackTrace();
         }
