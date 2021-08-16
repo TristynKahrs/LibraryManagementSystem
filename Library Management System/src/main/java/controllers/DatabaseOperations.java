@@ -285,7 +285,7 @@ public class DatabaseOperations {
         return false;
     }
 
-    public static ArrayList<Integer> getAllLostBooks() {
+    public static ArrayList<Integer> getAllLostBookIds() {
         String getAllLostBooks = "SELECT book_id FROM lost_books";
         ArrayList<Integer> bookIds = new ArrayList<>();
         try {
