@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="PagePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagementsystem.PagePane">
+   <children>
+      <Pane fx:id="Book1" layoutX="11.0" layoutY="14.0" prefHeight="83.0" prefWidth="574.0" />
+      <Pane fx:id="Book2" layoutX="14.0" layoutY="96.0" prefHeight="91.0" prefWidth="574.0" />
+      <Pane fx:id="Book3" layoutX="14.0" layoutY="185.0" prefHeight="91.0" prefWidth="574.0" />
+      <Pane fx:id="Book4" layoutX="20.0" layoutY="302.0" prefHeight="83.0" prefWidth="555.0" />
+   </children>
+</AnchorPane>
