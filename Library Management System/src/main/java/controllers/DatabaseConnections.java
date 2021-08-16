@@ -11,7 +11,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DatabaseConnections { //TODO split this class into two classes
+public class DatabaseConnections {
 
     private static Connection connection = null;
     private static String url = "jdbc:mysql://localhost:3306/"
@@ -91,10 +91,6 @@ public class DatabaseConnections { //TODO split this class into two classes
             System.out.println("File not found");
         }
 
-    }
-
-    public static void runDatabase() {
-        SQLConnection();
     }
 }
 

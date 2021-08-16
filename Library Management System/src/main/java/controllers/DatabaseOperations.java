@@ -285,6 +285,26 @@ public class DatabaseOperations {
         return false;
     }
 
+    public static ArrayList<Integer> getAllLostBooks() {
+        String getAllLostBooks = "SELECT book_id FROM lost_books";
+        ArrayList<Integer> bookIds = new ArrayList<>();
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(getAllLostBooks);
+
+            while(rs.next()) {
+                bookIds.add(rs.getInt(1));
+            }
+
+            return bookIds;
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return bookIds;
+    }
+
     public static boolean createFee(Book book, User user, double fee) {
         String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount) VALUES(?, ?, ?)";
         try {
@@ -298,6 +318,31 @@ public class DatabaseOperations {
             SQLe.printStackTrace();
         }
         return false;
+    }
+
+    public static ArrayList<double[]> checkForFees(User user) {
+        String getFees = "SELECT * FROM fees WHERE user_id=(?)";
+        ArrayList<double[]> bookFees = new ArrayList<>();
+        double[] bookFeeInfo = null;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getFees);
+            pst.setInt(1, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                bookFeeInfo = new double[2];
+                bookFeeInfo[0] = rs.getInt(3);
+                bookFeeInfo[1] = rs.getDouble(4);
+                bookFees.add(bookFeeInfo);
+            }
+
+            return bookFees;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return bookFees;
     }
 
     public static double getCurrentFee(Book book, User user) {
