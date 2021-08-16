@@ -79,18 +79,4 @@ public class LibraryManagement {
         }
         return books;
     }
-
-    //TODO lost books and fees
-    /*
-    lost book basically reports to the database that book is lost
-     */
-//    public static void lostBook(User user, Book book) {
-//
-//    }
-
-//    public static void updateFees() {
-//
-//    }
-    //see fees
-    //pay fees
 }
