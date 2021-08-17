@@ -19,6 +19,10 @@ public class DatabaseConnections {
     private static String user = "root";
     private static String password = "Password1234!";
 
+    /**
+     * This method creates a connection from java program to the localhost of MySQL.
+     * @return Returns a Connection to the lmsdatabase.
+     */
     public static Connection SQLConnection() {
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -33,6 +37,10 @@ public class DatabaseConnections {
         return connection;
     }
 
+    /**
+     * This method creates a lmsdatabase in the localhost of MySQL and creates a books, users, checkout, lost_books, and fees
+     * table.
+     */
     public static void createDatabase() {
         String schemaSQL = "CREATE SCHEMA IF NOT EXISTS lmsdatabase;";
         String sqlBooks = "CREATE TABLE IF NOT EXISTS books(book_id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), author VARCHAR(255));";
@@ -61,6 +69,9 @@ public class DatabaseConnections {
         }
     }
 
+    /**
+     * This method inserts books into books table in lmsdatabase using books.csv file.
+     */
     private static void insertBooks() {
         File bookList = new File("src//main//java//data.bookData//books.csv");
         String insertBook  = "INSERT INTO books(title, author) Values(?,?)";
