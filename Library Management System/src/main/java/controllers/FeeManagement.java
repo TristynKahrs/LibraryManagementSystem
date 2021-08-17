@@ -17,19 +17,23 @@ public class FeeManagement {
     }
 
     public static void lostBook(User user, Book book) {
-        double lostFeeAmount = 20.00;
         if(LibraryManagement.usersCheckedOutBooks(user).contains(book)){
+            double lostFeeAmount = -20.00;
             DatabaseOperations.createLostBook(book, user);
             DatabaseOperations.checkInBook(book, user);
-            //TODO add fee, then done
-            DatabaseOperations.createFee(book, user, lostFeeAmount);
+            if(DatabaseOperations.getCurrentFee(book, user) == 0) {
+                DatabaseOperations.createFee(book, user, lostFeeAmount);
+            } else {
+                DatabaseOperations.updateFee(book, user, lostFeeAmount);
+            }
         }
     }
 
     public static void foundBook(User user, Book book) {
+        double lostFeeRefund = 20.00;
         if(allLostBooks().contains(book)) {
             DatabaseOperations.deleteLostBook(book, user);
-            //TODO remove fee, then done
+            DatabaseOperations.updateFee(book, user, lostFeeRefund);
         }
     }
 
@@ -40,9 +44,7 @@ public class FeeManagement {
         Book lateBook = null;
         for(double[] bookInfo: DatabaseOperations.checkForFees(user)) {
             feeInfo = new String[2];
-
             lateBook = new Book(DatabaseOperations.getBook((int)bookInfo[bookNameCount]));
-
             feeInfo[0] = lateBook.toString();
             feeInfo[1] = String.valueOf(bookInfo[1]);
             lateBooks.add(feeInfo);
@@ -52,7 +54,7 @@ public class FeeManagement {
         return lateBooks;
     }
 
-    public static void updateFees() {
-
+    public static void updateFees(Book book, User user, double feeAmount) {
+        DatabaseOperations.updateFee(book, user, feeAmount);
     }
 }

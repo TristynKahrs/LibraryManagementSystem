@@ -234,6 +234,27 @@ public class DatabaseOperations {
         return false;
     }
 
+    public static Date getCheckOutDate(Book book, User user) {
+        String getDate = "SELECT checkOutDate FROM checkout WHERE book_id=? AND user_id=?";
+        Date checkOutDate = null;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getDate);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                checkOutDate = rs.getDate(1);
+                return checkOutDate;
+            }
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return checkOutDate;
+    }
+
     public static boolean checkInBook(Book book, User user){
         String checkInBook = "DELETE FROM checkout WHERE book_id=(?) AND user_id=(?)";
         try{
