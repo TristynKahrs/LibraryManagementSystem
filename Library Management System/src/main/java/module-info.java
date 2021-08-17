@@ -5,7 +5,6 @@ module com.example.librarymanagementsystem {
     requires java.naming;
     requires java.sql;
 
-
-    opens views to javafx.fxml;
-    exports views to javafx.graphics;
+    exports com.example.librarymanagementsystem to javafx.graphics;
+    opens com.example.librarymanagementsystem to javafx.fxml;
 }

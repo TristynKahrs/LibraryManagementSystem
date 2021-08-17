@@ -1,4 +1,4 @@
-package views;
+package com.example.librarymanagementsystem;
 
 import controllers.LibraryManagement;
 import models.Book;
