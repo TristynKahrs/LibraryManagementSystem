@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class FeeManagement {
 
+    /**
+     * This method retrieves all books from lmsdatabse that are in the lost_books table.
+     * @return Returns an ArrayList of Book Objects.
+     */
     public static ArrayList<Book> allLostBooks() {
         ArrayList<Book> allLostBooks = new ArrayList<>();
         for (int bookID : DatabaseOperations.getAllLostBookIds()) {
@@ -16,6 +20,11 @@ public class FeeManagement {
         return allLostBooks;
     }
 
+    /**
+     * This method is used to create a lost book into the lmsdatabase.
+     * @param user A user Object used to create lost book.
+     * @param book A book Object used to create a lost book.
+     */
     public static void lostBook(User user, Book book) {
         if(LibraryManagement.usersCheckedOutBooks(user).contains(book)){
             double lostFeeAmount = -20.00;
@@ -29,6 +38,11 @@ public class FeeManagement {
         }
     }
 
+    /**
+     * This method is used to day a book has been found and update lmsdatabase.
+     * @param user A user Object used to remove a found book from lost_books.
+     * @param book A book Object used to remove a found book from lost_books.
+     */
     public static void foundBook(User user, Book book) {
         double lostFeeRefund = 20.00;
         if(allLostBooks().contains(book)) {
@@ -37,6 +51,11 @@ public class FeeManagement {
         }
     }
 
+    /**
+     * This method returns all fees that a user has from the lmsdatabase.
+     * @param user A user Object used to check if their primary_key is withing the fees table.
+     * @return Returns an ArrayList of String[] which contains the book Object toString, and the fee amount.
+     */
     public static ArrayList<String[]> seeFees(User user) {
         ArrayList<String[]> lateBooks = new ArrayList<>();
         int bookNameCount = 0;
@@ -54,6 +73,12 @@ public class FeeManagement {
         return lateBooks;
     }
 
+    /**
+     * This method is used to act as a buffer between GUI and DatabaseOperations, updates fees
+     * @param book A book Object used to update fees table.
+     * @param user A user Object used to update fees table.
+     * @param feeAmount A double (price amount) to be updated to the fees table.
+     */
     public static void updateFees(Book book, User user, double feeAmount) {
         DatabaseOperations.updateFee(book, user, feeAmount);
     }
