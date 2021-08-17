@@ -6,6 +6,6 @@ module com.example.librarymanagementsystem {
     requires java.sql;
 
 
-    opens com.example.librarymanagementsystem to javafx.fxml;
-    exports com.example.librarymanagementsystem to javafx.graphics;
+    opens views to javafx.fxml;
+    exports views to javafx.graphics;
 }
