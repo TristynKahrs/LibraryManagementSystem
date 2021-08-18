@@ -70,7 +70,7 @@ public class User {
 
     public boolean passwordMatches(User candidate) {
         String candidatePassword = candidate.getPassword();
-        return candidatePassword.equals(getPassword());
+        return candidatePassword.equals(candidate.getPassword());
     }
 
     public boolean passwordMatches(String password) {
