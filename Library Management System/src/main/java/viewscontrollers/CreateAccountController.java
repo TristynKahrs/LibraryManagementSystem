@@ -1,14 +1,21 @@
 package viewscontrollers;
 
 import controllers.AccountManagement;
+import controllers.Alerter;
+import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import models.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,18 +34,21 @@ public class CreateAccountController implements Initializable {
         String fullName = txtFullName.getText();
         String userName = txtUsername.getText();
         String password = txtPassword.getText();
+        Window owner= btnCreate.getScene().getWindow();
         String passwordConfirmation = txtPasswordConfirmation.getText();
         if (!fullName.equals("") && !userName.equals("") && !password.equals("") && !passwordConfirmation.equals("")) {
             if (password.equals(passwordConfirmation)) {
                 try {
                     AccountManagement.createAccount(fullName, userName, password);
                     User activeUser = AccountManagement.login(userName, password);
-                    //TODO go to main menu controller/browse-pane (login for them)
+                    ChangeScene.changeScene(event, "Browse-pane.fxml");
                 } catch (SecurityException se) {
-                    //TODO label that says that username is taken
+                    Alerter.showAlert(Alert.AlertType.WARNING, owner, "Username Taken", "Username is already taken, please use a different username.");
+                }catch(IOException ioe){
+                    ioe.printStackTrace();
                 }
             } else {
-                //TODO make a label that says passwords did not match
+                Alerter.showAlert(Alert.AlertType.WARNING, owner, "Passwords Don't Match", "Your passwords don't match, please re-enter your passwords.");
             }
         }
     }

@@ -33,7 +33,6 @@ public class LoginController implements Initializable {
             try {
                 User activeUser = AccountManagement.login(username, password);
                 ChangeScene.changeScene(event, "Browse-pane.fxml");
-//                TODO go to main menu controller/browse-pane
             } catch (SecurityException se) {
                 // TODO make a label that says try again when failing login
             }catch (IOException ioe){
