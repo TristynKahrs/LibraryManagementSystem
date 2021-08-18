@@ -16,5 +16,6 @@
       <TextField fx:id="txtPassword" layoutX="226.0" layoutY="200.0" promptText="Password" />
       <TextField fx:id="txtPasswordConfirmation" layoutX="226.0" layoutY="250.0" promptText="Confirm Password" />
       <Button fx:id="btnCreate" layoutX="251.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCreateAccountBtn" text="Create Account" />
+      <Button fx:id="btnBack" layoutX="29.0" layoutY="34.0" mnemonicParsing="false" onAction="#onClickBack" text="Back" />
    </children>
 </Pane>
