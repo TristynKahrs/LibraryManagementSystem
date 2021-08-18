@@ -1,5 +1,6 @@
 package viewscontrollers;
 
+import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,9 +28,12 @@ public class BrowseBooksController implements Initializable {
 
     public Button btnProfile;
     public void onClickUserProfile(ActionEvent event) {
-        //TODO go to user profile fxml
+        try {
+            ChangeScene.changeScene(event, "User-Profile-pane.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
-
 
     //Center
     public Pane panePage;
