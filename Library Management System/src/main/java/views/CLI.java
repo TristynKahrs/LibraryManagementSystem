@@ -1,9 +1,9 @@
 package views;
 
 import controllers.AccountManagement;
-import controllers.DatabaseConnections;
 import controllers.LibraryManagement;
 import models.Book;
+import models.DisplayBooks;
 import models.User;
 
 import javax.naming.CannotProceedException;
@@ -12,9 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.module.FindException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CLI {
     public static void startupMenu() {

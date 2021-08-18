@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.LoginController">
+   <children>
+      <Label alignment="CENTER" layoutX="228.0" layoutY="42.0" prefHeight="34.0" prefWidth="144.0" text="Welcome!">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsername" layoutX="226.0" layoutY="108.0" promptText="Username" />
+      <PasswordField fx:id="txtPassword" layoutX="226.0" layoutY="153.0" promptText="Password" />
+      <Button fx:id="btnLogin" layoutX="275.0" layoutY="200.0" mnemonicParsing="false" onAction="#onClickLogin" text="Log In" />
+      <Label fx:id="lblCreateAccount" layoutX="258.0" layoutY="288.0" onMouseClicked="#onCreateAccountLink" text="Create Account" textFill="#4e77f4" underline="true" />
+      <Label fx:id="lblForgotPassword" layoutX="255.0" layoutY="317.0" onMouseClicked="#onForgotPasswordClick" text="Forgot Password" textFill="#4e77f4" underline="true" />
+   </children>
+</Pane>

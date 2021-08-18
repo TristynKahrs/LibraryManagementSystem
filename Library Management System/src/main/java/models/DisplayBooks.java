@@ -1,4 +1,4 @@
-package views;
+package models;
 
 import controllers.LibraryManagement;
 import models.Book;
@@ -13,16 +13,16 @@ public class DisplayBooks {
     private static int pageNumber = 0;
     private static Book[] page;
 
-    static ArrayList<Book> setAllBooks() {
+    public static ArrayList<Book> setAllBooks() {
         pageNumber = 0;
         return LibraryManagement.allBooks();
     }
 
-    static void updateAllBooks() {
+    public static void updateAllBooks() {
         bookSet = setAllBooks();
     }
 
-    static void searchBooks(String search) throws FindException {
+    public static void searchBooks(String search) throws FindException {
         pageNumber = 0;
         bookSet = LibraryManagement.search(search);
         if(bookSet.size() == 0) {
@@ -46,27 +46,27 @@ public class DisplayBooks {
         return bookArrays;
     }
 
-    static Book[] page() {
+    public static Book[] page() {
         page = splitBooks().get(pageNumber);
         return page;
     }
 
-    static Book getSelectedBook(int selection) {
+    public static Book getSelectedBook(int selection) {
         return page[selection];
     }
 
-    static int getPageSize() {
+    public static int getPageSize() {
         return pageSize;
     }
 
-    static void prev() {
+    public static void prev() {
         if (pageNumber == 0) {
             pageNumber = splitBooks().size();
         }
         pageNumber--;
     }
 
-    static void next() {
+    public static void next() {
         if (pageNumber == splitBooks().size() - 1) {
             pageNumber = -1;
         }

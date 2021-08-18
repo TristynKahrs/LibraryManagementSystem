@@ -4,18 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="BrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <Pane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="NextBtn" layoutX="443.0" layoutY="18.0" mnemonicParsing="false" onAction="#onButtonClick" text="Next" />
-            <Button fx:id="PreviousBtn" layoutX="132.0" layoutY="18.0" mnemonicParsing="false" onAction="#onButtonClick" text="Previous" />
-         </children>
-      </Pane>
-   </bottom>
-   <center>
-      <Pane fx:id="BookDisplay" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
    <top>
       <Pane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -24,9 +13,20 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="SearchBooks" layoutX="172.0" layoutY="50.0" promptText="Search books" />
-            <Button fx:id="SearchBtn" layoutX="340.0" layoutY="50.0" mnemonicParsing="false" onAction="#onButtonClick" text="Search" />
+            <TextField fx:id="txtSearch" layoutX="172.0" layoutY="50.0" promptText="Search books" />
+            <Button fx:id="btnSearch" layoutX="340.0" layoutY="50.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
          </children>
       </Pane>
    </top>
+   <center>
+      <Pane fx:id="panePage" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Pane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnNext" layoutX="443.0" layoutY="18.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" />
+            <Button fx:id="btnPrev" layoutX="132.0" layoutY="18.0" mnemonicParsing="false" onAction="#onPrevButtonClick" text="Previous" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

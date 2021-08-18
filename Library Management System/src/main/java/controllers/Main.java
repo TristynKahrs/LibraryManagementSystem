@@ -1,10 +1,10 @@
 package controllers;
-import views.LoginGUIController;
+
 public class Main {
 
     public static void main(String[] args){
         try {
-            LoginGUIController.launch();
+            System.out.println("This easter egg.");
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="CreateAccount" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginGUIController">
+<Pane fx:id="paneCreateAccount" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.CreateAccountController">
    <children>
       <Label layoutX="192.0" layoutY="34.0" text="Create Account">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="FullName" layoutX="226.0" layoutY="99.0" promptText="Full name" />
-      <TextField fx:id="Username" layoutX="226.0" layoutY="147.0" promptText="Username" />
-      <TextField fx:id="Password" layoutX="226.0" layoutY="200.0" promptText="Password" />
-      <TextField fx:id="PasswordConfirmation" layoutX="226.0" layoutY="250.0" promptText="Confirm Password" />
-      <Button fx:id="CreateBtn" layoutX="251.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCreateAccountBtn" text="Create Account" />
+      <TextField fx:id="txtFullName" layoutX="226.0" layoutY="99.0" promptText="Full name" />
+      <TextField fx:id="txtUsername" layoutX="226.0" layoutY="147.0" promptText="Username" />
+      <TextField fx:id="txtPassword" layoutX="226.0" layoutY="200.0" promptText="Password" />
+      <TextField fx:id="txtPasswordConfirmation" layoutX="226.0" layoutY="250.0" promptText="Confirm Password" />
+      <Button fx:id="btnCreate" layoutX="251.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCreateAccountBtn" text="Create Account" />
    </children>
-</AnchorPane>
+</Pane>
