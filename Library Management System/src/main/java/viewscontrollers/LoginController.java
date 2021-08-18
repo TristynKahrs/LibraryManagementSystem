@@ -33,6 +33,7 @@ public class LoginController implements Initializable {
             try {
                 User activeUser = AccountManagement.login(username, password);
                 ChangeScene.changeScene(event, "Browse-pane.fxml");
+//                TODO go to main menu controller/browse-pane
             } catch (SecurityException se) {
                 // TODO make a label that says try again when failing login
             }catch (IOException ioe){
@@ -47,7 +48,7 @@ public class LoginController implements Initializable {
     public void onCreateAccountLink(MouseEvent event) {
         try {
             ChangeScene.changeScene(event, "Create-Account.fxml");
-        }catch (IOException ioe) {
+        } catch(IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -58,7 +59,7 @@ public class LoginController implements Initializable {
     public void onForgotPasswordClick(MouseEvent event) {
         try {
             ChangeScene.changeScene(event, "Recover-Password.fxml");
-        }catch (IOException ioe) {
+        } catch(IOException ioe) {
             ioe.printStackTrace();
         }
     }
