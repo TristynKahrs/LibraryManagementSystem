@@ -2,61 +2,101 @@ package viewscontrollers;
 
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserProfileController implements Initializable {
-    //TODO CREATE fee-pane.fxml, lostbooks-pane.fxml, changename-pane.fxml, changepassword-pane.fxml, checkedout-pane.fxml
+    //TODO all of the little controllers in here
     public Label lblGreeting;
     public ImageView userImg;
 
-    public Pane paneDisplay; //TODO buttons update this pane
+    public Pane paneDisplay;
 
     public Button btnBrowse;
+
     public void onClickBrowse(ActionEvent event) {
+        paneDisplay.getChildren().clear();
         try {
             ChangeScene.changeScene(event, "Browse-pane.fxml");
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
+
     //vbox
     public Button btnFees;
+
     public void onClickFees(ActionEvent event) {
-        //switch paneDisplay to fee pane
+        paneDisplay.getChildren().clear();
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/fee-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     public Button btnLostBooks;
+
     public void onClickLostBooks(ActionEvent event) {
-        //switch paneDisplay to lost books pane
+        paneDisplay.getChildren().clear();
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/lostbooks-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     public Button btnChangeName;
+
     public void onClickChangeName(ActionEvent event) {
-        //switch paneDisplay to change name pane
+        paneDisplay.getChildren().clear();
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     public Button btnChangePassword;
+
     public void onClickChangePassword(ActionEvent event) {
-        //switch paneDisplay to change password pane
+        paneDisplay.getChildren().clear();
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
     public Button btnCheckedOutBooks;
+
     public void onClickCheckedOut(ActionEvent event) {
-        //switch paneDisplay to checked out pane
+        paneDisplay.getChildren().clear();
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
     //vbox end
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO set paneDisplay to checked out pane
+        //TODO change label to have persons name
+        try {
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 
 }
