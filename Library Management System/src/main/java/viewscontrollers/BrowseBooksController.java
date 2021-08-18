@@ -17,11 +17,16 @@ public class BrowseBooksController implements Initializable {
     //Top
     @FXML
     public TextField txtSearch;
-    public Button btnSearch;
 
+    public Button btnSearch;
     public void onSearchClick(ActionEvent event) {
         System.out.println("Search Works");
         //TODO get search field, search books, update page pane
+    }
+
+    public Button btnProfile;
+    public void onClickUserProfile(ActionEvent event) {
+        //TODO go to user profile fxml
     }
 
 

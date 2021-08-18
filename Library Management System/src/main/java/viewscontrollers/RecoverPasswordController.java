@@ -9,8 +9,8 @@ import javafx.scene.control.TextField;
 
 public class RecoverPasswordController {
     @FXML
-    public TextField usernameSearch;
     public TextField fullNameSearch;
+    public TextField usernameSearch;
     public Label PasswordRetrieval;
 
     @FXML

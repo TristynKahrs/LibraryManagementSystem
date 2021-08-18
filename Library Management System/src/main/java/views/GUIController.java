@@ -2,6 +2,8 @@ package views;
 
 import controllers.AccountManagement;
 import controllers.ChangeScene;
+import controllers.DatabaseConnections;
+import controllers.DatabaseOperations;
 import javafx.application.Application;
 import java.io.File;
 import java.io.IOException;
