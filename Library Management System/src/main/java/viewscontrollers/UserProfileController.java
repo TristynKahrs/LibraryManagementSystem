@@ -1,5 +1,6 @@
 package viewscontrollers;
 
+import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,9 +19,16 @@ public class UserProfileController implements Initializable {
 
     public Pane paneDisplay; //TODO buttons update this pane
 
+    public Button btnBrowse;
+    public void onClickBrowse(ActionEvent event) {
+        try {
+            ChangeScene.changeScene(event, "Browse-pane.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
     //vbox
     public Button btnFees;
-
     public void onClickFees(ActionEvent event) {
         //switch paneDisplay to fee pane
     }
@@ -49,4 +58,5 @@ public class UserProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO set paneDisplay to checked out pane
     }
+
 }
