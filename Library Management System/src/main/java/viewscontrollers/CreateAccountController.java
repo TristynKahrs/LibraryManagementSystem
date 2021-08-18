@@ -29,6 +29,13 @@ public class CreateAccountController implements Initializable {
 
     @FXML
     public Button btnCreate;
+    public void onClickBack(ActionEvent event) {
+        try{
+            ChangeScene.changeScene(event, "Login-pane.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void onCreateAccountBtn(ActionEvent event) {
         String fullName = txtFullName.getText();
@@ -57,4 +64,5 @@ public class CreateAccountController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }
