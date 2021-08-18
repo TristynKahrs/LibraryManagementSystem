@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
+<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
    <top>
       <Pane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -15,6 +15,7 @@
             </Label>
             <TextField fx:id="txtSearch" layoutX="172.0" layoutY="50.0" promptText="Search books" />
             <Button fx:id="btnSearch" layoutX="340.0" layoutY="50.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
+            <Button fx:id="btnProfile" layoutX="514.0" layoutY="32.0" mnemonicParsing="false" onAction="#onClickUserProfile" text="Profile" />
          </children>
       </Pane>
    </top>
