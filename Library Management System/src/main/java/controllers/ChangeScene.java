@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,7 +18,7 @@ public class ChangeScene {
     private static Scene scene;
     private static String fxmlFile;
 
-    public static void changeScene(ActionEvent event, String fxml) throws IOException {
+    public static void changeScene(Event event, String fxml) throws IOException {
         fxmlFile = fxml;
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
         Parent root = FXMLLoader.load(url);

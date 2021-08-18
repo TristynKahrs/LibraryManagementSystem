@@ -46,14 +46,22 @@ public class LoginController implements Initializable {
     public Label lblCreateAccount;
 
     public void onCreateAccountLink(MouseEvent event) {
-        // TODO go to create account pane
+        try {
+            ChangeScene.changeScene(event, "Create-Account.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
     @FXML
     public Label lblForgotPassword;
 
     public void onForgotPasswordClick(MouseEvent event) {
-        // TODO go to forgot password
+        try {
+            ChangeScene.changeScene(event, "Recover-Password.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
     @Override
