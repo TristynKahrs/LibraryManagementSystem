@@ -3,12 +3,14 @@ package viewscontrollers;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,7 +39,14 @@ public class BrowseBooksController implements Initializable {
 
     //Center
     public Pane panePage;
-    //TODO update pane method?
+    //TODO THIS IS FING IMPORTANT!!!!!! REMEMBER DIS
+    public void updateCenterPane(){
+        try {
+            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/Page-pane.fxml").toURI().toURL()));
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+    }
 
 
 
@@ -56,6 +65,7 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateCenterPane();
         //TODO set page to be all books at page one (zero)
     }
 }
