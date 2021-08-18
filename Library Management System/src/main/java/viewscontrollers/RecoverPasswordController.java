@@ -1,13 +1,26 @@
 package viewscontrollers;
 
 import controllers.AccountManagement;
+import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class RecoverPasswordController {
+    @FXML
+    public Button btnBack;
+    public void onClickBack(ActionEvent event) {
+        try {
+            ChangeScene.changeScene(event, "Login-pane.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
     @FXML
     public TextField fullNameSearch;
     public TextField usernameSearch;

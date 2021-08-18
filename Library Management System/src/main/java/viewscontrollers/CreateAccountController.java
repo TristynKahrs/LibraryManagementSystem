@@ -1,6 +1,7 @@
 package viewscontrollers;
 
 import controllers.AccountManagement;
+import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,10 +10,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import models.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreateAccountController implements Initializable {
+    @FXML
+    public Button btnBack;
+    public void onClickBack(ActionEvent event) {
+        try {
+            ChangeScene.changeScene(event, "Login-pane.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+
     @FXML
     public Pane paneCreateAccount;
     public TextField txtFullName;
