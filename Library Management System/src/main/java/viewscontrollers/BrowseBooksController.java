@@ -24,7 +24,7 @@ public class BrowseBooksController implements Initializable {
 
     //Top
     @FXML
-    public TextField txtSearch;
+    public TextField txtSearch; //meh?
 
     public Button btnSearch;
 
