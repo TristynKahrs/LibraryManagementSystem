@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import javafx.scene.layout.Pane;
 
@@ -33,9 +36,12 @@ public class PagePaneController implements Initializable {
     public Pane paneBook_4;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Pane getPagePane() {
         return PagePane;
 =======
+=======
+>>>>>>> Stashed changes
     public void updateCurrentPage() {
         try {
             panePage.getChildren().clear();
