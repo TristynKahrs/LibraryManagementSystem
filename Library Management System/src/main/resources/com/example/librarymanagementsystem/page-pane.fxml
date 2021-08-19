@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane fx:id="PagePane" prefHeight="230.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.PagePaneController">
    <children>
-<<<<<<< Updated upstream
       <TextField fx:id="txtSearch" layoutX="226.0" layoutY="92.0" promptText="Search books" />
       <Pane fx:id="paneBook_1" layoutX="11.0" layoutY="14.0" prefHeight="90.0" prefWidth="270.0" />
       <Pane fx:id="paneBook_2" layoutX="15.0" layoutY="94.0" prefHeight="90.0" prefWidth="270.0" />
       <Pane fx:id="paneBook_3" layoutX="14.0" layoutY="185.0" prefHeight="90.0" prefWidth="270.0" />
       <Pane fx:id="paneBook_4" layoutX="20.0" layoutY="302.0" prefHeight="90.0" prefWidth="270.0" />
-=======
-      <Pane fx:id="paneBook_0" layoutX="14.0" layoutY="14.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_1" layoutX="316.0" layoutY="14.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_2" layoutX="14.0" layoutY="126.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_3" layoutX="316.0" layoutY="126.0" prefHeight="90.0" prefWidth="270.0" />
->>>>>>> Stashed changes
    </children>
 </Pane>

@@ -27,7 +27,11 @@ public class GUIController extends Application {
 
     @Override
     public void start(Stage window) throws IOException {
+<<<<<<< Updated upstream
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/Login-pane.fxml").toURI().toURL();
+=======
+        URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
+>>>>>>> Stashed changes
         Parent root = FXMLLoader.load(url);
         window.setTitle("Library Management System!");
         window.setScene(new Scene(root, 600, 400));
