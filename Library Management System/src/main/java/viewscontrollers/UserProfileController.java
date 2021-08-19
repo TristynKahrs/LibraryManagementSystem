@@ -24,7 +24,6 @@ public class UserProfileController implements Initializable {
     public Button btnBrowse;
 
     public void onClickBrowse(ActionEvent event) {
-        paneDisplay.getChildren().clear();
         try {
             ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {

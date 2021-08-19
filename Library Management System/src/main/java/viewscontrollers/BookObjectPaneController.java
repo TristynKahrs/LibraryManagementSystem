@@ -9,17 +9,24 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BookObjectPaneController implements Initializable {
+    Book book = null;
+
+    public BookObjectPaneController() {
+        book = PagePaneController.currentBook;
+    }
+
     @FXML
     public Label lblTitle;
+
+    @FXML
     public Label lblAuthor;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Book book = PagePaneController.currentBook;
+        if (book != null) {
             lblTitle.setText("Title: " + book.getTitle());
             lblAuthor.setText("Author: " + book.getAuthor());
-        } catch (Exception ignored) {} //TODO MAYBE HANDLE IN THE BOOKCONTROL THING?
+        }
     }
 }

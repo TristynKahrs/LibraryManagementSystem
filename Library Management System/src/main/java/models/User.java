@@ -7,7 +7,6 @@ import java.util.Objects;
 
 public class User {
     private int primaryKey;
-    private int numberOfCheckedOutBooks;
     private String fullName;
     public String username;
     private String password;

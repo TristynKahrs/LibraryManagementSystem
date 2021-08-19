@@ -48,7 +48,7 @@ public class CreateAccountController implements Initializable {
                 try {
                     AccountManagement.createAccount(fullName, userName, password);
                     User activeUser = AccountManagement.login(userName, password);
-                    ChangeScene.changeScene(event, "bbrowse-pane.fxml");
+                    ChangeScene.changeScene(event, "browse-pane.fxml");
                 } catch (SecurityException se) {
                     Alerter.showAlert(Alert.AlertType.WARNING, owner, "Username Taken", "Username is already taken, please use a different username.");
                 }catch(IOException ioe){

@@ -17,6 +17,7 @@ public class DatabaseOperations {
      */
     public static void createUser(String _fullName, String _username, String _password) {
         String insertUser = "INSERT INTO users(full_name, username, password) Values(?, ?, aes_encrypt(?, 'pass1234!'))";
+        //TODO better the encryption (hashing w/ salt)
         try {
             Connection con = DatabaseConnections.SQLConnection();
             PreparedStatement pst = con.prepareStatement(insertUser);

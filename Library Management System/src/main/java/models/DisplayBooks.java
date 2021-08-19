@@ -15,11 +15,8 @@ public class DisplayBooks {
 
     public static ArrayList<Book> setAllBooks() {
         pageNumber = 0;
-        return LibraryManagement.allBooks();
-    }
-
-    public static void updateAllBooks() {
-        bookSet = setAllBooks();
+        bookSet = LibraryManagement.allBooks();
+        return bookSet;
     }
 
     public static void searchBooks(String search) throws FindException {
@@ -29,6 +26,13 @@ public class DisplayBooks {
             bookSet = setAllBooks();
             throw new FindException();
         }
+    }
+
+    //TODO different book pages here
+
+    public static Book[] page() {
+        page = splitBooks().get(pageNumber);
+        return page;
     }
 
     private static ArrayList<Book[]> splitBooks() {
@@ -46,10 +50,6 @@ public class DisplayBooks {
         return bookArrays;
     }
 
-    public static Book[] page() {
-        page = splitBooks().get(pageNumber);
-        return page;
-    }
 
     public static Book getSelectedBook(int selection) {
         return page[selection];
