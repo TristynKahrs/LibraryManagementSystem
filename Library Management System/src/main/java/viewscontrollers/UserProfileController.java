@@ -26,7 +26,7 @@ public class UserProfileController implements Initializable {
     public void onClickBrowse(ActionEvent event) {
         paneDisplay.getChildren().clear();
         try {
-            ChangeScene.changeScene(event, "Browse-pane.fxml");
+            ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -38,7 +38,9 @@ public class UserProfileController implements Initializable {
     public void onClickFees(ActionEvent event) {
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/fee-pane.fxml").toURI().toURL()));
+            //set the current bookset to the users fees with books
+            //change the controllers to the fee book controllers
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -49,7 +51,9 @@ public class UserProfileController implements Initializable {
     public void onClickLostBooks(ActionEvent event) {
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/lostbooks-pane.fxml").toURI().toURL()));
+            //set the current bookset to the users lost books
+            //change the controllers to the lost books controllers
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -82,7 +86,9 @@ public class UserProfileController implements Initializable {
     public void onClickCheckedOut(ActionEvent event) {
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
+            //set the current bookset to the users checkout books
+            //change the controllers to the checked out controllers
+            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -92,11 +98,7 @@ public class UserProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO change label to have persons name
-        try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+        //TODO go to checked out books on default
     }
 
 }

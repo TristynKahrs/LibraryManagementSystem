@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
         if (!username.equals("") && !password.equals("")) {
             try {
                 User activeUser = AccountManagement.login(username, password);
-                ChangeScene.changeScene(event, "Browse-pane.fxml");
+                ChangeScene.changeScene(event, "browse-pane.fxml");
             } catch (SecurityException se) {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){
@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
 
     public void onCreateAccountLink(MouseEvent event) {
         try {
-            ChangeScene.changeScene(event, "Create-Account.fxml");
+            ChangeScene.changeScene(event, "createaccount-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
 
     public void onForgotPasswordClick(MouseEvent event) {
         try {
-            ChangeScene.changeScene(event, "Recover-Password.fxml");
+            ChangeScene.changeScene(event, "recoverpassword-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }

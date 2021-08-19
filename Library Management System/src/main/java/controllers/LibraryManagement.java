@@ -83,4 +83,8 @@ public class LibraryManagement {
     public static ArrayList<double[]> checkFees(String username) {
        return DatabaseOperations.checkForFees(new User(DatabaseOperations.getUser(username)));
     }
+
+    public static Book getBook(int bookID) {
+        return new Book(DatabaseOperations.getBook(bookID));
+    }
 }

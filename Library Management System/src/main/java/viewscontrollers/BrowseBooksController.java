@@ -32,7 +32,7 @@ public class BrowseBooksController implements Initializable {
     public Button btnProfile;
     public void onClickUserProfile(ActionEvent event) {
         try {
-            ChangeScene.changeScene(event, "User-Profile-pane.fxml");
+            ChangeScene.changeScene(event, "userprofile-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
@@ -40,10 +40,9 @@ public class BrowseBooksController implements Initializable {
 
     //Center
     public Pane panePage;
-    //TODO THIS IS FING IMPORTANT!!!!!! REMEMBER DIS
     public void updateCenterPane(){
         try {
-            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/Page-pane.fxml").toURI().toURL()));
+            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch (IOException ioe){
             ioe.printStackTrace();
         }

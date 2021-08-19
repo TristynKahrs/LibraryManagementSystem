@@ -26,20 +26,20 @@ public class Book {
         this.primaryKey = primaryKey;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public int getPrimaryKey() {
         return primaryKey;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getAuthor() {

@@ -16,7 +16,7 @@ public class RecoverPasswordController {
     public Button btnBack;
     public void onClickBack(ActionEvent event) {
         try {
-            ChangeScene.changeScene(event, "Login-pane.fxml");
+            ChangeScene.changeScene(event, "login-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }

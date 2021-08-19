@@ -72,8 +72,8 @@ public class DatabaseConnections {
     /**
      * This method inserts books into books table in lmsdatabase using books.csv file.
      */
-    private static void insertBooks() {
-        File bookList = new File("src//main//java//data.bookData//books.csv");
+    public static void insertBooks() {
+        File bookList = new File("src//main//resources//data//books.csv");
         String insertBook  = "INSERT INTO books(title, author) Values(?,?)";
         PreparedStatement pst = null;
         if (bookList.exists()) {
