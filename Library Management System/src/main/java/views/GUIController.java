@@ -26,7 +26,6 @@ public class GUIController extends Application {
 
     @Override
     public void start(Stage window) throws IOException {
-        DatabaseConnections.insertBooks();
 
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);

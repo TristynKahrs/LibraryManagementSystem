@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
 
 public class BookObjectPaneController implements Initializable {
     Book book = null;
+    public BookObjectPaneController(Book book) {
+        this.book = book;
+    }
 
     public BookObjectPaneController() {
         book = PagePaneController.currentBook;

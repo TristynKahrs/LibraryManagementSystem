@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import models.DisplayBooks;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,48 +25,55 @@ public class BrowseBooksController implements Initializable {
     public TextField txtSearch;
 
     public Button btnSearch;
+
     public void onSearchClick(ActionEvent event) {
-        System.out.println("Search Works");
-        //TODO get search field, search books, update page pane
+        String strSearch = txtSearch.getText();
+        DisplayBooks.searchBooks(strSearch);
+        updateCenterPane();
     }
 
     public Button btnProfile;
+
     public void onClickUserProfile(ActionEvent event) {
         try {
             ChangeScene.changeScene(event, "userprofile-pane.fxml");
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
     //Center
     public Pane panePage;
-    public void updateCenterPane(){
+
+    public void updateCenterPane() {
+        panePage.getChildren().clear();
         try {
             panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
 
-
     //Bottom
     @FXML
     public Button btnNext;
+
     public void onNextButtonClick(ActionEvent event) {
-        //TODO go next, update page pane
+        DisplayBooks.next();
+        updateCenterPane();
     }
 
     @FXML
     public Button btnPrev;
+
     public void onPrevButtonClick(ActionEvent event) {
-        //TODO go prev, update page pane
+        DisplayBooks.prev();
+        updateCenterPane();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateCenterPane();
-        //TODO set page to be all books at page one (zero)
     }
 }

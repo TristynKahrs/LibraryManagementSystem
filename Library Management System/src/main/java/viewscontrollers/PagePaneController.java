@@ -15,15 +15,12 @@ import java.util.ResourceBundle;
 
 public class PagePaneController implements Initializable {
     Book[] currentPage = null;
-    public PagePaneController() {
-        currentPage = DisplayBooks.page(); // FIXME: 08/19/21 makes the login really slow
-    }
 
     public static Book currentBook;
 
     @FXML
     public Pane panePage;
-    
+
     @FXML
     public Pane paneBook_0;
 
@@ -36,17 +33,18 @@ public class PagePaneController implements Initializable {
     @FXML
     public Pane paneBook_3;
 
-    @FXML
-    public Label testLabel;
-
     public void updateCurrentPage() {
         try {
+            //TODO catch the error if there's no books
+            currentPage = DisplayBooks.page();
             panePage.getChildren().clear();
             Pane[] panes = {paneBook_0, paneBook_1, paneBook_2, paneBook_3};
-            //TODO catch the error if there's no books
             for (int i = 0; i < currentPage.length; i++) {
                 currentBook = currentPage[i];
-                panes[i].getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL())); // FIXME: 08/19/21 error right here
+                FXMLLoader loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
+                loader.setController(new BookObjectPaneController(currentBook));
+                panes[i].getChildren().add(loader.load());
+                panePage.getChildren().add(panes[i]);
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
