@@ -1,5 +1,6 @@
 package models;
 
+import controllers.FeeManagement;
 import controllers.LibraryManagement;
 import models.Book;
 
@@ -29,6 +30,18 @@ public class DisplayBooks {
     }
 
     //TODO different book pages here
+    public static void setFeesSet(User user) {
+
+    }
+
+    public static void setLostBooksSet(User user) {
+        //TODO get all books that have fees (AL); then go get the fee amounts
+//        bookSet = FeeManagement.seeFees(user);
+    }
+
+    public static void setCheckedOutSet(User user) {
+        bookSet = LibraryManagement.usersCheckedOutBooks(user);
+    }
 
     public static Book[] page() {
         page = splitBooks().get(pageNumber);

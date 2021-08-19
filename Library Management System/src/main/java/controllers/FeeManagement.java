@@ -82,4 +82,7 @@ public class FeeManagement {
     public static void updateFees(Book book, User user, double feeAmount) {
         DatabaseOperations.updateFee(book, user, feeAmount);
     }
+
+    //TODO a method to get all books that have fees (AL) of one user
+    //TODO a method where you pass in a book and it returns the fees
 }

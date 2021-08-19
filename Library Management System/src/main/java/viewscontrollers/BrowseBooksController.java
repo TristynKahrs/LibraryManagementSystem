@@ -10,9 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
-
 import java.io.File;
 import java.io.IOException;
+import java.lang.module.FindException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,9 +27,11 @@ public class BrowseBooksController implements Initializable {
     public Button btnSearch;
 
     public void onSearchClick(ActionEvent event) {
-        String strSearch = txtSearch.getText();
-        DisplayBooks.searchBooks(strSearch);
-        updateCenterPane();
+        try {
+            String strSearch = txtSearch.getText();
+            DisplayBooks.searchBooks(strSearch);
+            updateCenterPane();
+        }catch(FindException ignored) {}
     }
 
     public Button btnProfile;
