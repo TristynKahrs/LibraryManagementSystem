@@ -43,33 +43,19 @@ public class BrowseBooksController implements Initializable {
 
     public void onClickUserProfile(ActionEvent event) {
         try {
-<<<<<<< Updated upstream
             ChangeScene.changeScene(event, "User-Profile-pane.fxml");
         } catch(IOException ioe) {
-=======
-            ChangeScene.changeScene(event, "userprofile-pane.fxml");
-        } catch (IOException ioe) {
->>>>>>> Stashed changes
             ioe.printStackTrace();
         }
     }
 
     //Center
     public Pane panePage;
-<<<<<<< Updated upstream
-    //TODO THIS IS FING IMPORTANT!!!!!! REMEMBER DIS
-    public void updateCenterPane(){
-        try {
-            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/Page-pane.fxml").toURI().toURL()));
-        }catch (IOException ioe){
-=======
-
     public void updateCenterPane() {
         try {
             panePage.getChildren().clear();
             panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
->>>>>>> Stashed changes
             ioe.printStackTrace();
         }
     }
