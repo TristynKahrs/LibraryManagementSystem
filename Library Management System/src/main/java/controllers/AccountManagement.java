@@ -88,4 +88,16 @@ public class AccountManagement {
             throw new CannotProceedException();
         }
     }
+
+    /**
+     * This method acts as a buffer and changes users full name.
+     * @param activeUser A user Object used to change users full name.
+     * @param newName String newName is used to set to their new full name.
+     * @param confirmNewName String confirmNewName is used to confirm newName is the same.
+     */
+    public static void changeFullName(User activeUser, String newName, String confirmNewName) {
+        if(newName.equals(confirmNewName)) {
+            DatabaseOperations.changeFullName(newName, activeUser.getUsername());
+        }
+    }
 }
