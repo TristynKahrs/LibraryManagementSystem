@@ -37,6 +37,7 @@ public class UserProfileController implements Initializable {
     public Button btnFees;
     public void onClickFees(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
+        lblGreeting.setText(activeUser.getFullName() + " here are your fees");
         paneDisplay.getChildren().clear();
         try {
 //            DisplayBooks.setFeesBookSet(activeUser);
@@ -50,6 +51,7 @@ public class UserProfileController implements Initializable {
     public Button btnLostBooks;
     public void onClickLostBooks(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
+        lblGreeting.setText(activeUser.getFullName() + " here are your lost books");
         paneDisplay.getChildren().clear();
         try {
 //            DisplayBooks.setLostBooksSet(activeUser);
@@ -63,6 +65,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangeName;
     public void onClickChangeName(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
+        lblGreeting.setText(activeUser.getFullName() + " would you like to change your name?");
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
@@ -74,6 +77,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangePassword;
     public void onClickChangePassword(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
+        lblGreeting.setText(activeUser.getFullName() + " would you like to change your password?");
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
@@ -85,9 +89,10 @@ public class UserProfileController implements Initializable {
     public Button btnCheckedOutBooks;
     public void onClickCheckedOut(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
+        lblGreeting.setText(activeUser.getFullName() + " checked out books!");
         paneDisplay.getChildren().clear();
         try {
-//            DisplayBooks.setCheckedOutSet(activeUser);
+            DisplayBooks.setCheckedOutSet(activeUser);
             //change the controllers to the checked out controllers
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
@@ -98,6 +103,7 @@ public class UserProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TODO call checkout to start on page
         //TODO change label to have persons name
         lblGreeting.setText("Hello " + activeUser.getFullName());
         //TODO go to checked out books on default
