@@ -6,6 +6,7 @@ import models.Book;
 
 import java.lang.module.FindException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DisplayBooks {
     private static ArrayList<Book> bookSet = setAllBooks();
@@ -33,15 +34,16 @@ public class DisplayBooks {
     public static void setFeesBookSet(User user) throws FindException{
         bookSet = FeeManagement.getUsersBooksWithFees(user);
         if(bookSet.size() == 0) {
+            setEmptySet();
             throw new FindException();
         }
         //TODO get all books that have fees (AL); then go get the fee amounts
     }
 
     public static void setLostBooksSet(User user) {
-        //TODO get all lost books under a user
-//        bookSet = FeeManagement.getUsersBooksWithFees(user);
+        bookSet = FeeManagement.usersLostBooks(user);
         if(bookSet.size() == 0) {
+            setEmptySet();
             throw new FindException();
         }
     }
@@ -49,7 +51,15 @@ public class DisplayBooks {
     public static void setCheckedOutSet(User user) {
         bookSet = LibraryManagement.usersCheckedOutBooks(user);
         if(bookSet.size() == 0) {
+            setEmptySet();
             throw new FindException();
+        }
+    }
+
+    public static void setEmptySet() {
+        bookSet.clear();
+        for (int i = 0; i < 4; i++) {
+            bookSet.add(null);
         }
     }
 
