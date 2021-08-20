@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import models.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class UserProfileController implements Initializable {
     //TODO all of the little controllers in here
+    private User activeUser;
     public Label lblGreeting;
     public ImageView userImg;
 
@@ -35,6 +37,7 @@ public class UserProfileController implements Initializable {
     public Button btnFees;
 
     public void onClickFees(ActionEvent event) {
+        activeUser = ChangeScene.receiveData(event);
         paneDisplay.getChildren().clear();
         try {
             //set the current bookset to the users fees with books
@@ -48,6 +51,7 @@ public class UserProfileController implements Initializable {
     public Button btnLostBooks;
 
     public void onClickLostBooks(ActionEvent event) {
+        activeUser = ChangeScene.receiveData(event);
         paneDisplay.getChildren().clear();
         try {
             //set the current bookset to the users lost books
@@ -61,6 +65,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangeName;
 
     public void onClickChangeName(ActionEvent event) {
+        activeUser = ChangeScene.receiveData(event);
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
@@ -72,6 +77,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangePassword;
 
     public void onClickChangePassword(ActionEvent event) {
+        activeUser = ChangeScene.receiveData(event);
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
@@ -83,6 +89,7 @@ public class UserProfileController implements Initializable {
     public Button btnCheckedOutBooks;
 
     public void onClickCheckedOut(ActionEvent event) {
+        activeUser = ChangeScene.receiveData(event);
         paneDisplay.getChildren().clear();
         try {
             //set the current bookset to the users checkout books
@@ -97,6 +104,7 @@ public class UserProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO change label to have persons name
+        lblGreeting.setText("Hello " + activeUser.getFullName());
         //TODO go to checked out books on default
     }
 

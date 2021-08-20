@@ -38,7 +38,7 @@ public class BrowseBooksController implements Initializable {
 
     public void onClickUserProfile(ActionEvent event) {
         try {
-            ChangeScene.changeScene(event, "userprofile-pane.fxml");
+            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", ChangeScene.receiveData(event));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

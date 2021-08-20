@@ -26,14 +26,17 @@ public class GUIController extends Application {
 
     @Override
     public void start(Stage window) throws IOException {
+        String[] info = new String[4];
+        info[0] = "1";
+        info[1] = "test";
+        info[2] = "tets";
+        info[3] = "tst";
+        User user = new User(info);
+        System.out.println(DatabaseOperations.getAllUsersLostBooks(user));
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         window.setTitle("Library Management System!");
         window.setScene(new Scene(root, 600, 400));
         window.show();
     }
-
-
-
-
 }

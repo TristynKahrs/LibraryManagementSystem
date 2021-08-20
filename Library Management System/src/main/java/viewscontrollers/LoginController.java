@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
         if (!username.equals("") && !password.equals("")) {
             try {
                 User activeUser = AccountManagement.login(username, password);
-                ChangeScene.changeScene(event, "browse-pane.fxml");
+                ChangeScene.changeSceneWithUser(event, "browse-pane.fxml", activeUser);
             } catch (SecurityException se) {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){

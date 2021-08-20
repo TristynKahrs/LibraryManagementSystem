@@ -3,7 +3,6 @@ package controllers;
 import models.Book;
 import models.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FeeManagement {
@@ -17,6 +16,21 @@ public class FeeManagement {
         for (int bookID : DatabaseOperations.getAllLostBookIds()) {
             allLostBooks.add(new Book(DatabaseOperations.getBook(bookID)));
         }
+        return allLostBooks;
+    }
+
+    /**
+     * This method gets all of the users Lost books
+     * @param user A user Object use
+     * @return
+     */
+    public static ArrayList<Book> usersLostBooks(User user) {
+        ArrayList<Book> allLostBooks = new ArrayList<>();
+        for(Integer book_id : DatabaseOperations.getAllUsersLostBooks(user)) {
+            Book book = new Book(DatabaseOperations.getBook(book_id));
+            allLostBooks.add(book);
+        }
+
         return allLostBooks;
     }
 
@@ -112,4 +126,5 @@ public class FeeManagement {
         }
         return fees;
     }
+    //TODO change this to pass ina book to get the feee for that book.
 }

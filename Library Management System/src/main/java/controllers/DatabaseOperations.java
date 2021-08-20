@@ -390,6 +390,32 @@ public class DatabaseOperations {
     }
 
     /**
+     * This method will get all of the current users lost books.
+     * @param user A user Object used to retrive lost bookd from lost_books table.
+     * @return Returns an ArrayList of Integers containing the book_ids found.
+     */
+    public static ArrayList<Integer> getAllUsersLostBooks(User user) {
+        String getLostBooks = "SELECT * FROM lost_books WHERE user_id=?";
+        ArrayList<Integer> bookIds = new ArrayList<>();
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getLostBooks);
+            pst.setInt(1, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                bookIds.add(rs.getInt(2));
+            }
+
+            return bookIds;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return bookIds;
+    }
+
+    /**
      * This method will insert a fee into fees table in lmsdatabase.
      * @param book A book Object to insert information into fees table.
      * @param user A user Object to insert information into fees table.
