@@ -84,5 +84,23 @@ public class FeeManagement {
     }
 
     //TODO a method to get all books that have fees (AL) of one user
-    //TODO a method where you pass in a book and it returns the fees
+    public static ArrayList<Book> getUsersBooksWithFees(User  user) {
+        ArrayList<Book> books = new ArrayList<>();
+        ArrayList<double[]> getBookIds = DatabaseOperations.checkForFees(user);
+        for(double[] bookFee :getBookIds) {
+            Book book = new Book(DatabaseOperations.getBook((int)bookFee[0]));
+            books.add(book);
+        }
+
+        return books;
+    }
+    //TODO a method where you pass in a user and it returns the fees
+    public static ArrayList<Double> getUsersFees(User user) {
+        ArrayList<Double> fees = new ArrayList<>();
+        ArrayList<double[]> getBookFees = DatabaseOperations.checkForFees(user);
+        for(double[] bookFee : getBookFees) {
+            fees.add(bookFee[1]);
+        }
+        return fees;
+    }
 }
