@@ -83,7 +83,11 @@ public class FeeManagement {
         DatabaseOperations.updateFee(book, user, feeAmount);
     }
 
-    //TODO a method to get all books that have fees (AL) of one user
+    /**
+     * This method gets an Arraylist of books that a user has a fee on.
+     * @param user A user Object used to retrieve all of their books that have fees
+     * @return Returns a ArrayList of book Objects
+     */
     public static ArrayList<Book> getUsersBooksWithFees(User  user) {
         ArrayList<Book> books = new ArrayList<>();
         ArrayList<double[]> getBookIds = DatabaseOperations.checkForFees(user);
@@ -94,7 +98,12 @@ public class FeeManagement {
 
         return books;
     }
-    //TODO a method where you pass in a user and it returns the fees
+
+    /**
+     * This method gets na ArrayList of fees that a user has for a book.
+     * @param user A user Object user to retrieve all of their book that have fees.
+     * @return Returns an ArrayList of Doubles with the fee amounts.
+     */
     public static ArrayList<Double> getUsersFees(User user) {
         ArrayList<Double> fees = new ArrayList<>();
         ArrayList<double[]> getBookFees = DatabaseOperations.checkForFees(user);
