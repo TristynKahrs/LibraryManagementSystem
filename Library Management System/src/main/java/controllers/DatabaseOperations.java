@@ -495,6 +495,31 @@ public class DatabaseOperations {
     }
 
     /**
+     * This method gets the fees for books.
+     * @param book A book Object that gets the fee_amount in fees table.
+     * @return Returns a double which is the fee amount.
+     */
+    public static double getBookFee(Book book) {
+        String getFeeAmount = "SELECT fee_amount FROM fees WHERE book_id=(?)";
+        double currentFee = 0;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getFeeAmount);
+            pst.setInt(1, book.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                currentFee = rs.getDouble(1);
+                return currentFee;
+            }
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return currentFee;
+    }
+
+    /**
      * This method is used to update a users fee for a book either, paying off or giving them more fees.
      * @param book A book Object used to update fees table.
      * @param user A user Object used to update fees table.

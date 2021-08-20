@@ -21,8 +21,8 @@ public class FeeManagement {
 
     /**
      * This method gets all of the users Lost books
-     * @param user A user Object use
-     * @return
+     * @param user A user Object used to get users lost books
+     * @return Returns an ArrayList of Books
      */
     public static ArrayList<Book> usersLostBooks(User user) {
         ArrayList<Book> allLostBooks = new ArrayList<>();
@@ -114,17 +114,12 @@ public class FeeManagement {
     }
 
     /**
-     * This method gets na ArrayList of fees that a user has for a book.
-     * @param user A user Object user to retrieve all of their book that have fees.
-     * @return Returns an ArrayList of Doubles with the fee amounts.
+     * This method gets the fee for a book
+     * @param book A book Object to retrieve the fee
+     * @return Returns fee amount
      */
-    public static ArrayList<Double> getUsersFees(User user) {
-        ArrayList<Double> fees = new ArrayList<>();
-        ArrayList<double[]> getBookFees = DatabaseOperations.checkForFees(user);
-        for(double[] bookFee : getBookFees) {
-            fees.add(bookFee[1]);
-        }
-        return fees;
+    public static double getUserFee(Book book) {
+        double feeForBook = DatabaseOperations.getBookFee(book);
+        return feeForBook;
     }
-    //TODO change this to pass ina book to get the feee for that book.
 }
