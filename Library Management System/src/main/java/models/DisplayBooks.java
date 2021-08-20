@@ -30,13 +30,12 @@ public class DisplayBooks {
     }
 
     //TODO different book pages here
-    public static void setFeesSet(User user) {
-
+    public static void setFeesBookSet(User user) {
+        //TODO get all books that have fees (AL); then go get the fee amounts
     }
 
     public static void setLostBooksSet(User user) {
-        //TODO get all books that have fees (AL); then go get the fee amounts
-//        bookSet = FeeManagement.seeFees(user);
+        //TODO get all lost books under a user
     }
 
     public static void setCheckedOutSet(User user) {

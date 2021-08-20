@@ -13,10 +13,6 @@ public class BookObjectPaneController implements Initializable {
         this.book = book;
     }
 
-    public BookObjectPaneController() {
-        book = PagePaneController.currentBook;
-    }
-
     @FXML
     public Label lblTitle;
 
