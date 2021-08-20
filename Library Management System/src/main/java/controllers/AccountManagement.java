@@ -77,7 +77,7 @@ public class AccountManagement {
      * @param oldPassword confirming they entered the correct old password
      * @param newPassword updated password they want
      */
-    public static void changePassword(User activeUser, String oldPassword, String newPassword) throws Exception {
+    public static void changePassword(User activeUser, String oldPassword, String newPassword) throws CannotProceedException, SecurityException {
         if (!activeUser.passwordMatches(newPassword)) {
             if (activeUser.passwordMatches(oldPassword)) {
                 DatabaseOperations.changeUserPassword(activeUser.getUsername(), newPassword);
