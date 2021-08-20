@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.UserProfileController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.UserProfileController">
    <children>
       <ImageView fx:id="imgUser" fitHeight="50.0" fitWidth="50.0" layoutX="29.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lblGreeting" layoutX="88.0" layoutY="17.0" prefHeight="41.0" prefWidth="279.0" text="Hey">
@@ -14,7 +14,6 @@
          </font>
       </Label>
       <Pane fx:id="paneDisplay" layoutX="2.0" layoutY="79.0" prefHeight="230.0" prefWidth="600.0" />
-      <Button fx:id="btnBrowse" layoutX="516.0" layoutY="25.0" mnemonicParsing="false" onAction="#onClickBrowse" text="Browse" />
       <HBox alignment="CENTER" layoutY="359.0" prefHeight="41.0" prefWidth="604.0">
          <children>
             <Button fx:id="btnFees" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickFees" text="Fees">
@@ -44,5 +43,7 @@
             </Button>
          </children>
       </HBox>
+      <Button fx:id="logoutID" layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutOnClick" text="Log Out" />
+      <Button fx:id="btnBrowse" layoutX="532.0" layoutY="38.0" mnemonicParsing="false" onAction="#onClickBrowse" text="Browse" />
    </children>
 </AnchorPane>
