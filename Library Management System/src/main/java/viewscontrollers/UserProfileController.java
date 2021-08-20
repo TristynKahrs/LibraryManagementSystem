@@ -107,6 +107,15 @@ public class UserProfileController implements Initializable {
             ioe.printStackTrace();
         }
     }
+
+    public Button logoutBtn;
+    public void logoutOnClick(ActionEvent event) {
+        try {
+            ChangeScene.changeScene(event, "login-pane.fxml");
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
     //vbox end
 
     public void updateActiveUser(Event event) {
