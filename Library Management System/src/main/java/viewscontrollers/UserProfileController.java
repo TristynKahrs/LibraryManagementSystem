@@ -118,6 +118,7 @@ public class UserProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO call checkout to start on page
         //TODO change label to have persons name
+        lblGreeting.setText("Profile Menu");
         //TODO go to checked out books on default
     }
 
