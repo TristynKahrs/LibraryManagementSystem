@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import models.Book;
 import models.DisplayBooks;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,20 +33,22 @@ public class PagePaneController implements Initializable {
     public Pane paneBook_3;
 
     public void updateCurrentPage() {
-        try {
-            //TODO catch the error if there's no books
-            currentPage = DisplayBooks.page();
-            panePage.getChildren().clear();
-            Pane[] panes = {paneBook_0, paneBook_1, paneBook_2, paneBook_3};
-            for (int i = 0; i < currentPage.length; i++) {
-                currentBook = currentPage[i];
-                FXMLLoader loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
-                loader.setController(new BookObjectPaneController(currentBook));
-                panes[i].getChildren().add(loader.load());
-                panePage.getChildren().add(panes[i]);
+        //TODO catch the error if there's no books
+        currentPage = DisplayBooks.page();
+        panePage.getChildren().clear();
+        Pane[] panes = {paneBook_0, paneBook_1, paneBook_2, paneBook_3};
+        for (int i = 0; i < currentPage.length; i++) {
+            currentBook = currentPage[i];
+            if(currentBook != null) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
+                    loader.setController(new BookObjectPaneController(currentBook));
+                    panes[i].getChildren().add(loader.load());
+                    panePage.getChildren().add(panes[i]);
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
             }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
         }
     }
 

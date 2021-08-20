@@ -2,6 +2,7 @@ package viewscontrollers;
 
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import models.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.module.FindException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,11 +38,13 @@ public class UserProfileController implements Initializable {
     //vbox
     public Button btnFees;
     public void onClickFees(ActionEvent event) {
-        activeUser = ChangeScene.receiveData(event);
+        updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " here are your fees");
         paneDisplay.getChildren().clear();
         try {
-//            DisplayBooks.setFeesBookSet(activeUser);
+            try{ //TODO ERROR HERE
+            DisplayBooks.setFeesBookSet(activeUser);
+            }catch (FindException ignored) {}
             //change the controllers to the fee book controllers
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
@@ -50,11 +54,13 @@ public class UserProfileController implements Initializable {
 
     public Button btnLostBooks;
     public void onClickLostBooks(ActionEvent event) {
-        activeUser = ChangeScene.receiveData(event);
+        updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " here are your lost books");
         paneDisplay.getChildren().clear();
-        try {
-//            DisplayBooks.setLostBooksSet(activeUser);
+        try { //TODO error here
+            try {
+                DisplayBooks.setLostBooksSet(activeUser);
+            }catch (FindException ignored) {}
             //change the controllers to the lost books controllers
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
@@ -64,7 +70,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnChangeName;
     public void onClickChangeName(ActionEvent event) {
-        activeUser = ChangeScene.receiveData(event);
+        updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " would you like to change your name?");
         paneDisplay.getChildren().clear();
         try {
@@ -76,7 +82,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnChangePassword;
     public void onClickChangePassword(ActionEvent event) {
-        activeUser = ChangeScene.receiveData(event);
+        updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " would you like to change your password?");
         paneDisplay.getChildren().clear();
         try {
@@ -88,11 +94,13 @@ public class UserProfileController implements Initializable {
 
     public Button btnCheckedOutBooks;
     public void onClickCheckedOut(ActionEvent event) {
-        activeUser = ChangeScene.receiveData(event);
+        updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " checked out books!");
         paneDisplay.getChildren().clear();
-        try {
-            DisplayBooks.setCheckedOutSet(activeUser);
+        try { //TODO ERROR HERE
+            try {
+                DisplayBooks.setCheckedOutSet(activeUser);
+            }catch (FindException ignored) {}
             //change the controllers to the checked out controllers
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
@@ -101,11 +109,15 @@ public class UserProfileController implements Initializable {
     }
     //vbox end
 
+    public void updateActiveUser(Event event) {
+        activeUser = ChangeScene.receiveData(event);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO call checkout to start on page
         //TODO change label to have persons name
-        lblGreeting.setText("Hello " + activeUser.getFullName());
         //TODO go to checked out books on default
     }
 
