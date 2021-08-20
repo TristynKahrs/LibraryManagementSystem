@@ -30,17 +30,27 @@ public class DisplayBooks {
     }
 
     //TODO different book pages here
-    public static void setFeesSet(User user) {
-
+    public static void setFeesBookSet(User user) throws FindException{
+        bookSet = FeeManagement.getUsersBooksWithFees(user);
+        if(bookSet.size() == 0) {
+            throw new FindException();
+        }
+        //TODO get all books that have fees (AL); then go get the fee amounts
     }
 
     public static void setLostBooksSet(User user) {
-        //TODO get all books that have fees (AL); then go get the fee amounts
-//        bookSet = FeeManagement.seeFees(user);
+        //TODO get all lost books under a user
+//        bookSet = FeeManagement.getUsersBooksWithFees(user);
+        if(bookSet.size() == 0) {
+            throw new FindException();
+        }
     }
 
     public static void setCheckedOutSet(User user) {
         bookSet = LibraryManagement.usersCheckedOutBooks(user);
+        if(bookSet.size() == 0) {
+            throw new FindException();
+        }
     }
 
     public static Book[] page() {
