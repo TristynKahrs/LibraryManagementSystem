@@ -10,6 +10,7 @@ import models.DisplayBooks;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 public class PagePaneController implements Initializable {
@@ -60,9 +61,12 @@ public class PagePaneController implements Initializable {
                             break;
                         case "Lost Book":
                             loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-lost.fxml").toURI().toURL());
+                            break;
                         case "Fees":
                             loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-fee.fxml").toURI().toURL());
+                            break;
                         default:
+                            System.out.println("How did you manage to get here Easter Egg Three!");
                             break;
                     }
 
