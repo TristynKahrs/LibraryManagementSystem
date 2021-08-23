@@ -33,6 +33,9 @@ public class BookObjectPaneController implements Initializable {
     public Pane checkInPane;
 
     @FXML
+    public Pane lostPane;
+
+    @FXML
     public Label lblTitle;
 
     @FXML
@@ -47,11 +50,16 @@ public class BookObjectPaneController implements Initializable {
     @FXML
     public Button btnLost;
 
+    @FXML
+    public Button btnFound;
+
+    @FXML Button btnPay;
+
     public void onCheckOutClick(ActionEvent event){
         User user = ChangeScene.receiveData(event);
         Window owner= btnCheckOut.getScene().getWindow();
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-
+        
         try {
             LibraryManagement.checkOut(user, book);
             DisplayBooks.setAllBooks();
@@ -76,6 +84,17 @@ public class BookObjectPaneController implements Initializable {
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         FeeManagement.lostBook(user, book);
         checkInPane.setVisible(false);
+    }
+
+    public void onReportFoundClick(ActionEvent event) {
+        User user = ChangeScene.receiveData(event);
+        book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
+        FeeManagement.foundBook(user, book);
+        lostPane.setVisible(false);
+    }
+
+    public void onPayClick(ActionEvent event) {
+
     }
 
     @Override

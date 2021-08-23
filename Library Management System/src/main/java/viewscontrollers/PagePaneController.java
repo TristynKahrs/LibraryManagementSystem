@@ -14,14 +14,14 @@ import java.util.ResourceBundle;
 
 public class PagePaneController implements Initializable {
     Book[] currentPage = null;
-    private static boolean browseBooks;
+    private static String bookObjectPaneLocation;
 
-    public static boolean isBrowseBooks() {
-        return browseBooks;
+    public static String getBookObjectLocation() {
+        return bookObjectPaneLocation;
     }
 
-    public static void setBrowseBooks(boolean browseBooks) {
-        PagePaneController.browseBooks = browseBooks;
+    public static void setLocation(String location) {
+        PagePaneController.bookObjectPaneLocation = location;
     }
 
     public static Book currentBook;
@@ -51,11 +51,21 @@ public class PagePaneController implements Initializable {
             currentBook = currentPage[i];
              if(currentBook != null){
                 try {
-                    if (!(PagePaneController.isBrowseBooks())) {
-                        loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
-                    } else if (PagePaneController.isBrowseBooks()) {
-                        loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkin.fxml").toURI().toURL());
+                    switch(bookObjectPaneLocation) {
+                        case "Check-Out":
+                            loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkout.fxml").toURI().toURL());
+                            break;
+                        case "Profile":
+                            loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkin.fxml").toURI().toURL());
+                            break;
+                        case "Lost Book":
+                            loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-lost.fxml").toURI().toURL());
+                        case "Fees":
+                            loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-fee.fxml").toURI().toURL());
+                        default:
+                            break;
                     }
+
                     loader.setController(new BookObjectPaneController(currentBook));
                     panes[i].getChildren().add(loader.load());
                     panePage.getChildren().add(panes[i]);

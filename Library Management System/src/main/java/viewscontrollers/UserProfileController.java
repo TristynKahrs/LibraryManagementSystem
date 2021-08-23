@@ -28,7 +28,7 @@ public class UserProfileController implements Initializable {
     public Button btnBrowse;
     public void onClickBrowse(ActionEvent event) {
         try {
-            PagePaneController.setBrowseBooks(false);
+            PagePaneController.setLocation("Profile");
             DisplayBooks.setAllBooks();
             ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {
@@ -39,6 +39,7 @@ public class UserProfileController implements Initializable {
     //vbox
     public Button btnFees;
     public void onClickFees(ActionEvent event) {
+        PagePaneController.setLocation("Fees");
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " here are your fees");
         paneDisplay.getChildren().clear();
@@ -55,6 +56,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnLostBooks;
     public void onClickLostBooks(ActionEvent event) {
+        PagePaneController.setLocation("Lost Book");
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " here are your lost books");
         paneDisplay.getChildren().clear();
@@ -95,7 +97,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnCheckedOutBooks;
     public void onClickCheckedOut(ActionEvent event) {
-        PagePaneController.setBrowseBooks(true);
+        PagePaneController.setLocation("Profile");
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " checked out books!");
         paneDisplay.getChildren().clear();

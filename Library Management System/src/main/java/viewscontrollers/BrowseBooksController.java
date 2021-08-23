@@ -41,7 +41,7 @@ public class BrowseBooksController implements Initializable {
         try {
             DisplayBooks.setAllBooks();
             ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", ChangeScene.receiveData(event));
-            PagePaneController.setBrowseBooks(false);
+            PagePaneController.setLocation("Profile");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -53,6 +53,7 @@ public class BrowseBooksController implements Initializable {
     public void updateCenterPane() {
         panePage.getChildren().clear();
         try {
+            PagePaneController.setLocation("Check-Out");
             panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
             ioe.printStackTrace();

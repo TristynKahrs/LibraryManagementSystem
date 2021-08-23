@@ -61,9 +61,11 @@ public class FeeManagement {
      */
     public static void foundBook(User user, Book book) {
         double lostFeeRefund = 20.00;
-        if(allLostBooks().contains(book)) {
-            DatabaseOperations.deleteLostBook(book, user);
-            DatabaseOperations.updateFee(book, user, lostFeeRefund);
+        for(Book lostBook : allLostBooks()) {
+            if(lostBook.getTitle().equals(book.getTitle())) {
+                DatabaseOperations.deleteLostBook(book, user);
+                DatabaseOperations.updateFee(book, user, lostFeeRefund);
+            }
         }
     }
 
