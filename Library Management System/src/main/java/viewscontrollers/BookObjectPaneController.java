@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import models.Book;
 import models.DisplayBooks;
@@ -27,6 +28,12 @@ public class BookObjectPaneController implements Initializable {
     public BookObjectPaneController() {
         book = PagePaneController.currentBook;
     }
+
+    @FXML
+    public Pane checkOutPane;
+
+    @FXML
+    public Pane checkInPane;
 
     @FXML
     public Label lblTitle;
@@ -55,10 +62,9 @@ public class BookObjectPaneController implements Initializable {
     public void onCheckInClick(ActionEvent event){
         User user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-
         try {
             LibraryManagement.checkIn(user, book);
-
+            checkInPane.setVisible(false);
         }catch (Exception e){
         }
     }
