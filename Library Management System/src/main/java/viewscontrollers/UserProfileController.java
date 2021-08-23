@@ -44,7 +44,7 @@ public class UserProfileController implements Initializable {
         paneDisplay.getChildren().clear();
         try {
             try{ //TODO ERROR HERE
-            DisplayBooks.setFeesBookSet(activeUser);
+                DisplayBooks.setFeesBookSet(activeUser);
             }catch (FindException ignored) {}
             //change the controllers to the fee book controllers
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));

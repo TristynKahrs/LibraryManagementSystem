@@ -349,7 +349,7 @@ public class DatabaseOperations {
      * @return Returns true if successfully inserted into lmsdatabase, false if not successful.
      */
     public static boolean createLostBook(Book book, User user) {
-        String createLostBook = "INSERT INTO lost_books(book_id, user_id) VALEUS(?, ?)";
+        String createLostBook = "INSERT INTO lost_books(book_id, user_id) VALUES(?, ?)";
 
         try {
             Connection con = DatabaseConnections.SQLConnection();

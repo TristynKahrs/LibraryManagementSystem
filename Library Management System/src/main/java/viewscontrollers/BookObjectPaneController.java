@@ -1,9 +1,6 @@
 package viewscontrollers;
 
-import controllers.Alerter;
-import controllers.ChangeScene;
-import controllers.DatabaseOperations;
-import controllers.LibraryManagement;
+import controllers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,6 +44,9 @@ public class BookObjectPaneController implements Initializable {
     @FXML
     public Button btnCheckIn;
 
+    @FXML
+    public Button btnLost;
+
     public void onCheckOutClick(ActionEvent event){
         User user = ChangeScene.receiveData(event);
         Window owner= btnCheckOut.getScene().getWindow();
@@ -69,6 +69,13 @@ public class BookObjectPaneController implements Initializable {
             checkInPane.setVisible(false);
         }catch (Exception e){
         }
+    }
+
+    public void onReportLostClick(ActionEvent event) {
+        User user = ChangeScene.receiveData(event);
+        book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
+        FeeManagement.lostBook(user, book);
+        checkInPane.setVisible(false);
     }
 
     @Override

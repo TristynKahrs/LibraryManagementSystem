@@ -40,14 +40,16 @@ public class FeeManagement {
      * @param book A book Object used to create a lost book.
      */
     public static void lostBook(User user, Book book) {
-        if(LibraryManagement.usersCheckedOutBooks(user).contains(book)){
-            double lostFeeAmount = -20.00;
-            DatabaseOperations.createLostBook(book, user);
-            DatabaseOperations.checkInBook(book, user);
-            if(DatabaseOperations.getCurrentFee(book, user) == 0) {
-                DatabaseOperations.createFee(book, user, lostFeeAmount);
-            } else {
-                DatabaseOperations.updateFee(book, user, lostFeeAmount);
+        for(Book checkedOutBook : LibraryManagement.usersCheckedOutBooks(user)) {
+            if(checkedOutBook.getTitle().equals(book.getTitle())){
+                double lostFeeAmount = -20.00;
+                DatabaseOperations.createLostBook(book, user);
+                DatabaseOperations.checkInBook(book, user);
+                if(DatabaseOperations.getCurrentFee(book, user) == 0) {
+                    DatabaseOperations.createFee(book, user, lostFeeAmount);
+                } else {
+                    DatabaseOperations.updateFee(book, user, lostFeeAmount);
+                }
             }
         }
     }
