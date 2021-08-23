@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
 import models.User;
@@ -41,7 +40,7 @@ public class UserProfileController implements Initializable {
     public void onClickFees(ActionEvent event) {
         PagePaneController.setLocation("Fees");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + " here are your fees");
+        lblGreeting.setText(activeUser.getFullName() + ", here are any fees you have.");
         paneDisplay.getChildren().clear();
         try {
             try{ //TODO ERROR HERE
@@ -58,7 +57,7 @@ public class UserProfileController implements Initializable {
     public void onClickLostBooks(ActionEvent event) {
         PagePaneController.setLocation("Lost Book");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + " here are your lost books");
+        lblGreeting.setText(activeUser.getFullName() + ", here are your lost books.");
         paneDisplay.getChildren().clear();
         try { //TODO error here
             try {
@@ -74,7 +73,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangeName;
     public void onClickChangeName(ActionEvent event) {
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + " would you like to change your name?");
+        lblGreeting.setText(activeUser.getFullName() + ", here you can change your name.");
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
@@ -86,7 +85,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangePassword;
     public void onClickChangePassword(ActionEvent event) {
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + " would you like to change your password?");
+        lblGreeting.setText(activeUser.getFullName() + ", here you can change your password.");
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
@@ -99,7 +98,7 @@ public class UserProfileController implements Initializable {
     public void onClickCheckedOut(ActionEvent event) {
         PagePaneController.setLocation("Profile");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + " checked out books!");
+        lblGreeting.setText(activeUser.getFullName() + ", here are your checked out books.");
         paneDisplay.getChildren().clear();
         try { //TODO ERROR HERE
             try {

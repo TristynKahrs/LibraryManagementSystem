@@ -23,7 +23,6 @@ public class ChangePasswordPaneController implements Initializable {
     public TextField txtConfirmPassword;
 
     public Button btnSubmit;
-
     public void onSubmitClick(ActionEvent event) {
         activeUser = ChangeScene.receiveData(event);
         String strCurrentPassword = txtCurrentPassword.getText();

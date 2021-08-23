@@ -5,15 +5,12 @@ import controllers.Alerter;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import models.User;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +18,7 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     @FXML
     public Pane paneLogin;
+
     public TextField txtUsername;
     public PasswordField txtPassword;
 
