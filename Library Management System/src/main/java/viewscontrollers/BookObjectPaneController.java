@@ -54,6 +54,8 @@ public class BookObjectPaneController implements Initializable {
 
         try {
             LibraryManagement.checkOut(user, book);
+            DisplayBooks.setAllBooks();
+            checkOutPane.setVisible(false);
         }catch (Exception e){
             Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than three books.");
         }
