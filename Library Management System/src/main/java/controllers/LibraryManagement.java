@@ -49,7 +49,7 @@ public class LibraryManagement {
      * or a book is null an Exception will be thrown.
      */
     public static boolean checkOut(User user, Book book) throws Exception {
-        if(usersCheckedOutBooks(user).size() <= bookLimit) {
+        if(usersCheckedOutBooks(user).size() != bookLimit) {
             ArrayList<int[]> checkedOut = DatabaseOperations.getAllCheckedOut();
             for (int[] books : checkedOut) {
                 if (books[1] == book.getPrimaryKey()) {

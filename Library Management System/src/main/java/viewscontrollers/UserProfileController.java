@@ -28,6 +28,7 @@ public class UserProfileController implements Initializable {
     public Button btnBrowse;
     public void onClickBrowse(ActionEvent event) {
         try {
+            PagePaneController.setBrowseBooks(false);
             DisplayBooks.setAllBooks();
             ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {
@@ -94,6 +95,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnCheckedOutBooks;
     public void onClickCheckedOut(ActionEvent event) {
+        PagePaneController.setBrowseBooks(true);
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + " checked out books!");
         paneDisplay.getChildren().clear();

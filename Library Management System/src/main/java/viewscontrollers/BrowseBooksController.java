@@ -41,6 +41,7 @@ public class BrowseBooksController implements Initializable {
         try {
             DisplayBooks.setAllBooks();
             ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", ChangeScene.receiveData(event));
+            PagePaneController.setBrowseBooks(false);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

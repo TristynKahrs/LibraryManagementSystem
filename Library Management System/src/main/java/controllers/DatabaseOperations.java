@@ -65,7 +65,7 @@ public class DatabaseOperations {
 
     /**
      * This method retrieves a User from the lmsdatabase.
-     * @param username String username used to retrive user
+     * @param username String username used to retrieve user
      * @return Returns a String[] containing Users id, fullname, username, and password
      */
     public static String[] getUser(String username) {
@@ -203,6 +203,30 @@ public class DatabaseOperations {
             Connection con = DatabaseConnections.SQLConnection();
             PreparedStatement pst = con.prepareStatement(checkUser);
             pst.setInt(1, bookId);
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                foundBook[0] = rs.getString(1);
+                foundBook[1] = rs.getString(2);
+                foundBook[2] = rs.getString(3);
+            }
+            con.close();
+
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+        return foundBook;
+    }
+
+    public static String[] getBook(String title, String author){
+        String checkUser = "SELECT * FROM lmsdatabase.books WHERE title=? AND author=?;";
+        String[] foundBook = new String[3];
+
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(checkUser);
+            pst.setString(1, title);
+            pst.setString(2, author);
             ResultSet rs = pst.executeQuery();
 
             if(rs.next()) {

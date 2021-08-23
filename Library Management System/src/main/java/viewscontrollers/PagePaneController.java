@@ -14,6 +14,15 @@ import java.util.ResourceBundle;
 
 public class PagePaneController implements Initializable {
     Book[] currentPage = null;
+    private static boolean browseBooks;
+
+    public static boolean isBrowseBooks() {
+        return browseBooks;
+    }
+
+    public static void setBrowseBooks(boolean browseBooks) {
+        PagePaneController.browseBooks = browseBooks;
+    }
 
     public static Book currentBook;
 
@@ -37,11 +46,16 @@ public class PagePaneController implements Initializable {
         currentPage = DisplayBooks.page();
         panePage.getChildren().clear();
         Pane[] panes = {paneBook_0, paneBook_1, paneBook_2, paneBook_3};
+        FXMLLoader loader = null;
         for (int i = 0; i < currentPage.length; i++) {
             currentBook = currentPage[i];
-            if(currentBook != null) {
+             if(currentBook != null){
                 try {
-                    FXMLLoader loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
+                    if (!(PagePaneController.isBrowseBooks())) {
+                        loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane.fxml").toURI().toURL());
+                    } else if (PagePaneController.isBrowseBooks()) {
+                        loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkin.fxml").toURI().toURL());
+                    }
                     loader.setController(new BookObjectPaneController(currentBook));
                     panes[i].getChildren().add(loader.load());
                     panePage.getChildren().add(panes[i]);

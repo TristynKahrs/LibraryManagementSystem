@@ -28,7 +28,7 @@ public class GUIController extends Application {
     public void start(Stage window) throws IOException {
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        window.setTitle("Library Management System!");
+        window.setTitle("Library Management System");
         window.setScene(new Scene(root, 600, 400));
         window.show();
     }

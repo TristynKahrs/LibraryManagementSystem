@@ -1,14 +1,25 @@
 package viewscontrollers;
 
+import controllers.Alerter;
+import controllers.ChangeScene;
+import controllers.DatabaseOperations;
+import controllers.LibraryManagement;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Window;
 import models.Book;
+import models.DisplayBooks;
+import models.User;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BookObjectPaneController implements Initializable {
-    Book book = null;
+    Book book;
     public BookObjectPaneController(Book book) {
         this.book = book;
     }
@@ -23,6 +34,34 @@ public class BookObjectPaneController implements Initializable {
     @FXML
     public Label lblAuthor;
 
+    @FXML
+    public Button btnCheckOut;
+
+    @FXML
+    public Button btnCheckIn;
+
+    public void onCheckOutClick(ActionEvent event){
+        User user = ChangeScene.receiveData(event);
+        Window owner= btnCheckOut.getScene().getWindow();
+        book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
+
+        try {
+            LibraryManagement.checkOut(user, book);
+        }catch (Exception e){
+            Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than three books.");
+        }
+    }
+
+    public void onCheckInClick(ActionEvent event){
+        User user = ChangeScene.receiveData(event);
+        book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
+
+        try {
+            LibraryManagement.checkIn(user, book);
+
+        }catch (Exception e){
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
