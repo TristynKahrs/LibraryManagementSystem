@@ -404,6 +404,7 @@ public class DatabaseOperations {
             while(rs.next()) {
                 bookIds.add(rs.getInt(1));
             }
+            con.close();
 
             return bookIds;
         } catch (SQLException SQLe) {

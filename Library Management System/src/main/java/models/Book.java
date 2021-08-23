@@ -55,6 +55,15 @@ public class Book {
         return false;
     }
 
+    public boolean isLost() {
+        for(Integer book_id : DatabaseOperations.getAllLostBookIds()) {
+            if(getPrimaryKey() == book_id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return getTitle()  + " by " + getAuthor();

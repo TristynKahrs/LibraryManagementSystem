@@ -44,7 +44,6 @@ public class FeeManagement {
             if(checkedOutBook.getTitle().equals(book.getTitle())){
                 double lostFeeAmount = -20.00;
                 DatabaseOperations.createLostBook(book, user);
-                DatabaseOperations.checkInBook(book, user);
                 if(DatabaseOperations.getCurrentFee(book, user) == 0) {
                     DatabaseOperations.createFee(book, user, lostFeeAmount);
                 } else {

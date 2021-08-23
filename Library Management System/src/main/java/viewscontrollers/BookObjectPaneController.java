@@ -89,6 +89,7 @@ public class BookObjectPaneController implements Initializable {
         User user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         FeeManagement.lostBook(user, book);
+        LibraryManagement.checkIn(user, book);
         checkInPane.setVisible(false);
     }
 
@@ -96,6 +97,7 @@ public class BookObjectPaneController implements Initializable {
         User user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         FeeManagement.foundBook(user, book);
+        LibraryManagement.checkIn(user, book);
         lostPane.setVisible(false);
     }
 

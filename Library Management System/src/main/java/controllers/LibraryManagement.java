@@ -80,7 +80,9 @@ public class LibraryManagement {
         for (String[] bookInfo : DatabaseOperations.search(searchBooks)) {
             Book currentBook = new Book(bookInfo);
             if(!currentBook.isCheckedOut()) {
-                books.add(currentBook);
+                if(!currentBook.isLost()) {
+                    books.add(currentBook);
+                }
             }
         }
         return books;
@@ -99,7 +101,9 @@ public class LibraryManagement {
         for (String[] bookInfo : DatabaseOperations.getAllBooks()) {
             Book currentBook = new Book(bookInfo);
             if(!currentBook.isCheckedOut()) {
-                books.add(currentBook);
+                if(!currentBook.isLost()) {
+                    books.add(currentBook);
+                }
             }
         }
         return books;
