@@ -51,6 +51,8 @@ public class BrowseBooksController implements Initializable {
     public Pane panePage;
 
     public void updateCenterPane() {
+        //TODO FIX THIS YOU FUCKING TWAT
+//  panePage.getChildren().clear().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         panePage.getChildren().clear();
         try {
             PagePaneController.setLocation("Check-Out");

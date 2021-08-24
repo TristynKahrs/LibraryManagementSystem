@@ -64,10 +64,9 @@ public class BookObjectPaneController implements Initializable {
     @FXML public TextField txtPayAmount;
 
     public void onCheckOutClick(ActionEvent event){
-        user = ChangeScene.receiveData(event);
-        Window owner= btnCheckOut.getScene().getWindow();
+        User user = ChangeScene.receiveData(event);
+        Window owner = btnCheckOut.getScene().getWindow();
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-
         try {
             LibraryManagement.checkOut(user, book);
             DisplayBooks.setAllBooks();

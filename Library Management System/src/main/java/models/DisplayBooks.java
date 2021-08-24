@@ -16,13 +16,16 @@ public class DisplayBooks {
     private static Book[] page;
 
     public static ArrayList<Book> setAllBooks() {
-        pageNumber = 0;
         bookSet = LibraryManagement.allBooks();
         return bookSet;
     }
 
-    public static void searchBooks(String search) throws FindException {
+    public static void resetPageNumber() {
         pageNumber = 0;
+    }
+
+    public static void searchBooks(String search) throws FindException {
+        resetPageNumber();
         bookSet = LibraryManagement.search(search);
         if(bookSet.size() == 0) {
             bookSet = setAllBooks();
@@ -32,6 +35,7 @@ public class DisplayBooks {
 
     //TODO different book pages here
     public static void setFeesBookSet(User user) throws FindException{
+        resetPageNumber();
         bookSet = FeeManagement.getUsersBooksWithFees(user);
         if(bookSet.size() == 0) {
             setEmptySet();
@@ -41,6 +45,7 @@ public class DisplayBooks {
     }
 
     public static void setLostBooksSet(User user) {
+        resetPageNumber();
         bookSet = FeeManagement.usersLostBooks(user);
         if(bookSet.size() == 0) {
             setEmptySet();
@@ -49,6 +54,7 @@ public class DisplayBooks {
     }
 
     public static void setCheckedOutSet(User user) {
+        resetPageNumber();
         bookSet = LibraryManagement.usersCheckedOutBooks(user);
         if(bookSet.size() == 0) {
             setEmptySet();
@@ -57,6 +63,7 @@ public class DisplayBooks {
     }
 
     public static void setEmptySet() {
+        resetPageNumber();
         bookSet.clear();
         for (int i = 0; i < 4; i++) {
             bookSet.add(null);

@@ -29,6 +29,7 @@ public class UserProfileController implements Initializable {
         try {
             PagePaneController.setLocation("Profile");
             DisplayBooks.setAllBooks();
+            DisplayBooks.resetPageNumber();
             ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {
             ioe.printStackTrace();
