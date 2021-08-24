@@ -3,20 +3,25 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import models.Book;
 import models.User;
 import views.GUIController;
+import viewscontrollers.BookObjectPaneController;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ChangeScene {
 
@@ -40,16 +45,23 @@ public class ChangeScene {
         stage.show();
     }
 
-    public static void createPopUp(Event event, String fxml) {
+    public static void createPopUp(Event event, String fxml, Book book, User user) {
         fxmlFile = fxml;
+        ArrayList<Object> passInfo = new ArrayList<>();
+        passInfo.add(book);
+        passInfo.add(user);
         try {
             URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
             Parent root = FXMLLoader.load(url);
+
             Stage dialog = new Stage();
+            dialog.setUserData(passInfo);
             dialog.getIcons().add(new Image(ChangeScene.class.getResourceAsStream("/data/libraryIcon.png")));
+            dialog.setTitle("Fee Payment");
             dialog.setResizable(false);
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner(((Node)event.getSource()).getScene().getWindow());
+
             Scene dialogScene = new Scene(root);
             dialog.setScene(dialogScene);
             dialog.show();
@@ -90,5 +102,13 @@ public class ChangeScene {
         User currentUser = (User) newStage.getUserData();
 
         return currentUser;
+    }
+
+    public static ArrayList<Object> receiveInfo(Event event) {
+        Node node = (Node)event.getSource();
+        Stage newStage = (Stage) node.getScene().getWindow();
+        ArrayList<Object> feeInfo = (ArrayList<Object>) newStage.getUserData();
+
+        return feeInfo;
     }
 }

@@ -28,18 +28,23 @@ import models.User;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static java.lang.String.format;
+import static viewscontrollers.PagePaneController.currentBook;
 
 public class BookObjectPaneController implements Initializable {
     Book book;
+    User user;
     public BookObjectPaneController(Book book) {
         this.book = book;
     }
 
     public BookObjectPaneController() {
-        book = PagePaneController.currentBook;
+        book = currentBook;
     }
 
     @FXML public Pane checkOutPane;
@@ -53,12 +58,13 @@ public class BookObjectPaneController implements Initializable {
     @FXML public Button btnLost;
     @FXML public Button btnFound;
     @FXML public Button btnPay;
+    @FXML public Button btnSubmit;
+    @FXML public Label lblFee;
     @FXML public Label lblFeeAmount;
     @FXML public TextField txtPayAmount;
 
-
     public void onCheckOutClick(ActionEvent event){
-        User user = ChangeScene.receiveData(event);
+        user = ChangeScene.receiveData(event);
         Window owner= btnCheckOut.getScene().getWindow();
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
 
@@ -72,7 +78,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onCheckInClick(ActionEvent event){
-        User user = ChangeScene.receiveData(event);
+        user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
             LibraryManagement.checkIn(user, book);
@@ -82,7 +88,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onReportLostClick(ActionEvent event) {
-        User user = ChangeScene.receiveData(event);
+        user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         FeeManagement.lostBook(user, book);
         LibraryManagement.checkIn(user, book);
@@ -90,7 +96,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onReportFoundClick(ActionEvent event) {
-        User user = ChangeScene.receiveData(event);
+        user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         FeeManagement.foundBook(user, book);
         LibraryManagement.checkIn(user, book);
@@ -98,16 +104,34 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onPayClick(ActionEvent event) {
-        ChangeScene.createPopUp(event, "fee-popup-pane.fxml");
+        book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
+        user = ChangeScene.receiveData(event);
+        ChangeScene.createPopUp(event, "fee-popup-pane.fxml", book, user);
     }
 
     public void onSubmitClick(ActionEvent actionEvent) {
         Window owner = ((Node)actionEvent.getSource()).getScene().getWindow();
+        ArrayList<Object> feeInfo = ChangeScene.receiveInfo(actionEvent);
+        book = (Book) feeInfo.get(0);
+        user = (User) feeInfo.get(1);
+
         try {
-            Double.parseDouble(txtPayAmount.getText());
-            lblFeeAmount.setText("$" + txtPayAmount.getText());
-        } catch(NumberFormatException nfe) {
-            Alerter.showAlert(Alert.AlertType.ERROR, owner, "Invalid Payment", "Please Enter a Dollar Amount!");
+            if(txtPayAmount.getText().charAt(0) == '-') {
+                throw new NumberFormatException();
+            }
+
+            FeeManagement.updateFees(book, user, -(Double.parseDouble(txtPayAmount.getText())));
+            if(DatabaseOperations.getCurrentFee(book, user) <= 0) {
+                DatabaseOperations.deleteFee(book, user);
+                if(book.isLost()) {
+                    FeeManagement.foundBook(user, book);
+                }
+            }
+
+            Stage stage = (Stage) btnSubmit.getScene().getWindow();
+            stage.close();
+        } catch(Exception e) {
+            Alerter.showAlert(Alert.AlertType.ERROR, owner, "Invalid Payment", "Please enter a valid positive dollar amount!");
         }
     }
 
