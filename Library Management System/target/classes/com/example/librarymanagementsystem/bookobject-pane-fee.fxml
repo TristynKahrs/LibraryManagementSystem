@@ -18,7 +18,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnPayFee" layoutX="254.0" layoutY="33.0" mnemonicParsing="false" onAction="#onPayClick" text="Pay" />
+      <Button fx:id="btnPay" layoutX="254.0" layoutY="33.0" mnemonicParsing="false" onAction="#onPayClick" text="Pay" />
     </children>
    <padding>
       <Insets bottom="3.0" left="3.0" top="3.0" />

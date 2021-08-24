@@ -6,8 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.User;
+import views.GUIController;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +38,24 @@ public class ChangeScene {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void createPopUp(Event event, String fxml) {
+        fxmlFile = fxml;
+        try {
+            URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Stage dialog = new Stage();
+            dialog.getIcons().add(new Image(ChangeScene.class.getResourceAsStream("/data/libraryIcon.png")));
+            dialog.setResizable(false);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(((Node)event.getSource()).getScene().getWindow());
+            Scene dialogScene = new Scene(root);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
