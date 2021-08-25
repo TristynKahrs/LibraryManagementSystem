@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BrowseBooksController implements Initializable {
-    //TODO try login constructor
     public BorderPane paneBrowseBooks;
     private User activeUser;
 
@@ -46,7 +45,7 @@ public class BrowseBooksController implements Initializable {
             UserProfileController.updateCenterPane("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        }
+        } catch (FindException ignored) {}
     }
 
     //Center
