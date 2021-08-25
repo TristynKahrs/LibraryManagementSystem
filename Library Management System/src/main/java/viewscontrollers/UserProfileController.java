@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
 import models.User;
@@ -18,7 +19,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserProfileController implements Initializable {
-    //TODO all of the little controllers in here
     private User activeUser;
     public Label lblGreeting;
 
@@ -36,7 +36,6 @@ public class UserProfileController implements Initializable {
         }
     }
 
-    //vbox
     public Button btnFees;
     public void onClickFees(ActionEvent event) {
         PagePaneController.setLocation("Fees");
@@ -44,11 +43,10 @@ public class UserProfileController implements Initializable {
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
-            try{ //TODO ERROR HERE
+            try{
                 DisplayBooks.setFeesBookSet(activeUser);
             }catch (FindException ignored) {}
-            //change the controllers to the fee book controllers
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -60,12 +58,11 @@ public class UserProfileController implements Initializable {
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
-        try { //TODO error here
+        try {
             try {
                 DisplayBooks.setLostBooksSet(activeUser);
             }catch (FindException ignored) {}
-            //change the controllers to the lost books controllers
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -77,7 +74,7 @@ public class UserProfileController implements Initializable {
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
+            paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -89,7 +86,7 @@ public class UserProfileController implements Initializable {
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
+            paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -101,12 +98,11 @@ public class UserProfileController implements Initializable {
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
-        try { //TODO ERROR HERE
+        try {
             try {
                 DisplayBooks.setCheckedOutSet(activeUser);
             }catch (FindException ignored) {}
-            //change the controllers to the checked out controllers
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
@@ -125,6 +121,14 @@ public class UserProfileController implements Initializable {
         activeUser = ChangeScene.receiveData(event);
     }
 
+    public static ScrollPane updateScrollPane() throws IOException{
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+        sp.setPrefSize(600, 230);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        return sp;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
