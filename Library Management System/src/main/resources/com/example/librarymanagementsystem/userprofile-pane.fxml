@@ -43,7 +43,7 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="logoutID" layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutOnClick" text="Log Out" />
+      <Button fx:id="btnLogout" layoutX="530.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutOnClick" text="Log Out" />
       <Button fx:id="btnBrowse" layoutX="532.0" layoutY="38.0" mnemonicParsing="false" onAction="#onClickBrowse" text="Browse" />
    </children>
 </AnchorPane>

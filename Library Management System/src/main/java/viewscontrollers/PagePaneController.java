@@ -3,6 +3,8 @@ package viewscontrollers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import models.Book;
 import models.DisplayBooks;
@@ -40,6 +42,15 @@ public class PagePaneController implements Initializable {
 
     @FXML
     public Pane paneBook_3;
+
+    public void setUpScroll() {
+        ScrollBar sb = new ScrollBar();
+        //vertical
+        sb.setMin(0);
+        sb.setMax(150);
+        sb.setValue(0);
+        panePage.getChildren().add(sb);
+    }
 
     public void updateCurrentPage() {
         //TODO catch the error if there's no books
@@ -81,6 +92,7 @@ public class PagePaneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setUpScroll();
         updateCurrentPage();
     }
 }

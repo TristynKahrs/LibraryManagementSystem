@@ -52,7 +52,7 @@ public class UserProfileController implements Initializable {
     public void onClickFees(ActionEvent event) {
         PagePaneController.setLocation("Fees");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + ", here are any fees you have.");
+        lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
             try{ //TODO ERROR HERE
@@ -69,7 +69,7 @@ public class UserProfileController implements Initializable {
     public void onClickLostBooks(ActionEvent event) {
         PagePaneController.setLocation("Lost Book");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + ", here are your lost books.");
+        lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try { //TODO error here
             try {
@@ -85,7 +85,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangeName;
     public void onClickChangeName(ActionEvent event) {
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + ", here you can change your name.");
+        lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
@@ -97,7 +97,7 @@ public class UserProfileController implements Initializable {
     public Button btnChangePassword;
     public void onClickChangePassword(ActionEvent event) {
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + ", here you can change your password.");
+        lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
             paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
@@ -110,7 +110,7 @@ public class UserProfileController implements Initializable {
     public void onClickCheckedOut(ActionEvent event) {
         PagePaneController.setLocation("CheckIn");
         updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName() + ", here are your checked out books.");
+        lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try { //TODO ERROR HERE
             try {
@@ -123,7 +123,7 @@ public class UserProfileController implements Initializable {
         }
     }
 
-    public Button logoutBtn;
+    public Button btnLogout;
     public void logoutOnClick(ActionEvent event) {
         try {
             ChangeScene.changeScene(event, "login-pane.fxml");
@@ -131,7 +131,6 @@ public class UserProfileController implements Initializable {
             ioe.printStackTrace();
         }
     }
-    //vbox end
 
     public void updateActiveUser(Event event) {
         activeUser = ChangeScene.receiveData(event);
