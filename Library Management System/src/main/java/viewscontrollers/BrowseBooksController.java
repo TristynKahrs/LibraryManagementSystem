@@ -40,9 +40,10 @@ public class BrowseBooksController implements Initializable {
 
     public void onClickUserProfile(ActionEvent event) {
         try {
-            DisplayBooks.setAllBooks();
-            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", ChangeScene.receiveData(event));
-            PagePaneController.setLocation("Profile");
+            User user = ChangeScene.receiveData(event);
+            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);
+            DisplayBooks.setCheckedOutSet(user);
+            UserProfileController.updateCenterPane("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
