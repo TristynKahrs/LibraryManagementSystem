@@ -52,10 +52,10 @@ public class PagePaneController implements Initializable {
              if(currentBook != null){
                 try {
                     switch(bookObjectPaneLocation) {
-                        case "Check-Out":
+                        case "Browse":
                             loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkout.fxml").toURI().toURL());
                             break;
-                        case "Profile":
+                        case "CheckIn":
                             loader = new FXMLLoader(new File("src/main/resources/com/example/librarymanagementsystem/bookobject-pane-checkin.fxml").toURI().toURL());
                             break;
                         case "Lost Book":

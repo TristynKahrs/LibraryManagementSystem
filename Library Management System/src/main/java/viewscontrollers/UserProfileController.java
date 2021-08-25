@@ -97,7 +97,7 @@ public class UserProfileController implements Initializable {
 
     public Button btnCheckedOutBooks;
     public void onClickCheckedOut(ActionEvent event) {
-        PagePaneController.setLocation("Profile");
+        PagePaneController.setLocation("CheckIn");
         updateActiveUser(event);
         lblGreeting.setText(activeUser.getFullName() + ", here are your checked out books.");
         paneDisplay.getChildren().clear();

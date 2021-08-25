@@ -14,6 +14,7 @@ import models.User;
 import java.io.File;
 import java.io.IOException;
 import java.lang.module.FindException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,14 +50,13 @@ public class BrowseBooksController implements Initializable {
 
     //Center
     public Pane panePage;
+    public static Pane static_pane;
 
-    public void updateCenterPane() {
-        //TODO FIX THIS YOU FUCKING TWAT
-//  panePage.getChildren().clear().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
-        panePage.getChildren().clear();
+    public static void updateCenterPane() {
+        static_pane.getChildren().clear();
         try {
-            PagePaneController.setLocation("Check-Out");
-            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            PagePaneController.setLocation("Browse");
+            static_pane.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -82,6 +82,7 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        static_pane = panePage;
         updateCenterPane();
     }
 }
