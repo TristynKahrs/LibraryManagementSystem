@@ -40,9 +40,10 @@ public class BrowseBooksController implements Initializable {
 
     public void onClickUserProfile(ActionEvent event) {
         try {
-            DisplayBooks.setAllBooks();
-            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", ChangeScene.receiveData(event));
-            PagePaneController.setLocation("Profile");
+            User user = ChangeScene.receiveData(event);
+            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);
+            DisplayBooks.setCheckedOutSet(user);
+            UserProfileController.updateCenterPane("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -68,6 +69,11 @@ public class BrowseBooksController implements Initializable {
         sp.setPrefSize(600, 285);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        final double SPEED = 0.0075;
+        sp.getContent().setOnScroll(scrollEvent -> {
+            double deltaY = scrollEvent.getDeltaY() * SPEED;
+            sp.setVvalue(sp.getVvalue() - deltaY);
+        });
         return sp;
     }
 

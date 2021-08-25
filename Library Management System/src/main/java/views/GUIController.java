@@ -16,6 +16,7 @@ public class GUIController extends Application {
     public void start(Stage window) throws IOException {
         window.setMinWidth(600);
         window.setMinHeight(400);
+        window.setResizable(false);
         window.getIcons().add(new Image(GUIController.class.getResourceAsStream("/data/libraryIcon.png")));
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
