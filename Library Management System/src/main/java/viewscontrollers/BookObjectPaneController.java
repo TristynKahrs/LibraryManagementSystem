@@ -29,6 +29,7 @@ import models.User;
 import java.io.File;
 import java.io.IOException;
 import java.lang.module.FindException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -157,6 +158,20 @@ public class BookObjectPaneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //This is a fix for a very obscure bug, and I know its disgusting, but it works, so deal unless you have another fix
+        URL checkUrl = null;
+        try {
+           checkUrl = new File("src/main/resources/com/example/librarymanagementsystem/fee-popup-pane.fxml").toURI().toURL();
+        } catch(MalformedURLException mue) {
+            mue.printStackTrace();
+        }
+
+        if(url.equals(checkUrl)) {
+            book = null;
+        }
+        //This is the end of disgusting
+
         if (book != null) {
             lblTitle.setText("Title: " + book.getTitle());
             lblAuthor.setText("Author: " + book.getAuthor());
