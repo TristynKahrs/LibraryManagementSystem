@@ -145,6 +145,8 @@ public class BookObjectPaneController implements Initializable {
                     FeeManagement.foundBook(user, book);
                 }
             }
+            DisplayBooks.setFeesBookSet(user);
+            UserProfileController.updateCenterPane("Fees");
 
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();
