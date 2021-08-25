@@ -1,5 +1,6 @@
 package viewscontrollers;
 
+import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -29,7 +30,8 @@ public class UserProfileController implements Initializable {
         static_paneDisplay.getChildren().clear();
         try {
             PagePaneController.setLocation(buttonLocation);
-            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+//            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -43,38 +45,6 @@ public class UserProfileController implements Initializable {
             DisplayBooks.resetPageNumber();
             ChangeScene.changeScene(event, "browse-pane.fxml");
         } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    public Button btnFees;
-    public void onClickFees(ActionEvent event) {
-        PagePaneController.setLocation("Fees");
-        updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName());
-        paneDisplay.getChildren().clear();
-        try {
-            try{
-                DisplayBooks.setFeesBookSet(activeUser);
-            }catch (FindException ignored) {}
-            paneDisplay.getChildren().add(updateScrollPane());
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-
-    public Button btnLostBooks;
-    public void onClickLostBooks(ActionEvent event) {
-        PagePaneController.setLocation("Lost Book");
-        updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName());
-        paneDisplay.getChildren().clear();
-        try {
-            try {
-                DisplayBooks.setLostBooksSet(activeUser);
-            }catch (FindException ignored) {}
-            paneDisplay.getChildren().add(updateScrollPane());
-        }catch(IOException ioe){
             ioe.printStackTrace();
         }
     }
@@ -97,22 +67,6 @@ public class UserProfileController implements Initializable {
         lblGreeting.setText(activeUser.getFullName());
         paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(updateScrollPane());
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-
-    public Button btnCheckedOutBooks;
-    public void onClickCheckedOut(ActionEvent event) {
-        PagePaneController.setLocation("CheckIn");
-        updateActiveUser(event);
-        lblGreeting.setText(activeUser.getFullName());
-        paneDisplay.getChildren().clear();
-        try {
-            try {
-                DisplayBooks.setCheckedOutSet(activeUser);
-            }catch (FindException ignored) {}
             paneDisplay.getChildren().add(updateScrollPane());
         }catch(IOException ioe){
             ioe.printStackTrace();
@@ -149,10 +103,12 @@ public class UserProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         static_paneDisplay = paneDisplay;
-        //TODO call checkout to start on page
-        //TODO change label to have persons name
-        lblGreeting.setText("Profile Menu");
-        //TODO go to checked out books on default
+        try {
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        lblGreeting.setText(AccountManagement.activeUser.getFullName());
     }
 
 }

@@ -86,6 +86,7 @@ public class ChangeScene {
      */
     public static void changeSceneWithUser(Event event, String fxml, User user) throws IOException {
         User currentUser = user;
+        AccountManagement.activeUser = user;
         Node node = (Node)event.getSource();
         Stage oldStage = (Stage)node.getScene().getWindow();
 

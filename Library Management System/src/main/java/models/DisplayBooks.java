@@ -38,10 +38,11 @@ public class DisplayBooks {
         bookSet = FeeManagement.getUsersBooksWithFees(user);
         if(bookSet.size() == 0) {
             setEmptySet();
+            throw new FindException();
         }
     }
 
-    public static void setLostBooksSet(User user) {
+    public static void setLostBooksSet(User user) throws FindException{
         resetPageNumber();
         bookSet = FeeManagement.usersLostBooks(user);
         if(bookSet.size() == 0) {
@@ -50,7 +51,7 @@ public class DisplayBooks {
         }
     }
 
-    public static void setCheckedOutSet(User user) {
+    public static void setCheckedOutSet(User user) throws FindException{
         resetPageNumber();
         bookSet = LibraryManagement.usersCheckedOutBooks(user);
         if(bookSet.size() == 0) {

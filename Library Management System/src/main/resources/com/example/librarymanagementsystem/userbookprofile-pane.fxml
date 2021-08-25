@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="viewscontrollers.UserBookController"
-            prefHeight="338.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="338.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.UserBookController">
+   <children>
+      <TabPane prefHeight="338.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabCheckIn" text="Check In">
+            <content>
+              <AnchorPane fx:id="pneCheckIn" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblCheckInMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabFees" text="Fees">
+            <content>
+              <AnchorPane fx:id="pneFees" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblFeesMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabLost" text="Lost">
+              <content>
+                <AnchorPane fx:id="pneLost" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblLostMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>

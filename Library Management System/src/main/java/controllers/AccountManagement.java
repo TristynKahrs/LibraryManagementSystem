@@ -6,6 +6,8 @@ import javax.naming.CannotProceedException;
 import java.nio.file.AccessDeniedException;
 
 public class AccountManagement {
+    //TODO brittle fix here
+    public static User activeUser;
 
     /**
      * createAccount should be able to grab the full name of the user, the username and the password.
