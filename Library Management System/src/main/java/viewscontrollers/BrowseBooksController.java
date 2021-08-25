@@ -69,6 +69,11 @@ public class BrowseBooksController implements Initializable {
         sp.setPrefSize(600, 230);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        final double SPEED = 0.0075;
+        sp.getContent().setOnScroll(scrollEvent -> {
+            double deltaY = scrollEvent.getDeltaY() * SPEED;
+            sp.setVvalue(sp.getVvalue() - deltaY);
+        });
         return sp;
     }
 

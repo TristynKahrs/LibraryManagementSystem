@@ -28,6 +28,7 @@ import models.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.module.FindException;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
@@ -78,25 +79,46 @@ public class BookObjectPaneController implements Initializable {
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
             LibraryManagement.checkIn(user, book);
+            DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
-        }catch (Exception e){
+            UserProfileController.updateCenterPane("CheckIn");
+        } catch(FindException e) {
+            UserProfileController.updateCenterPane("CheckIn");
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
     public void onReportLostClick(ActionEvent event) {
         user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-        FeeManagement.lostBook(user, book);
-        LibraryManagement.checkIn(user, book);
-        checkInPane.setVisible(false);
+        try {
+            FeeManagement.lostBook(user, book);
+            LibraryManagement.checkIn(user, book);
+            DisplayBooks.setCheckedOutSet(user);
+            checkInPane.setVisible(false);
+            UserProfileController.updateCenterPane("CheckIn");
+        } catch(FindException fe) {
+         UserProfileController.updateCenterPane("CheckIn");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onReportFoundClick(ActionEvent event) {
         user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-        FeeManagement.foundBook(user, book);
-        LibraryManagement.checkIn(user, book);
-        lostPane.setVisible(false);
+        try {
+            FeeManagement.foundBook(user, book);
+            LibraryManagement.checkIn(user, book);
+            DisplayBooks.setLostBooksSet(user);
+            lostPane.setVisible(false);
+            UserProfileController.updateCenterPane("Lost Book");
+        } catch(FindException fe) {
+            UserProfileController.updateCenterPane("Lost Book");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onPayClick(ActionEvent event) {

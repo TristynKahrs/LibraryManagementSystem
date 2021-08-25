@@ -23,11 +23,22 @@ public class UserProfileController implements Initializable {
     public Label lblGreeting;
 
     public Pane paneDisplay;
+    public static Pane static_paneDisplay;
+
+    public static void updateCenterPane(String buttonLocation) {
+        static_paneDisplay.getChildren().clear();
+        try {
+            PagePaneController.setLocation(buttonLocation);
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     public Button btnBrowse;
     public void onClickBrowse(ActionEvent event) {
         try {
-            PagePaneController.setLocation("Profile");
+            PagePaneController.setLocation("CheckIn");
             DisplayBooks.setAllBooks();
             DisplayBooks.resetPageNumber();
             ChangeScene.changeScene(event, "browse-pane.fxml");
@@ -129,6 +140,7 @@ public class UserProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        static_paneDisplay = paneDisplay;
         //TODO call checkout to start on page
         //TODO change label to have persons name
         lblGreeting.setText("Profile Menu");
