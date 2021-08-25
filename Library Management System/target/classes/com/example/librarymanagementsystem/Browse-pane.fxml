@@ -20,7 +20,7 @@
       </Pane>
    </top>
    <center>
-      <Pane fx:id="panePage" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="centerPane" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <Pane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">

@@ -42,7 +42,7 @@ public class FeeManagement {
     public static void lostBook(User user, Book book) {
         for(Book checkedOutBook : LibraryManagement.usersCheckedOutBooks(user)) {
             if(checkedOutBook.getTitle().equals(book.getTitle())){
-                double lostFeeAmount = -20.00;
+                double lostFeeAmount = 20.00;
                 DatabaseOperations.createLostBook(book, user);
                 if(DatabaseOperations.getCurrentFee(book, user) == 0) {
                     DatabaseOperations.createFee(book, user, lostFeeAmount);
@@ -59,11 +59,14 @@ public class FeeManagement {
      * @param book A book Object used to remove a found book from lost_books.
      */
     public static void foundBook(User user, Book book) {
-        double lostFeeRefund = 20.00;
+        double lostFeeRefund = -20.00;
         for(Book lostBook : allLostBooks()) {
             if(lostBook.getTitle().equals(book.getTitle())) {
                 DatabaseOperations.deleteLostBook(book, user);
                 DatabaseOperations.updateFee(book, user, lostFeeRefund);
+                if(DatabaseOperations.getCurrentFee(book, user) <= 0) {
+                    DatabaseOperations.deleteFee(book, user);
+                }
             }
         }
     }

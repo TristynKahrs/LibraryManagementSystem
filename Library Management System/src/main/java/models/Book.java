@@ -2,6 +2,7 @@ package models;
 
 import controllers.DatabaseConnections;
 import controllers.DatabaseOperations;
+import controllers.FeeManagement;
 
 public class Book {
     public int primaryKey;

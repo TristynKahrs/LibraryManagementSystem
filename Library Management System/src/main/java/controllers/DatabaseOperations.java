@@ -313,6 +313,8 @@ public class DatabaseOperations {
                 checkOutDate = rs.getDate(1);
                 return checkOutDate;
             }
+
+            con.close();
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
@@ -432,6 +434,7 @@ public class DatabaseOperations {
                 bookIds.add(rs.getInt(2));
             }
 
+            con.close();
             return bookIds;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
@@ -455,10 +458,35 @@ public class DatabaseOperations {
             pst.setInt(1, book.getPrimaryKey());
             pst.setInt(2, user.getPrimaryKey());
             pst.setDouble(3, fee);
+            pst.executeUpdate();
+            con.close();
             return true;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
+        return false;
+    }
+
+    /**
+     * This method deletes  a fee from the fees table in the lmsdatabase
+     * @param book A book Object used to delete information from fees table.
+     * @param user A user Object used to delete information from fees table.
+     * @return Returns true if successfully deleted from lmsdatabase, false if not successful.
+     */
+    public static boolean deleteFee(Book book, User user) {
+        String deleteFee = "DELETE FROM fees WHERE book_id=? AND user_id=?";
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(deleteFee);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            pst.executeUpdate();
+            con.close();
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
         return false;
     }
 
@@ -484,6 +512,7 @@ public class DatabaseOperations {
                 bookFees.add(bookFeeInfo);
             }
 
+            con.close();
             return bookFees;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
@@ -512,6 +541,8 @@ public class DatabaseOperations {
                 currentFee = rs.getDouble(1);
                 return currentFee;
             }
+
+            con.close();
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
@@ -537,6 +568,8 @@ public class DatabaseOperations {
                 currentFee = rs.getDouble(1);
                 return currentFee;
             }
+
+            con.close();
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
@@ -561,6 +594,7 @@ public class DatabaseOperations {
             pst.setInt(3, user.getPrimaryKey());
             pst.executeUpdate();
 
+            con.close();
             return true;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
