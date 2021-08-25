@@ -70,6 +70,8 @@ public class ChangeScene {
             Scene dialogScene = new Scene(root);
             dialog.setScene(dialogScene);
             dialog.show();
+        } catch(NullPointerException npe) {
+            npe.printStackTrace();
         } catch(Exception e) {
             e.printStackTrace();
         }
