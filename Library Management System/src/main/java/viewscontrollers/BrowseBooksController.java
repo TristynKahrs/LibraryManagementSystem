@@ -36,13 +36,12 @@ public class BrowseBooksController implements Initializable {
 
     @FXML
     public Button btnProfile;
-
     public void onClickUserProfile(ActionEvent event) {
         try {
             User user = ChangeScene.receiveData(event);
             ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);
             DisplayBooks.setCheckedOutSet(user);
-            UserProfileController.updateCenterPane("CheckIn");
+            PagePaneController.bookPaneSwitcher("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (FindException ignored) {}
@@ -50,13 +49,11 @@ public class BrowseBooksController implements Initializable {
 
     //Center
     public Pane centerPane;
-    public static Pane static_pane;
-
-    public static void updateCenterPane() {
-        static_pane.getChildren().clear();
+    public void updateCenterPane() {
+        centerPane.getChildren().clear();
         try {
-            PagePaneController.setLocation("Browse");
-            static_pane.getChildren().add(updateScrollPane());
+            PagePaneController.bookPaneSwitcher("Browse");
+            centerPane.getChildren().add(updateScrollPane());
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -96,7 +93,6 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        static_pane = centerPane;
         updateCenterPane();
     }
 }

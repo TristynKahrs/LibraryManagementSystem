@@ -46,7 +46,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public BookObjectPaneController() {
-        book = currentBook;
+        book = PagePaneController.currentBook;
     }
 
     @FXML public Pane checkOutPane;
@@ -60,6 +60,7 @@ public class BookObjectPaneController implements Initializable {
     @FXML public Label lblFeeAmount;
     @FXML public TextField txtPayAmount;
 
+    @FXML
     public void onCheckOutClick(ActionEvent event){
         User user = ChangeScene.receiveData(event);
         Window owner = btnCheckOut.getScene().getWindow();
@@ -68,12 +69,14 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkOut(user, book);
             DisplayBooks.setAllBooks();
             checkOutPane.setVisible(false);
-            BrowseBooksController.updateCenterPane();
+            //TODO REIMPLEMENT THIS
+//            BrowseBooksController.updateCenterPane();
         }catch (Exception e){
             Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than four books.");
         }
     }
 
+    @FXML
     public void onCheckInClick(ActionEvent event){
         user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
@@ -81,14 +84,15 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
-            UserProfileController.updateCenterPane("CheckIn");
+            PagePaneController.bookPaneSwitcher("CheckIn");
         } catch(FindException e) {
-            UserProfileController.updateCenterPane("CheckIn");
+            PagePaneController.bookPaneSwitcher("CheckIn");
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void onReportLostClick(ActionEvent event) {
         user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
@@ -97,14 +101,15 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
-            UserProfileController.updateCenterPane("CheckIn");
+            PagePaneController.bookPaneSwitcher("CheckIn");
         } catch(FindException fe) {
-         UserProfileController.updateCenterPane("CheckIn");
+         PagePaneController.bookPaneSwitcher("CheckIn");
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void onReportFoundClick(ActionEvent event) {
         user = ChangeScene.receiveData(event);
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
@@ -113,31 +118,31 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setLostBooksSet(user);
             lostPane.setVisible(false);
-            UserProfileController.updateCenterPane("Lost Book");
+            PagePaneController.bookPaneSwitcher("Lost Book");
         } catch(FindException fe) {
-            UserProfileController.updateCenterPane("Lost Book");
+            PagePaneController.bookPaneSwitcher("Lost Book");
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void onPayClick(ActionEvent event) {
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         user = ChangeScene.receiveData(event);
         ChangeScene.createPopUp(event, "fee-popup-pane.fxml", book, user);
     }
 
+    @FXML
     public void onSubmitClick(ActionEvent actionEvent) {
         Window owner = ((Node)actionEvent.getSource()).getScene().getWindow();
         ArrayList<Object> feeInfo = ChangeScene.receiveInfo(actionEvent);
         book = (Book) feeInfo.get(0);
         user = (User) feeInfo.get(1);
-
         try {
             if(txtPayAmount.getText().charAt(0) == '-') {
                 throw new NumberFormatException();
             }
-
             FeeManagement.updateFees(book, user, -(Double.parseDouble(txtPayAmount.getText())));
             if(DatabaseOperations.getCurrentFee(book, user) <= 0) {
                 DatabaseOperations.deleteFee(book, user);
@@ -145,7 +150,6 @@ public class BookObjectPaneController implements Initializable {
                     FeeManagement.foundBook(user, book);
                 }
             }
-
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();
         } catch(Exception e) {
