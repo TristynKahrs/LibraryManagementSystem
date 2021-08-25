@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -54,12 +55,7 @@ public class BookObjectPaneController implements Initializable {
     @FXML public Label lblAuthor;
     @FXML public ImageView imgBook;
     @FXML public Button btnCheckOut;
-    @FXML public Button btnCheckIn;
-    @FXML public Button btnLost;
-    @FXML public Button btnFound;
-    @FXML public Button btnPay;
     @FXML public Button btnSubmit;
-    @FXML public Label lblFee;
     @FXML public Label lblFeeAmount;
     @FXML public TextField txtPayAmount;
 
@@ -72,7 +68,7 @@ public class BookObjectPaneController implements Initializable {
             DisplayBooks.setAllBooks();
             checkOutPane.setVisible(false);
         }catch (Exception e){
-            Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than three books.");
+            Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than four books.");
         }
     }
 
@@ -142,6 +138,12 @@ public class BookObjectPaneController implements Initializable {
             File bookFile = new File("src//main//resources//images//" + book.getPrimaryKey() + ".jpg");
             Image bookIMG = new Image(bookFile.toURI().toString());
             imgBook.setImage(bookIMG);
+
+            try {
+                if(FeeManagement.getUserFee(book) > 0) {
+                    lblFeeAmount.setText("$" + FeeManagement.getUserFee(book));
+                }
+            } catch(NullPointerException npe) {}
         }
     }
 }
