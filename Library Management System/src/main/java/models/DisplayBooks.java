@@ -33,15 +33,12 @@ public class DisplayBooks {
         }
     }
 
-    //TODO different book pages here
     public static void setFeesBookSet(User user) throws FindException{
         resetPageNumber();
         bookSet = FeeManagement.getUsersBooksWithFees(user);
         if(bookSet.size() == 0) {
             setEmptySet();
-            throw new FindException();
         }
-        //TODO get all books that have fees (AL); then go get the fee amounts
     }
 
     public static void setLostBooksSet(User user) {
