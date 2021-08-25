@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -49,17 +50,26 @@ public class BrowseBooksController implements Initializable {
     }
 
     //Center
-    public Pane panePage;
+    public Pane centerPane;
     public static Pane static_pane;
 
     public static void updateCenterPane() {
         static_pane.getChildren().clear();
         try {
             PagePaneController.setLocation("Browse");
-            static_pane.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            static_pane.getChildren().add(updateScrollPane());
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    public static ScrollPane updateScrollPane() throws IOException{
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+        sp.setPrefSize(600, 230);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        return sp;
     }
 
 
@@ -82,7 +92,7 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        static_pane = panePage;
+        static_pane = centerPane;
         updateCenterPane();
     }
 }

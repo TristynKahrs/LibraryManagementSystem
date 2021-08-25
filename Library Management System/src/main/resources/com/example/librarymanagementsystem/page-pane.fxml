@@ -2,11 +2,11 @@
 
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="panePage" prefHeight="230.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.PagePaneController">
+<Pane fx:id="panePage" prefHeight="416.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.PagePaneController">
    <children>
-      <Pane fx:id="paneBook_0" layoutX="14.0" layoutY="14.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_1" layoutX="316.0" layoutY="14.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_2" layoutX="14.0" layoutY="126.0" prefHeight="90.0" prefWidth="270.0" />
-      <Pane fx:id="paneBook_3" layoutX="316.0" layoutY="126.0" prefHeight="90.0" prefWidth="270.0" />
+      <Pane fx:id="paneBook_0" layoutX="14.0" layoutY="14.0" prefHeight="90.0" prefWidth="575.0" />
+      <Pane fx:id="paneBook_1" layoutX="13.0" layoutY="110.0" prefHeight="90.0" prefWidth="575.0" />
+      <Pane fx:id="paneBook_2" layoutX="14.0" layoutY="200.0" prefHeight="90.0" prefWidth="575.0" />
+      <Pane fx:id="paneBook_3" layoutX="14.0" layoutY="312.0" prefHeight="90.0" prefWidth="575.0" />
    </children>
 </Pane>

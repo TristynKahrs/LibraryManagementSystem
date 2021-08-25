@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="checkOutPane" prefHeight="90.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="checkOutPane" prefHeight="90.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="imgBook" fitHeight="69.0" fitWidth="57.0" layoutX="22.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="lblTitle" layoutX="79.0" layoutY="14.0" text="abc">
@@ -17,7 +17,7 @@
             <font>
                 <Font size="14.0" />
             </font></Label>
-      <Button fx:id="btnCheckOut" layoutX="256.0" layoutY="33.0" mnemonicParsing="false" onAction="#onCheckOutClick" text="Check Out" />
+      <Button fx:id="btnCheckOut" layoutX="489.0" layoutY="33.0" mnemonicParsing="false" onAction="#onCheckOutClick" text="Check Out" />
     </children>
    <padding>
       <Insets bottom="3.0" left="3.0" top="3.0" />
