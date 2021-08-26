@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="311.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.ChangeNamePaneController">
+<AnchorPane prefHeight="311.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.ChangeNamePaneController">
    <children>
       <TextField fx:id="txtUsername" layoutX="126.0" layoutY="71.0" prefHeight="33.0" prefWidth="196.0" promptText="Username">
          <font>
@@ -27,6 +27,6 @@
          </font>
       </Label>
       <Button fx:id="btnSubmit" layoutX="190.0" layoutY="228.0" mnemonicParsing="false" onAction="#onClickSubmit" prefHeight="33.0" prefWidth="68.0" text="Submit" />
-      <Label fx:id="lblConfirmation" layoutX="250.0" layoutY="228.0" />
+      <Label fx:id="lblConfirmation" layoutX="209.0" layoutY="279.0" />
    </children>
 </AnchorPane>
