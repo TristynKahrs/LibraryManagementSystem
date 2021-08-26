@@ -136,11 +136,11 @@ public class BookObjectPaneController implements Initializable {
         ArrayList<Object> feeInfo = ChangeScene.receiveInfo(actionEvent);
         book = (Book) feeInfo.get(0);
         user = (User) feeInfo.get(1);
+        double currentFee = DatabaseOperations.getCurrentFee(book, user);
+        double userPayment = Double.parseDouble(txtPayAmount.getText());
+        double checkPayment = (currentFee - userPayment);
 
         try {
-            double currentFee = DatabaseOperations.getCurrentFee(book, user);
-            double userPayment = Double.parseDouble(txtPayAmount.getText());
-            double checkPayment = (currentFee - userPayment);
             if(txtPayAmount.getText().charAt(0) == '-') {
                 throw new NumberFormatException();
             }
@@ -163,6 +163,15 @@ public class BookObjectPaneController implements Initializable {
             }
         } catch(NumberFormatException e) {
             Alerter.showAlert(Alert.AlertType.ERROR, owner, "Invalid Payment", "Please enter a valid positive dollar amount!");
+        } catch(FindException fe) {
+            UserProfileController.booksCenterPane("Fees");
+
+            Stage stage = (Stage) btnSubmit.getScene().getWindow();
+            stage.close();
+
+            if(checkPayment < 0) {
+                Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Fee Donation", "You overpaid on your fee! Thank you for the Donation of $" + Math.abs(checkPayment) + "!");
+            }
         }
     }
 
