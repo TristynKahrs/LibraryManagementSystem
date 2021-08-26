@@ -37,6 +37,8 @@ public class LoginController implements Initializable {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){
                 ioe.printStackTrace();
+            } catch (NumberFormatException nfe) {
+                Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }
         }
     }
