@@ -86,6 +86,7 @@ public class BookObjectPaneController implements Initializable {
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
             UserProfileController.booksCenterPane("CheckIn");
+            UserBookController.selectTab(UserBookController.static_tabPane, UserBookController.static_tabCheckIn);
         } catch(FindException e) {
             UserProfileController.booksCenterPane("CheckIn");
         } catch (Exception e){
@@ -102,6 +103,7 @@ public class BookObjectPaneController implements Initializable {
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
             UserProfileController.booksCenterPane("CheckIn");
+            UserBookController.selectTab(UserBookController.static_tabPane, UserBookController.static_tabCheckIn);
         } catch(FindException fe) {
          UserProfileController.booksCenterPane("CheckIn");
         } catch(Exception e) {
@@ -117,7 +119,9 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setLostBooksSet(user);
             lostPane.setVisible(false);
+            lostPane.setManaged(false);
             UserProfileController.booksCenterPane("Lost Book");
+            UserBookController.selectTab(UserBookController.static_tabPane, UserBookController.static_tabLost);
         } catch(FindException fe) {
             UserProfileController.booksCenterPane("Lost Book");
         } catch(Exception e) {
@@ -154,6 +158,7 @@ public class BookObjectPaneController implements Initializable {
             }
             DisplayBooks.setFeesBookSet(user);
             UserProfileController.booksCenterPane("Fees");
+            UserBookController.selectTab(UserBookController.static_tabPane, UserBookController.static_tabFees);
 
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();

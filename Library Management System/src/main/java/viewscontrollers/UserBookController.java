@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import models.DisplayBooks;
 import models.User;
@@ -23,7 +24,10 @@ public class UserBookController implements Initializable {
     private User activeUser = AccountManagement.activeUser;
 
     @FXML
+    public TabPane tabPane;
+    public static TabPane static_tabPane;
     public Tab tabCheckIn;
+    public static Tab static_tabCheckIn;
     public AnchorPane pneCheckIn;
     public Label lblCheckInMessage;
 
@@ -47,6 +51,7 @@ public class UserBookController implements Initializable {
 
     @FXML
     public Tab tabFees;
+    public static Tab static_tabFees;
     public AnchorPane pneFees;
     public Label lblFeesMessage;
 
@@ -70,6 +75,7 @@ public class UserBookController implements Initializable {
 
     @FXML
     public Tab tabLost;
+    public static Tab static_tabLost;
     public AnchorPane pneLost;
     public Label lblLostMessage;
 
@@ -109,11 +115,19 @@ public class UserBookController implements Initializable {
         activeUser = AccountManagement.activeUser;
     }
 
+    public static void selectTab(TabPane tp, Tab t) {
+        tp.getSelectionModel().select(t);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         onCheckIn();
         onFees();
         onLost();
+        static_tabPane = tabPane;
+        static_tabCheckIn = tabCheckIn;
+        static_tabFees = tabFees;
+        static_tabLost = tabLost;
     }
 
 }
