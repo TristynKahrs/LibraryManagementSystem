@@ -38,7 +38,6 @@ public class DisplayBooks {
         bookSet = FeeManagement.getUsersBooksWithFees(user);
         if(bookSet.size() == 0) {
             setEmptySet();
-            throw new FindException();
         }
     }
 

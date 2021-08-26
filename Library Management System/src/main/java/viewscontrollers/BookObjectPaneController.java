@@ -26,6 +26,7 @@ import models.Book;
 import models.DisplayBooks;
 import models.User;
 
+import javax.naming.SizeLimitExceededException;
 import java.io.File;
 import java.io.IOException;
 import java.lang.module.FindException;
@@ -70,8 +71,10 @@ public class BookObjectPaneController implements Initializable {
             DisplayBooks.setAllBooks();
             checkOutPane.setVisible(false);
             BrowseBooksController.updateCenterPane();
-        }catch (Exception e){
+        }catch (SizeLimitExceededException e){
             Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out more than four books.");
+        } catch (Exception e) {
+            Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Exceeded Limit", "You can't check out any books. You have fees to pay off!");
         }
     }
 
@@ -135,12 +138,15 @@ public class BookObjectPaneController implements Initializable {
         user = (User) feeInfo.get(1);
 
         try {
+            double currentFee = DatabaseOperations.getCurrentFee(book, user);
+            double userPayment = Double.parseDouble(txtPayAmount.getText());
+            double checkPayment = (currentFee - userPayment);
             if(txtPayAmount.getText().charAt(0) == '-') {
                 throw new NumberFormatException();
             }
 
-            FeeManagement.updateFees(book, user, -(Double.parseDouble(txtPayAmount.getText())));
-            if(DatabaseOperations.getCurrentFee(book, user) <= 0) {
+            FeeManagement.updateFees(book, user, -(userPayment));
+            if(checkPayment <= 0) {
                 DatabaseOperations.deleteFee(book, user);
                 if(book.isLost()) {
                     FeeManagement.foundBook(user, book);
@@ -151,7 +157,11 @@ public class BookObjectPaneController implements Initializable {
 
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();
-        } catch(Exception e) {
+
+            if(checkPayment < 0) {
+                Alerter.showAlert(Alert.AlertType.INFORMATION, owner, "Fee Donation", "You overpaid on your fee! Thank you for the Donation of $" + Math.abs(checkPayment) + "!");
+            }
+        } catch(NumberFormatException e) {
             Alerter.showAlert(Alert.AlertType.ERROR, owner, "Invalid Payment", "Please enter a valid positive dollar amount!");
         }
     }

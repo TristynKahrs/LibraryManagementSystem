@@ -119,6 +119,16 @@ public class FeeManagement {
         return books;
     }
 
+    public static int countUsersFees(User user) {
+        int feeCount = 0;
+        ArrayList<double[]> getFees = DatabaseOperations.checkForFees(user);
+        for (double[] bookFee: getFees) {
+            feeCount++;
+        }
+
+        return feeCount;
+    }
+
     /**
      * This method gets the fee for a book
      * @param book A book Object to retrieve the fee

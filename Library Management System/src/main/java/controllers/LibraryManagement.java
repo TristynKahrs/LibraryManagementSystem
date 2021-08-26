@@ -50,16 +50,20 @@ public class LibraryManagement {
      */
     public static boolean checkOut(User user, Book book) throws Exception {
         if(usersCheckedOutBooks(user).size() <= bookLimit) {
-            ArrayList<int[]> checkedOut = DatabaseOperations.getAllCheckedOut();
-            for (int[] books : checkedOut) {
-                if (books[1] == book.getPrimaryKey()) {
-                    return false;
+            if(FeeManagement.countUsersFees(user) < bookLimit) {
+                ArrayList<int[]> checkedOut = DatabaseOperations.getAllCheckedOut();
+                for (int[] books : checkedOut) {
+                    if (books[1] == book.getPrimaryKey()) {
+                        return false;
+                    }
                 }
+                if (book == null) {
+                    throw new NullPointerException();
+                }
+                return DatabaseOperations.checkOutBook(book, user);
+            } else {
+                throw new Exception();
             }
-            if (book == null) {
-                throw new NullPointerException();
-            }
-            return DatabaseOperations.checkOutBook(book, user);
         }else {
             throw new SizeLimitExceededException();
         }
