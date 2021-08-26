@@ -1,0 +1,49 @@
+.root {
+    -fx-background-color: #534D41;
+}
+
+.button {
+    -fx-background-color: #ff0000;
+    /*
+    text color
+     */
+}
+
+.label {
+    /*
+    text color
+     */
+}
+
+/*
+create ids for "hyperlink" labels
+ */
+
+.text-field {
+    -fx-background-color: #0000FF;
+    /*
+    text color
+     */
+}
+
+.tab-pane {
+    -fx-background-color: #00FF00;
+}
+
+.tab {
+    -fx-background-color: #FF0000;
+    /*
+    text color
+     */
+}
+
+.scroll-pane {
+    -fx-background-color: #FFFF00;
+    /*
+    actually get background
+     */
+}
+
+/*
+surround images with a border
+ */

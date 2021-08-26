@@ -6,7 +6,6 @@ import models.User;
 import javax.naming.CannotProceedException;
 
 public class AccountManagement {
-    //TODO brittle fix here
     public static User activeUser;
 
     public static void setActiveUser(User newActiveUser) {

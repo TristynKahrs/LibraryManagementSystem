@@ -8,6 +8,7 @@ public class NavigationController {
     public Label lblChangeName;
     public Label lblChangePassword;
     public Label lblLogout;
+    public Label lblThemes;
 
 
     public void onChangeName(MouseEvent mouseEvent) {
@@ -20,5 +21,9 @@ public class NavigationController {
 
     public void onLogout(MouseEvent mouseEvent) {
         UserSettingsController.onClickLogout(mouseEvent);
+    }
+
+    public void onThemes(MouseEvent mouseEvent) {
+        //TODO go to themes pane here
     }
 }

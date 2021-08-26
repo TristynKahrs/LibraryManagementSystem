@@ -43,6 +43,7 @@ public class ChangeScene {
         fxmlFile = fxml;
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
         Parent root = FXMLLoader.load(url);
+        root.getStylesheets().add(ChangeScene.class.getResource("/data/DefaultTheme.css").toExternalForm());
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setResizable(false);
         scene = new Scene(root);
@@ -93,6 +94,7 @@ public class ChangeScene {
         fxmlFile = fxml;
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
         Parent root = FXMLLoader.load(url);
+        root.getStylesheets().add(ChangeScene.class.getResource("/data/DefaultTheme.css").toExternalForm());
         oldStage.setUserData(currentUser);
         oldStage.setResizable(false);
         scene = new Scene(root);

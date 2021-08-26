@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class RecoverPasswordController {
-    //TODO make it pretty foo
+    //TODO make it pretty foo (pw centering when submitted)
     @FXML
     public Button btnBack;
     public void onClickBack(ActionEvent event) {

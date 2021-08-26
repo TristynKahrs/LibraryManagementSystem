@@ -53,7 +53,6 @@ public class PagePaneController implements Initializable {
     }
 
     public void updateCurrentPage() {
-        //TODO catch the error if there's no books
         currentPage = DisplayBooks.page();
         panePage.getChildren().clear();
         Pane[] panes = {paneBook_0, paneBook_1, paneBook_2, paneBook_3};
