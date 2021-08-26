@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import java.net.URL;
 
 public class GUIController extends Application {
+    public static String css = "/data/LibraryManagementHub.css";
 
     @Override
     public void start(Stage window) throws IOException {
@@ -20,7 +21,7 @@ public class GUIController extends Application {
         window.getIcons().add(new Image(GUIController.class.getResourceAsStream("/data/libraryIcon.png")));
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/login-pane.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        root.getStylesheets().add(getClass().getResource("/data/DefaultTheme.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource(css).toExternalForm());
         window.setTitle("Library Management System");
         window.setScene(new Scene(root, 600, 400));
         window.show();
