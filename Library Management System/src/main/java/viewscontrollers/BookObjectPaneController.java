@@ -170,6 +170,7 @@ public class BookObjectPaneController implements Initializable {
             Alerter.showAlert(Alert.AlertType.ERROR, owner, "Invalid Payment", "Please enter a valid positive dollar amount!");
         } catch(FindException fe) {
             UserProfileController.booksCenterPane("Fees");
+            UserBookController.selectTab(UserBookController.static_tabPane, UserBookController.static_tabFees);
 
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();
