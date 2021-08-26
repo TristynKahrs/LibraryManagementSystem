@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -15,7 +17,13 @@
             </Label>
             <TextField fx:id="txtSearch" layoutX="198.0" layoutY="19.0" promptText="Search books" />
             <Button fx:id="btnSearch" layoutX="360.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
-            <Button fx:id="btnProfile" layoutX="514.0" layoutY="19.0" mnemonicParsing="false" onAction="#onClickUserProfile" text="Profile" />
+            <ImageView fx:id="imgProfile" fitHeight="50.0" fitWidth="50.0" layoutX="539.0" layoutY="10.0" onMouseClicked="#onClickUserProfile" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/defaultpfp.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ImageView>
          </children>
       </Pane>
    </top>

@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
+import models.DisplayBooks;
 import models.User;
 import java.io.IOException;
 import java.net.URL;
@@ -33,12 +34,10 @@ public class LoginController implements Initializable {
             try {
                 User activeUser = AccountManagement.login(username, password);
                 ChangeScene.changeSceneWithUser(event, "browse-pane.fxml", activeUser);
-            } catch (SecurityException se) {
+            } catch (SecurityException | NumberFormatException se) {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){
                 ioe.printStackTrace();
-            } catch (NumberFormatException nfe) {
-                Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }
         }
     }

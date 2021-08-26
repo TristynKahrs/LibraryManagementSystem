@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
@@ -37,7 +38,7 @@ public class BrowseBooksController implements Initializable {
     @FXML
     public Button btnProfile;
 
-    public void onClickUserProfile(ActionEvent event) {
+    public void onClickUserProfile(MouseEvent event) {
         try {
             User user = ChangeScene.receiveData(event);
             ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);

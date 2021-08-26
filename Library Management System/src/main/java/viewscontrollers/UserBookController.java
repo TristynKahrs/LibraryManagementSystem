@@ -94,7 +94,7 @@ public class UserBookController implements Initializable {
     public static ScrollPane updateScrollPane() throws IOException {
         ScrollPane sp = new ScrollPane();
         sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
-        sp.setPrefSize(600, 230);
+        sp.setPrefSize(600, 300);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         final double SPEED = 0.0075;

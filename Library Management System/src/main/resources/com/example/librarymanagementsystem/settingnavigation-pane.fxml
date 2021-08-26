@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="311.0" prefWidth="132.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.UserSettingsController">
+<AnchorPane prefHeight="311.0" prefWidth="132.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.NavigationController">
    <children>
-      <Label fx:id="lblChangeName" layoutX="14.0" layoutY="14.0" text="Change Name" textFill="#2cc3ff" underline="true" />
-      <Label fx:id="lblChangePassword" layoutX="14.0" layoutY="47.0" text="Change Password" textFill="#2cc3ff" underline="true" wrapText="true" />
-      <Label fx:id="lblLogout" layoutX="14.0" layoutY="280.0" text="Logout" textFill="#2cc3ff" underline="true" />
+      <Label fx:id="lblChangeName" layoutX="14.0" layoutY="14.0" onMouseClicked="#onChangeName" text="Change Name" textFill="#2cc3ff" underline="true" />
+      <Label fx:id="lblChangePassword" layoutX="14.0" layoutY="47.0" onMouseClicked="#onChangePassword" text="Change Password" textFill="#2cc3ff" underline="true" wrapText="true" />
+      <Label fx:id="lblLogout" layoutX="14.0" layoutY="280.0" onMouseClicked="#onLogout" text="Logout" textFill="#2cc3ff" underline="true" />
    </children>
 </AnchorPane>

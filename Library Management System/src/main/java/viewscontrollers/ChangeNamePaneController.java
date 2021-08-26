@@ -34,6 +34,7 @@ public class ChangeNamePaneController implements Initializable {
                 if(!activeUser.getFullName().equals(strNewFullName)) {
                     AccountManagement.changeFullName(activeUser, strNewFullName);
                     lblConfirmation.setText("Success!");
+                    UserProfileController.updateGreeting();
                 }else{
                     lblConfirmation.setText("That's already your name");
                 }

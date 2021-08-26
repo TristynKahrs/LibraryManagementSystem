@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class UserProfileController implements Initializable {
     private User activeUser;
     public Label lblGreeting;
+    public static Label static_lblGreeting;
     private boolean onSetting = false;
 
     public ImageView imgUser;
@@ -88,16 +89,21 @@ public class UserProfileController implements Initializable {
         activeUser = AccountManagement.activeUser;
     }
 
+    public static void updateGreeting() {
+        static_lblGreeting.setText(AccountManagement.activeUser.getFullName());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         static_paneDisplay = paneDisplay;
+        static_lblGreeting = lblGreeting;
         updateActiveUser();
         try {
             static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        lblGreeting.setText(activeUser.getFullName());
+        updateGreeting();
     }
 
 }

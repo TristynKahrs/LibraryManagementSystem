@@ -3,14 +3,17 @@ package viewscontrollers;
 import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import models.User;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +21,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserSettingsController implements Initializable {
-    User activeUser;
+    static User activeUser;
 
     @FXML
     public Pane pneNavigationBar;
     public ScrollPane updateScrollPane() throws IOException {
         ScrollPane sp = new ScrollPane();
-        //TODO  make a pane for navigation
         sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/settingnavigation-pane.fxml").toURI().toURL()));
         sp.setPrefSize(132, 311);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -38,31 +40,30 @@ public class UserSettingsController implements Initializable {
     }
 
     public Pane pneDisplay;
+    public static Pane static_pneDisplay;
 
-    public Label lblChangeName;
-    public void onClickChangeName(ActionEvent event) {
+
+    public static void onClickChangeName() {
         updateActiveUser();
-        pneDisplay.getChildren().clear();
+        static_pneDisplay.getChildren().clear();
         try {
-            pneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
+            static_pneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
     }
 
-    public Label lblChangePassword;
-    public void onClickChangePassword(ActionEvent event) {
+    public static void onClickChangePassword() {
         updateActiveUser();
-        pneDisplay.getChildren().clear();
+        static_pneDisplay.getChildren().clear();
         try {
-            pneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
+            static_pneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
         }catch(IOException ioe){
             ioe.printStackTrace();
         }
     }
 
-    public Label lblLogout;
-    public void onClickLogout(ActionEvent event) {
+    public static void onClickLogout(MouseEvent event) {
         try {
             AccountManagement.activeUser = null;
             ChangeScene.changeScene(event, "login-pane.fxml");
@@ -71,12 +72,13 @@ public class UserSettingsController implements Initializable {
         }
     }
 
-    public void updateActiveUser() {
+    public static void updateActiveUser() {
         activeUser = AccountManagement.activeUser;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        static_pneDisplay = pneDisplay;
         try {
             pneNavigationBar.getChildren().add(updateScrollPane());
         } catch (IOException e) {

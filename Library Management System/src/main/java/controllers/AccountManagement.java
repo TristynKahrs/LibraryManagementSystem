@@ -1,5 +1,6 @@
 package controllers;
 
+import models.DisplayBooks;
 import models.User;
 
 import javax.naming.CannotProceedException;
@@ -22,6 +23,7 @@ public class AccountManagement {
             throw new SecurityException();
         }
         DatabaseOperations.createUser(fullName, username, password);
+        DisplayBooks.setAllBooks();
     }
 
     /**
@@ -33,8 +35,9 @@ public class AccountManagement {
      * @param password account access
      */
     public static User login(String username, String password) throws SecurityException {
-        User activeUser = new User(DatabaseOperations.getUser(username));
+        activeUser = new User(DatabaseOperations.getUser(username));
         if (activeUser.passwordMatches(password)) {
+            DisplayBooks.setAllBooks();
             return activeUser;
         }
         throw new SecurityException();
@@ -94,10 +97,11 @@ public class AccountManagement {
     /**
      * This method acts as a buffer and changes users full name.
      *
-     * @param activeUser     A user Object used to change users full name.
-     * @param newName        String newName is used to set to their new full name.
+     * @param activeUser A user Object used to change users full name.
+     * @param newName    String newName is used to set to their new full name.
      */
     public static void changeFullName(User activeUser, String newName) {
+        activeUser.setFullName(newName);
         DatabaseOperations.changeFullName(newName, activeUser.getUsername());
     }
 }
