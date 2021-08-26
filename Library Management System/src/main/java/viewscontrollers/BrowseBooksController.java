@@ -35,8 +35,6 @@ public class BrowseBooksController implements Initializable {
         }catch(FindException ignored) {}
     }
 
-    @FXML
-    public Button btnProfile;
 
     public void onClickUserProfile(MouseEvent event) {
         try {

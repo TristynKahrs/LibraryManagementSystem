@@ -79,6 +79,7 @@ public class UserSettingsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         static_pneDisplay = pneDisplay;
+        onClickChangeName(); //TODO CHANGE THIS TO THEMES
         try {
             pneNavigationBar.getChildren().add(updateScrollPane());
         } catch (IOException e) {
