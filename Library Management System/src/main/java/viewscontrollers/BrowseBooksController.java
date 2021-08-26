@@ -42,7 +42,7 @@ public class BrowseBooksController implements Initializable {
             User user = ChangeScene.receiveData(event);
             ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);
             DisplayBooks.setCheckedOutSet(user);
-            UserProfileController.updateCenterPane("CheckIn");
+            UserProfileController.booksCenterPane("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } catch (FindException ignored) {}

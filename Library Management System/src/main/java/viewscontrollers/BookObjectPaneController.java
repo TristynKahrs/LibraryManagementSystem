@@ -85,9 +85,9 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
-            UserProfileController.updateCenterPane("CheckIn");
+            UserProfileController.booksCenterPane("CheckIn");
         } catch(FindException e) {
-            UserProfileController.updateCenterPane("CheckIn");
+            UserProfileController.booksCenterPane("CheckIn");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -101,9 +101,9 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setCheckedOutSet(user);
             checkInPane.setVisible(false);
-            UserProfileController.updateCenterPane("CheckIn");
+            UserProfileController.booksCenterPane("CheckIn");
         } catch(FindException fe) {
-         UserProfileController.updateCenterPane("CheckIn");
+         UserProfileController.booksCenterPane("CheckIn");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -117,9 +117,9 @@ public class BookObjectPaneController implements Initializable {
             LibraryManagement.checkIn(user, book);
             DisplayBooks.setLostBooksSet(user);
             lostPane.setVisible(false);
-            UserProfileController.updateCenterPane("Lost Book");
+            UserProfileController.booksCenterPane("Lost Book");
         } catch(FindException fe) {
-            UserProfileController.updateCenterPane("Lost Book");
+            UserProfileController.booksCenterPane("Lost Book");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -153,7 +153,7 @@ public class BookObjectPaneController implements Initializable {
                 }
             }
             DisplayBooks.setFeesBookSet(user);
-            UserProfileController.updateCenterPane("Fees");
+            UserProfileController.booksCenterPane("Fees");
 
             Stage stage = (Stage) btnSubmit.getScene().getWindow();
             stage.close();
