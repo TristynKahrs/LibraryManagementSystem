@@ -63,7 +63,7 @@ public class BookObjectPaneController implements Initializable {
     @FXML public TextField txtPayAmount;
 
     public void onCheckOutClick(ActionEvent event){
-        User user = ChangeScene.receiveData(event);
+        User user = AccountManagement.activeUser;
         Window owner = btnCheckOut.getScene().getWindow();
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
@@ -79,7 +79,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onCheckInClick(ActionEvent event){
-        user = ChangeScene.receiveData(event);
+        user = AccountManagement.activeUser;
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
             LibraryManagement.checkIn(user, book);
@@ -94,7 +94,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onReportLostClick(ActionEvent event) {
-        user = ChangeScene.receiveData(event);
+        user = AccountManagement.activeUser;
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
             FeeManagement.lostBook(user, book);
@@ -110,7 +110,7 @@ public class BookObjectPaneController implements Initializable {
     }
 
     public void onReportFoundClick(ActionEvent event) {
-        user = ChangeScene.receiveData(event);
+        user = AccountManagement.activeUser;
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
         try {
             FeeManagement.foundBook(user, book);
@@ -127,7 +127,7 @@ public class BookObjectPaneController implements Initializable {
 
     public void onPayClick(ActionEvent event) {
         book = new Book(DatabaseOperations.getBook(lblTitle.getText().substring(7), lblAuthor.getText().substring(8)));
-        user = ChangeScene.receiveData(event);
+        user = AccountManagement.activeUser;
         ChangeScene.createPopUp(event, "fee-popup-pane.fxml", book, user);
     }
 

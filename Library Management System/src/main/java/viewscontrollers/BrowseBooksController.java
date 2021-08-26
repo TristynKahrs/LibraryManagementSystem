@@ -1,5 +1,6 @@
 package viewscontrollers;
 
+import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,6 @@ import java.util.ResourceBundle;
 
 public class BrowseBooksController implements Initializable {
     public BorderPane paneBrowseBooks;
-    private User activeUser;
 
     //Top
     @FXML
@@ -40,8 +40,8 @@ public class BrowseBooksController implements Initializable {
 
     public void onClickUserProfile(MouseEvent event) {
         try {
-            User user = ChangeScene.receiveData(event);
-            ChangeScene.changeSceneWithUser(event, "userprofile-pane.fxml", user);
+            User user = AccountManagement.activeUser;
+            ChangeScene.changeScene(event, "userprofile-pane.fxml");
             DisplayBooks.setCheckedOutSet(user);
             UserProfileController.booksCenterPane("CheckIn");
         } catch (IOException ioe) {

@@ -25,7 +25,7 @@ public class ChangeNamePaneController implements Initializable {
     public Button btnSubmit;
     public void onClickSubmit(ActionEvent event) {
         //TODO wonkyness when trying to double name change
-        activeUser = ChangeScene.receiveData(event);
+        activeUser = AccountManagement.activeUser;
         String strUsername = txtUsername.getText();
         String strPassword = txtPassword.getText();
         String strNewFullName = txtNewFullName.getText();

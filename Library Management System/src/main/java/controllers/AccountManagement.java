@@ -4,12 +4,14 @@ import models.DisplayBooks;
 import models.User;
 
 import javax.naming.CannotProceedException;
-import java.nio.file.AccessDeniedException;
 
 public class AccountManagement {
     //TODO brittle fix here
     public static User activeUser;
 
+    public static void setActiveUser(User newActiveUser) {
+        activeUser = newActiveUser;
+    }
     /**
      * createAccount should be able to grab the full name of the user, the username and the password.
      * After that, it should make a new user and save it to the database

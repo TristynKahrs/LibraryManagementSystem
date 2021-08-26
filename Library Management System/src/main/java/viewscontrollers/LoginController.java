@@ -33,7 +33,8 @@ public class LoginController implements Initializable {
         if (!username.equals("") && !password.equals("")) {
             try {
                 User activeUser = AccountManagement.login(username, password);
-                ChangeScene.changeSceneWithUser(event, "browse-pane.fxml", activeUser);
+                AccountManagement.setActiveUser(activeUser);
+                ChangeScene.changeScene(event, "browse-pane.fxml");
             } catch (SecurityException | NumberFormatException se) {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){
@@ -67,7 +68,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO remove this in final presentation
-        txtUsername.setText("daprez");
-        txtPassword.setText("neumont");
+        txtUsername.setText("TestUser");
+        txtPassword.setText("TestPW");
     }
 }
