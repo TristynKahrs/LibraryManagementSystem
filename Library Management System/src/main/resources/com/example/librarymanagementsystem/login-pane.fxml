@@ -19,12 +19,12 @@
                    <Cursor fx:constant="HAND" />
                </cursor>
            </Button>
-           <Label fx:id="lblCreateAccount" layoutX="258.0" layoutY="321.0" onMouseClicked="#onCreateAccountLink" text="Create Account" textFill="#4e77f4" underline="true">
+           <Label id="hyperlink" fx:id="lblCreateAccount" layoutX="258.0" layoutY="321.0" onMouseClicked="#onCreateAccountLink" text="Create Account" underline="true">
                <cursor>
                    <Cursor fx:constant="HAND" />
                </cursor>
            </Label>
-           <Label fx:id="lblForgotPassword" layoutX="255.0" layoutY="350.0" onMouseClicked="#onForgotPasswordClick" prefHeight="18.0" text="Forgot Password" textFill="#4e77f4" underline="true">
+           <Label id="hyperlink" fx:id="lblForgotPassword" layoutX="255.0" layoutY="350.0" onMouseClicked="#onForgotPasswordClick" prefHeight="18.0" text="Forgot Password" underline="true">
                <cursor>
                    <Cursor fx:constant="HAND" />
                </cursor>

@@ -17,7 +17,7 @@
             </Label>
             <TextField fx:id="txtSearch" layoutX="198.0" layoutY="19.0" promptText="Search books" />
             <Button fx:id="btnSearch" layoutX="360.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
-            <ImageView fx:id="imgProfile" fitHeight="50.0" fitWidth="50.0" layoutX="539.0" layoutY="10.0" onMouseClicked="#onClickUserProfile" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="imgPFP" fx:id="imgProfile" fitHeight="50.0" fitWidth="50.0" layoutX="539.0" layoutY="10.0" onMouseClicked="#onClickUserProfile" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/defaultpfp.png" />
                </image>

@@ -8,8 +8,6 @@ public class NavigationController {
     public Label lblChangeName;
     public Label lblChangePassword;
     public Label lblLogout;
-    public Label lblThemes;
-
 
     public void onChangeName(MouseEvent mouseEvent) {
         UserSettingsController.onClickChangeName();
@@ -23,7 +21,9 @@ public class NavigationController {
         UserSettingsController.onClickLogout(mouseEvent);
     }
 
-    public void onThemes(MouseEvent mouseEvent) {
-        //TODO go to themes pane here
-    }
+//    //<Label id="hyperlink" fx:id="lblThemes" layoutX="14.0" layoutY="245.0" onMouseClicked="#onThemes" text="Themes" underline="true" wrapText="true" />
+//    public Label lblThemes;
+//    public void onThemes(MouseEvent mouseEvent) {
+//        //TODO go to themes pane here
+//    }
 }

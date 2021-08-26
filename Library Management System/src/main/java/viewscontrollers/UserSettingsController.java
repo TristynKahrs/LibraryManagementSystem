@@ -28,7 +28,7 @@ public class UserSettingsController implements Initializable {
     public ScrollPane updateScrollPane() throws IOException {
         ScrollPane sp = new ScrollPane();
         sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/settingnavigation-pane.fxml").toURI().toURL()));
-        sp.setPrefSize(132, 311);
+        sp.setPrefSize(132, 300);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         final double SPEED = 0.0075;
