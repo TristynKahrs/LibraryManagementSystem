@@ -35,6 +35,7 @@ public class UserBookController implements Initializable {
             try {
                 DisplayBooks.setCheckedOutSet(activeUser);
                 pneCheckIn.getChildren().add(updateScrollPane());
+                lblCheckInMessage.setText("");
             } catch (FindException fe) {
                 lblCheckInMessage.setText("You have no books checked out");
                 pneCheckIn.getChildren().add(lblCheckInMessage);
@@ -57,9 +58,10 @@ public class UserBookController implements Initializable {
             try {
                 DisplayBooks.setFeesBookSet(activeUser);
                 pneFees.getChildren().add(updateScrollPane());
+                lblFeesMessage.setText("");
             } catch (FindException fe) {
-                lblFeesMessage.setText("You have no books checked out");
-                pneCheckIn.getChildren().add(lblFeesMessage);
+                lblFeesMessage.setText("You have no books with fees");
+                pneFees.getChildren().add(lblFeesMessage);
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -79,9 +81,10 @@ public class UserBookController implements Initializable {
             try {
                 DisplayBooks.setLostBooksSet(activeUser);
                 pneLost.getChildren().add(updateScrollPane());
+                lblLostMessage.setText("");
             } catch (FindException fe) {
-                lblLostMessage.setText("You have no books checked out");
-                pneCheckIn.getChildren().add(lblLostMessage);
+                lblLostMessage.setText("You have no lost books");
+                pneLost.getChildren().add(lblLostMessage);
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();

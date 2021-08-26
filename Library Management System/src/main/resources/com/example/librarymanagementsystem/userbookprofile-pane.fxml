@@ -11,7 +11,7 @@
             <content>
               <AnchorPane fx:id="pneCheckIn" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lblCheckInMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                        <Label fx:id="lblCheckInMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="145.0" text="You have no books checked out" textAlignment="CENTER" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -19,7 +19,7 @@
             <content>
               <AnchorPane fx:id="pneFees" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lblFeesMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                        <Label fx:id="lblFeesMessage" layoutX="224.0" layoutY="145.0" text="You have no books with fees" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -27,7 +27,7 @@
               <content>
                 <AnchorPane fx:id="pneLost" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="lblLostMessage" layoutX="286.0" layoutY="146.0" text="Label" />
+                        <Label fx:id="lblLostMessage" layoutX="238.0" layoutY="145.0" text="You have no lost books" />
                      </children></AnchorPane>
               </content>
             </Tab>

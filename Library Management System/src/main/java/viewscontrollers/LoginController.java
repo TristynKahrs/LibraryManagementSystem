@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //TODO remove this in final presentation
-        txtUsername.setText("TestUser");
-        txtPassword.setText("TestPW");
+        txtUsername.setText("daprez");
+        txtPassword.setText("neumont");
     }
 }

@@ -3,9 +3,11 @@ package viewscontrollers;
 import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import models.User;
@@ -18,11 +20,12 @@ import java.util.ResourceBundle;
 public class UserSettingsController implements Initializable {
     User activeUser;
 
+    @FXML
     public Pane pneNavigationBar;
-    public static ScrollPane updateScrollPane() throws IOException {
+    public ScrollPane updateScrollPane() throws IOException {
         ScrollPane sp = new ScrollPane();
         //TODO  make a pane for navigation
-        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/settingnavigation-pane.fxml").toURI().toURL()));
         sp.setPrefSize(132, 311);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -34,13 +37,9 @@ public class UserSettingsController implements Initializable {
         return sp;
     }
 
-    //onClicks for navigation links change the display pane
-
     public Pane pneDisplay;
 
-    //pneDisplay controls
-
-
+    public Label lblChangeName;
     public void onClickChangeName(ActionEvent event) {
         updateActiveUser();
         pneDisplay.getChildren().clear();
@@ -51,7 +50,7 @@ public class UserSettingsController implements Initializable {
         }
     }
 
-
+    public Label lblChangePassword;
     public void onClickChangePassword(ActionEvent event) {
         updateActiveUser();
         pneDisplay.getChildren().clear();
@@ -62,7 +61,8 @@ public class UserSettingsController implements Initializable {
         }
     }
 
-    public void logoutOnClick(ActionEvent event) {
+    public Label lblLogout;
+    public void onClickLogout(ActionEvent event) {
         try {
             AccountManagement.activeUser = null;
             ChangeScene.changeScene(event, "login-pane.fxml");

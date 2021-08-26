@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
 import models.User;
@@ -22,6 +24,30 @@ import java.util.ResourceBundle;
 public class UserProfileController implements Initializable {
     private User activeUser;
     public Label lblGreeting;
+    private boolean onSetting = false;
+
+    public ImageView imgUser;
+
+    public void switchMenu(MouseEvent mouseEvent) {
+        static_paneDisplay.getChildren().clear();
+        if (onSetting) {
+            try {
+                PagePaneController.setLocation("CheckIn");
+                static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            onSetting = false;
+        } else {
+            try {
+                static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/usersettings-pane.fxml").toURI().toURL()));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            onSetting = true;
+        }
+    }
+
 
     public Pane paneDisplay;
     public static Pane static_paneDisplay;
@@ -30,7 +56,6 @@ public class UserProfileController implements Initializable {
         static_paneDisplay.getChildren().clear();
         try {
             PagePaneController.setLocation(buttonLocation);
-//            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
             static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -39,14 +64,15 @@ public class UserProfileController implements Initializable {
 
     public static void settingsCenterPane() {
         static_paneDisplay.getChildren().clear();
-        try{
+        try {
             static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/usersettings-pane.fxml").toURI().toURL()));
-        }catch (IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
     public Button btnBrowse;
+
     public void onClickBrowse(ActionEvent event) {
         try {
             PagePaneController.setLocation("CheckIn");
@@ -62,30 +88,15 @@ public class UserProfileController implements Initializable {
         activeUser = AccountManagement.activeUser;
     }
 
-    public static ScrollPane updateScrollPane() throws IOException{
-        ScrollPane sp = new ScrollPane();
-        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
-        sp.setPrefSize(600, 319);
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        final double SPEED = 0.0075;
-        sp.getContent().setOnScroll(scrollEvent -> {
-            double deltaY = scrollEvent.getDeltaY() * SPEED;
-            sp.setVvalue(sp.getVvalue() - deltaY);
-        });
-        return sp;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         static_paneDisplay = paneDisplay;
         updateActiveUser();
-//        try {
-//            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        settingsCenterPane();
+        try {
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         lblGreeting.setText(activeUser.getFullName());
     }
 
