@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import java.net.URL;
 
 public class GUIController extends Application {
-    public static String css = "/data/LibraryManagementHub.css";
+    public static String css = "/data/DefaultTheme.css";
 
     @Override
     public void start(Stage window) throws IOException {

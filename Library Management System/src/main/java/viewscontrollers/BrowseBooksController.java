@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
 import models.User;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.module.FindException;
@@ -28,12 +30,14 @@ public class BrowseBooksController implements Initializable {
     @FXML
     public TextField txtSearch;
     public Button btnSearch;
+
     public void onSearchClick(ActionEvent event) {
         try {
             String strSearch = txtSearch.getText();
             DisplayBooks.searchBooks(strSearch);
             updateCenterPane();
-        }catch(FindException ignored) {}
+        } catch (FindException ignored) {
+        }
     }
 
 
@@ -45,7 +49,8 @@ public class BrowseBooksController implements Initializable {
             UserProfileController.booksCenterPane("CheckIn");
         } catch (IOException ioe) {
             ioe.printStackTrace();
-        } catch (FindException ignored) {}
+        } catch (FindException ignored) {
+        }
     }
 
     //Center
@@ -57,12 +62,20 @@ public class BrowseBooksController implements Initializable {
         try {
             PagePaneController.setLocation("Browse");
             static_pane.getChildren().add(updateScrollPane());
+            updatePageNumbers();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    public static ScrollPane updateScrollPane() throws IOException{
+    public Label lblPageNumbers;
+    public static Label static_lblPageNumbers;
+
+    public static void updatePageNumbers() {
+        static_lblPageNumbers.setText((DisplayBooks.pageNumber + 1) + "/" + DisplayBooks.amountOfPages);
+    }
+
+    public static ScrollPane updateScrollPane() throws IOException {
         ScrollPane sp = new ScrollPane();
         sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
         sp.setPrefSize(600, 285);
@@ -97,6 +110,7 @@ public class BrowseBooksController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         static_pane = centerPane;
+        static_lblPageNumbers = lblPageNumbers;
         updateCenterPane();
     }
 }

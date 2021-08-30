@@ -2,18 +2,15 @@ package models;
 
 import controllers.FeeManagement;
 import controllers.LibraryManagement;
-import models.Book;
-
 import java.lang.module.FindException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DisplayBooks {
     private static ArrayList<Book> bookSet = setAllBooks();
-
     private static final int pageSize = 4;
-    private static int pageNumber = 0;
     private static Book[] page;
+    public static int pageNumber = 0;
+    public static int amountOfPages = 0;
 
     public static ArrayList<Book> getBookSet() {
         return bookSet;
@@ -86,9 +83,9 @@ public class DisplayBooks {
                     bookArray[j % pageSize] = bookSet.get(j);
                 } catch (Exception ignored) {}
             }
-
             bookArrays.add(bookArray);
         }
+        amountOfPages = bookArrays.size();
         return bookArrays;
     }
 

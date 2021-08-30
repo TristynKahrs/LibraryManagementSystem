@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
+<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
    <top>
       <Pane prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -35,6 +35,7 @@
          <children>
             <Button fx:id="btnNext" layoutX="444.0" layoutY="14.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" />
             <Button fx:id="btnPrev" layoutX="134.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPrevButtonClick" text="Previous" />
+            <Label fx:id="lblPageNumbers" layoutX="286.0" layoutY="18.0" text="Label" />
          </children>
       </Pane>
    </bottom>
