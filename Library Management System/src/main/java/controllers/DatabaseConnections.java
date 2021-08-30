@@ -47,7 +47,7 @@ public class DatabaseConnections {
         String sqlUsers = "CREATE TABLE IF NOT EXISTS users(user_id INT AUTO_INCREMENT PRIMARY KEY, full_name VARCHAR(255), username VARCHAR(255), password VARBINARY(255));";
         String sqlCheckout = "CREATE TABLE IF NOT EXISTS checkout(checkout_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, checkOutDate DATE, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
         String sqlLost = "CREATE TABLE IF NOT EXISTS lost_books(lost_book_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
-        String sqlFees = "CREATE TABLE IF NOT EXISTS fees(fee_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, fee_amount DOUBLE PRECISION(5,2), FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
+        String sqlFees = "CREATE TABLE IF NOT EXISTS fees(fee_id INT AUTO_INCREMENT PRIMARY KEY, book_id INT, user_id INT, fee_amount DOUBLE PRECISION(5,2),  feeDate DATE, FOREIGN KEY (book_id) REFERENCES books(book_id), FOREIGN KEY (user_id) REFERENCES users(user_id));";
         String url2 = "jdbc:mysql://localhost:3306/"
                 + "?allowPublicKeyRetrieval=true&useSSL=false";
 

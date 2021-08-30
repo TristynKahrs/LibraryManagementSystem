@@ -451,13 +451,14 @@ public class DatabaseOperations {
      * @return Returns true if successfully inserted into lmsdatabase, false if not successful.
      */
     public static boolean createFee(Book book, User user, double fee) {
-        String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount) VALUES(?, ?, ?)";
+        String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount, feeDate) VALUES(?, ?, ?, ?)";
         try {
             Connection con = DatabaseConnections.SQLConnection();
             PreparedStatement pst = con.prepareStatement(insertFee);
             pst.setInt(1, book.getPrimaryKey());
             pst.setInt(2, user.getPrimaryKey());
             pst.setDouble(3, fee);
+            pst.setDate(4, Date.valueOf(LocalDate.now()));
             pst.executeUpdate();
             con.close();
             return true;
@@ -601,5 +602,28 @@ public class DatabaseOperations {
         }
 
         return false;
+    }
+
+    public static Date getFeeDate(Book book, User user) {
+        String getDate = "SELECT feeDate FROM fees WHERE book_id=? AND user_id=?";
+        Date feeDate = null;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getDate);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                feeDate = rs.getDate(1);
+                return feeDate;
+            }
+
+            con.close();
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return feeDate;
     }
 }

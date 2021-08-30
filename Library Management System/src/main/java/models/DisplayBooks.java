@@ -15,6 +15,10 @@ public class DisplayBooks {
     private static int pageNumber = 0;
     private static Book[] page;
 
+    public static ArrayList<Book> getBookSet() {
+        return bookSet;
+    }
+
     public static ArrayList<Book> setAllBooks() {
         bookSet = LibraryManagement.allBooks();
         return bookSet;
