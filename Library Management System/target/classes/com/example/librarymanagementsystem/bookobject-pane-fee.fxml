@@ -20,7 +20,6 @@
       </Label>
       <Button fx:id="btnPay" layoutX="531.0" layoutY="55.0" mnemonicParsing="false" onAction="#onPayClick" text="Pay" />
       <Label layoutX="539.0" layoutY="11.0" text="Fee" />
-      <Label layoutX="534.0" layoutY="19.0" text="====" />
       <Label fx:id="lblFeeAmount" layoutX="533.0" layoutY="34.0" />
     </children>
    <padding>
