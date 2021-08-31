@@ -1,7 +1,11 @@
 package viewscontrollers;
 
+import controllers.ChangeScene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import views.GUIController;
+
+import java.io.IOException;
 
 public class NavigationController {
 
@@ -21,9 +25,14 @@ public class NavigationController {
         UserSettingsController.onClickLogout(mouseEvent);
     }
 
-//    //<Label id="hyperlink" fx:id="lblThemes" layoutX="14.0" layoutY="245.0" onMouseClicked="#onThemes" text="Themes" underline="true" wrapText="true" />
-//    public Label lblThemes;
-//    public void onThemes(MouseEvent mouseEvent) {
-//        //TODO go to themes pane here
-//    }
+    public Label lblThemes;
+
+    public void onThemes(MouseEvent mouseEvent) {
+        try {
+            GUIController.changeTheme();
+            ChangeScene.resetScene(mouseEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

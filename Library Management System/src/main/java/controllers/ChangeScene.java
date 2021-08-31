@@ -43,7 +43,18 @@ public class ChangeScene {
         fxmlFile = fxml;
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        root.getStylesheets().add(ChangeScene.class.getResource(GUIController.css).toExternalForm());
+        root.getStylesheets().add(ChangeScene.class.getResource(GUIController.current_theme).toExternalForm());
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setResizable(false);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void resetScene(Event event) throws IOException {
+        URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
+        Parent root = FXMLLoader.load(url);
+        root.getStylesheets().add(ChangeScene.class.getResource(GUIController.current_theme).toExternalForm());
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setResizable(false);
         scene = new Scene(root);
@@ -94,7 +105,7 @@ public class ChangeScene {
         fxmlFile = fxml;
         URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
         Parent root = FXMLLoader.load(url);
-        root.getStylesheets().add(ChangeScene.class.getResource(GUIController.css).toExternalForm());
+        root.getStylesheets().add(ChangeScene.class.getResource(GUIController.current_theme).toExternalForm());
         oldStage.setUserData(currentUser);
         oldStage.setResizable(false);
         scene = new Scene(root);
