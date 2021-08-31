@@ -4,13 +4,15 @@ import controllers.AccountManagement;
 import controllers.Alerter;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
-import models.DisplayBooks;
 import models.User;
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +28,7 @@ public class LoginController implements Initializable {
     @FXML
     public Button btnLogin;
 
-    public void onClickLogin(ActionEvent event) {
+    public void logIn(Event event){
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         Window owner= btnLogin.getScene().getWindow();
@@ -41,6 +43,10 @@ public class LoginController implements Initializable {
                 ioe.printStackTrace();
             }
         }
+    }
+
+    public void onClickLogin(ActionEvent event) {
+        logIn(event);
     }
 
     @FXML
@@ -67,8 +73,15 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtPassword.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                logIn(event);
+            }
+        });
         //TODO remove this in final presentation
         txtUsername.setText("TestUser");
         txtPassword.setText("TestPW");
     }
+
+
 }

@@ -3,6 +3,7 @@ package viewscontrollers;
 import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -32,14 +35,17 @@ public class BrowseBooksController implements Initializable {
     public Button btnSearch;
 
     public void onSearchClick(ActionEvent event) {
+        searching();
+    }
+
+    public void searching(){
         try {
             String strSearch = txtSearch.getText();
-            DisplayBooks.searchBooks(strSearch);
-            updateCenterPane();
+                DisplayBooks.searchBooks(strSearch);
+                updateCenterPane();
         } catch (FindException ignored) {
         }
     }
-
 
     public void onClickUserProfile(MouseEvent event) {
         try {
@@ -109,6 +115,12 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtSearch.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+               searching();
+               txtSearch.setText("");
+            }
+        });
         static_pane = centerPane;
         static_lblPageNumbers = lblPageNumbers;
         updateCenterPane();

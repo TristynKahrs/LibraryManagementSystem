@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import models.User;
 
 import javax.naming.CannotProceedException;
@@ -23,7 +24,8 @@ public class ChangePasswordPaneController implements Initializable {
     public TextField txtConfirmPassword;
 
     public Button btnSubmit;
-    public void onClickSubmit(ActionEvent event) {
+
+    public void changePassword(){
         activeUser = AccountManagement.activeUser;
         String strCurrentPassword = txtCurrentPassword.getText();
         String strNewPassword = txtNewPassword.getText();
@@ -46,11 +48,19 @@ public class ChangePasswordPaneController implements Initializable {
         }
     }
 
+    public void onClickSubmit(ActionEvent event) {
+       changePassword();
+    }
+
     public Label lblConfirmation;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        txtConfirmPassword.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                changePassword();
+            }
+        });
     }
 
 }

@@ -3,10 +3,13 @@ package viewscontrollers;
 import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import models.User;
 
 import javax.naming.CannotProceedException;
@@ -23,7 +26,8 @@ public class ChangeNamePaneController implements Initializable {
     public TextField txtNewFullName;
 
     public Button btnSubmit;
-    public void onClickSubmit(ActionEvent event) {
+
+    public void changeName(){
         //TODO wonkyness when trying to double name change
         activeUser = AccountManagement.activeUser;
         String strUsername = txtUsername.getText();
@@ -44,13 +48,21 @@ public class ChangeNamePaneController implements Initializable {
         }
     }
 
+    public void onClickSubmit(ActionEvent event) {
+       changeName();
+    }
+
     public Label lblConfirmation;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtNewFullName.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                changeName();
+            }
+        });
 
     }
-
 }
