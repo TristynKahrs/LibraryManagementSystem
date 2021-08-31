@@ -18,7 +18,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Label>
-      <Label id="hyperlink" fx:id="lblThemes" layoutX="14.0" layoutY="245.0" onMouseClicked="#onThemes" text="Themes" underline="true" wrapText="true">
+      <Label id="hyperlink" fx:id="lblThemes" layoutX="14.0" layoutY="245.0" onMouseClicked="#onThemes" text="Toggle Theme" underline="true" wrapText="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Label>

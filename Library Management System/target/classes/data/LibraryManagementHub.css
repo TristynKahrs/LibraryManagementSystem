@@ -11,7 +11,7 @@
 }
 
 .button {
-    -fx-background-color: #FFA31A;
+    -fx-background-color: #D8D8;
     -fx-text-fill: #FFFFFF;
     -fx-border-color: #181818;
     -fx-background-radius: 5;
@@ -23,7 +23,7 @@
 }
 
 #hyperlink.label {
-    -fx-text-fill: #FFA31A;
+    -fx-text-fill: #D8D8;
 }
 
 .text-field {
@@ -37,7 +37,7 @@
 }
 
 .tab {
-    -fx-background-color: #FFA31A;
+    -fx-background-color: #8153b0;
     -fx-background-radius: 0;
     -fx-border-color: #1B1B1B;
     -fx-border-radius: 0;

@@ -70,6 +70,7 @@ public class ChangeScene {
         try {
             URL url = new File("src/main/resources/com/example/librarymanagementsystem/" + fxmlFile).toURI().toURL();
             Parent root = FXMLLoader.load(url);
+            root.getStylesheets().add(ChangeScene.class.getResource(GUIController.current_theme).toExternalForm());
 
             Stage dialog = new Stage();
             dialog.setUserData(passInfo);
