@@ -69,7 +69,7 @@ public class CreateAccountController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtPassword.setOnKeyPressed(event -> {
+        txtPasswordConfirmation.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
                 createAccount(event);
             }
