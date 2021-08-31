@@ -206,7 +206,7 @@ public class BookObjectPaneController implements Initializable {
 
             try {
                 if(FeeManagement.getUserFee(book) > 0) {
-                    lblFeeAmount.setText("$" + FeeManagement.getUserFee(book));
+                    lblFeeAmount.setText("$" + String.format("%,.2f", FeeManagement.getUserFee(book)));
                 }
             } catch(NullPointerException npe) {}
         }
