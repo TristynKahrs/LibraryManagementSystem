@@ -5,15 +5,19 @@ import controllers.Alerter;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class RecoverPasswordController {
+public class RecoverPasswordController implements Initializable {
     //TODO make it pretty foo (pw centering when submitted)
     @FXML
     public Button btnBack;
@@ -33,7 +37,7 @@ public class RecoverPasswordController {
     @FXML
     public Button RecoverSubmitBtn;
 
-    public void btnSubmit(ActionEvent event) {
+    public void recoverPassword(){
         Window owner= RecoverSubmitBtn.getScene().getWindow();
         String fullName = fullNameSearch.getText();
         String userName = usernameSearch.getText();
@@ -45,5 +49,18 @@ public class RecoverPasswordController {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Forgot Password Failed", "That name and username don't go together, try again.");
             }
         }
+    }
+
+    public void btnSubmit(ActionEvent event) {
+       recoverPassword();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        usernameSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                recoverPassword();
+            }
+        });
     }
 }
