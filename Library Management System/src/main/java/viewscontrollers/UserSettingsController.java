@@ -63,15 +63,6 @@ public class UserSettingsController implements Initializable {
         }
     }
 
-    public static void onClickLogout(MouseEvent event) {
-        try {
-            AccountManagement.activeUser = null;
-            ChangeScene.changeScene(event, "login-pane.fxml");
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
     public static void updateActiveUser() {
         activeUser = AccountManagement.activeUser;
     }
