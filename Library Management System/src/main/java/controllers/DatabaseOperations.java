@@ -17,6 +17,7 @@ public class DatabaseOperations {
      */
     public static void createUser(String _fullName, String _username, String _password) {
         String insertUser = "INSERT INTO users(full_name, username, password) Values(?, ?, aes_encrypt(?, 'pass1234!'))";
+        //TODO better the encryption (hashing w/ salt)
         try {
             Connection con = DatabaseConnections.SQLConnection();
             PreparedStatement pst = con.prepareStatement(insertUser);
@@ -64,7 +65,7 @@ public class DatabaseOperations {
 
     /**
      * This method retrieves a User from the lmsdatabase.
-     * @param username String username used to retrive user
+     * @param username String username used to retrieve user
      * @return Returns a String[] containing Users id, fullname, username, and password
      */
     public static String[] getUser(String username) {
@@ -217,6 +218,30 @@ public class DatabaseOperations {
         return foundBook;
     }
 
+    public static String[] getBook(String title, String author){
+        String checkUser = "SELECT * FROM lmsdatabase.books WHERE title=? AND author=?;";
+        String[] foundBook = new String[3];
+
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(checkUser);
+            pst.setString(1, title);
+            pst.setString(2, author);
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                foundBook[0] = rs.getString(1);
+                foundBook[1] = rs.getString(2);
+                foundBook[2] = rs.getString(3);
+            }
+            con.close();
+
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+        return foundBook;
+    }
+
     /**
      * This method returns all books currently checked out of the lmsdatabase.
      * @return Returns a ArrayList of int[] which contains a check_out_id, book_id, and user_id.
@@ -288,6 +313,8 @@ public class DatabaseOperations {
                 checkOutDate = rs.getDate(1);
                 return checkOutDate;
             }
+
+            con.close();
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
@@ -324,7 +351,7 @@ public class DatabaseOperations {
      * @return Returns true if successfully inserted into lmsdatabase, false if not successful.
      */
     public static boolean createLostBook(Book book, User user) {
-        String createLostBook = "INSERT INTO lost_books(book_id, user_id) VALEUS(?, ?)";
+        String createLostBook = "INSERT INTO lost_books(book_id, user_id) VALUES(?, ?)";
 
         try {
             Connection con = DatabaseConnections.SQLConnection();
@@ -379,9 +406,37 @@ public class DatabaseOperations {
             while(rs.next()) {
                 bookIds.add(rs.getInt(1));
             }
+            con.close();
 
             return bookIds;
         } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return bookIds;
+    }
+
+    /**
+     * This method will get all of the current users lost books.
+     * @param user A user Object used to retrive lost bookd from lost_books table.
+     * @return Returns an ArrayList of Integers containing the book_ids found.
+     */
+    public static ArrayList<Integer> getAllUsersLostBooks(User user) {
+        String getLostBooks = "SELECT * FROM lost_books WHERE user_id=?";
+        ArrayList<Integer> bookIds = new ArrayList<>();
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getLostBooks);
+            pst.setInt(1, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            while(rs.next()) {
+                bookIds.add(rs.getInt(2));
+            }
+
+            con.close();
+            return bookIds;
+        } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
 
@@ -396,17 +451,43 @@ public class DatabaseOperations {
      * @return Returns true if successfully inserted into lmsdatabase, false if not successful.
      */
     public static boolean createFee(Book book, User user, double fee) {
-        String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount) VALUES(?, ?, ?)";
+        String insertFee = "INSERT INTO fees(book_id, user_id, fee_amount, feeDate) VALUES(?, ?, ?, ?)";
         try {
             Connection con = DatabaseConnections.SQLConnection();
             PreparedStatement pst = con.prepareStatement(insertFee);
             pst.setInt(1, book.getPrimaryKey());
             pst.setInt(2, user.getPrimaryKey());
             pst.setDouble(3, fee);
+            pst.setDate(4, Date.valueOf(LocalDate.now()));
+            pst.executeUpdate();
+            con.close();
             return true;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
+        return false;
+    }
+
+    /**
+     * This method deletes  a fee from the fees table in the lmsdatabase
+     * @param book A book Object used to delete information from fees table.
+     * @param user A user Object used to delete information from fees table.
+     * @return Returns true if successfully deleted from lmsdatabase, false if not successful.
+     */
+    public static boolean deleteFee(Book book, User user) {
+        String deleteFee = "DELETE FROM fees WHERE book_id=? AND user_id=?";
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(deleteFee);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            pst.executeUpdate();
+            con.close();
+            return true;
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
         return false;
     }
 
@@ -432,6 +513,7 @@ public class DatabaseOperations {
                 bookFees.add(bookFeeInfo);
             }
 
+            con.close();
             return bookFees;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
@@ -460,6 +542,35 @@ public class DatabaseOperations {
                 currentFee = rs.getDouble(1);
                 return currentFee;
             }
+
+            con.close();
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return currentFee;
+    }
+
+    /**
+     * This method gets the fees for books.
+     * @param book A book Object that gets the fee_amount in fees table.
+     * @return Returns a double which is the fee amount.
+     */
+    public static double getBookFee(Book book) {
+        String getFeeAmount = "SELECT fee_amount FROM fees WHERE book_id=(?)";
+        double currentFee = 0;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getFeeAmount);
+            pst.setInt(1, book.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                currentFee = rs.getDouble(1);
+                return currentFee;
+            }
+
+            con.close();
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
@@ -484,11 +595,35 @@ public class DatabaseOperations {
             pst.setInt(3, user.getPrimaryKey());
             pst.executeUpdate();
 
+            con.close();
             return true;
         } catch(SQLException SQLe) {
             SQLe.printStackTrace();
         }
 
         return false;
+    }
+
+    public static Date getFeeDate(Book book, User user) {
+        String getDate = "SELECT feeDate FROM fees WHERE book_id=? AND user_id=?";
+        Date feeDate = null;
+        try {
+            Connection con = DatabaseConnections.SQLConnection();
+            PreparedStatement pst = con.prepareStatement(getDate);
+            pst.setInt(1, book.getPrimaryKey());
+            pst.setInt(2, user.getPrimaryKey());
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()) {
+                feeDate = rs.getDate(1);
+                return feeDate;
+            }
+
+            con.close();
+        } catch(SQLException SQLe) {
+            SQLe.printStackTrace();
+        }
+
+        return feeDate;
     }
 }

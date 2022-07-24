@@ -116,7 +116,7 @@ public class CLI {
     }
 
     private static void checkInBook(User activeUser) {
-        DisplayBooks.updateAllBooks();
+        DisplayBooks.setAllBooks();
         ArrayList<Book> checkedOutBooks = LibraryManagement.usersCheckedOutBooks(activeUser);
         System.out.println("\n\nCheck-in Book");
         for (int i = 0; i < checkedOutBooks.size(); i++) {
@@ -154,7 +154,7 @@ public class CLI {
                 if (0 < choice && choice <= DisplayBooks.getPageSize()) {
                     Book userSelectedBook = DisplayBooks.getSelectedBook(choice - 1);
                     try {
-                        DisplayBooks.updateAllBooks();
+                        DisplayBooks.setAllBooks();
                         LibraryManagement.checkOut(activeUser, userSelectedBook);
                     } catch (NullPointerException npe) {
                         System.out.println("\nSorry, please select an option that is present.\n");

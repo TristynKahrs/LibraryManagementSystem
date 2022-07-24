@@ -1,12 +1,16 @@
 package controllers;
 
+import models.DisplayBooks;
 import models.User;
 
 import javax.naming.CannotProceedException;
-import java.nio.file.AccessDeniedException;
 
 public class AccountManagement {
+    public static User activeUser;
 
+    public static void setActiveUser(User newActiveUser) {
+        activeUser = newActiveUser;
+    }
     /**
      * createAccount should be able to grab the full name of the user, the username and the password.
      * After that, it should make a new user and save it to the database
@@ -20,6 +24,7 @@ public class AccountManagement {
             throw new SecurityException();
         }
         DatabaseOperations.createUser(fullName, username, password);
+        DisplayBooks.setAllBooks();
     }
 
     /**
@@ -31,8 +36,9 @@ public class AccountManagement {
      * @param password account access
      */
     public static User login(String username, String password) throws SecurityException {
-        User activeUser = new User(DatabaseOperations.getUser(username));
+        activeUser = new User(DatabaseOperations.getUser(username));
         if (activeUser.passwordMatches(password)) {
+            DisplayBooks.setAllBooks();
             return activeUser;
         }
         throw new SecurityException();
@@ -77,7 +83,7 @@ public class AccountManagement {
      * @param oldPassword confirming they entered the correct old password
      * @param newPassword updated password they want
      */
-    public static void changePassword(User activeUser, String oldPassword, String newPassword) throws Exception {
+    public static void changePassword(User activeUser, String oldPassword, String newPassword) throws CannotProceedException, SecurityException {
         if (!activeUser.passwordMatches(newPassword)) {
             if (activeUser.passwordMatches(oldPassword)) {
                 DatabaseOperations.changeUserPassword(activeUser.getUsername(), newPassword);
@@ -87,5 +93,16 @@ public class AccountManagement {
         } else {
             throw new CannotProceedException();
         }
+    }
+
+    /**
+     * This method acts as a buffer and changes users full name.
+     *
+     * @param activeUser A user Object used to change users full name.
+     * @param newName    String newName is used to set to their new full name.
+     */
+    public static void changeFullName(User activeUser, String newName) {
+        activeUser.setFullName(newName);
+        DatabaseOperations.changeFullName(newName, activeUser.getUsername());
     }
 }

@@ -4,12 +4,14 @@ import controllers.AccountManagement;
 import controllers.Alerter;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -30,8 +32,12 @@ public class CreateAccountController implements Initializable {
     @FXML
     public Button btnCreate;
     public void onClickBack(ActionEvent event) {
+        createAccount(event);
+    }
+
+    public void createAccount(Event event){
         try{
-            ChangeScene.changeScene(event, "Login-pane.fxml");
+            ChangeScene.changeScene(event, "login-pane.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +54,8 @@ public class CreateAccountController implements Initializable {
                 try {
                     AccountManagement.createAccount(fullName, userName, password);
                     User activeUser = AccountManagement.login(userName, password);
-                    ChangeScene.changeScene(event, "Browse-pane.fxml");
+                    AccountManagement.setActiveUser(activeUser);
+                    ChangeScene.changeScene(event, "browse-pane.fxml");
                 } catch (SecurityException se) {
                     Alerter.showAlert(Alert.AlertType.WARNING, owner, "Username Taken", "Username is already taken, please use a different username.");
                 }catch(IOException ioe){
@@ -62,6 +69,11 @@ public class CreateAccountController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtPassword.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                createAccount(event);
+            }
+        });
 
     }
 

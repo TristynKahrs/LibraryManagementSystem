@@ -2,6 +2,7 @@ package models;
 
 import controllers.DatabaseConnections;
 import controllers.DatabaseOperations;
+import controllers.FeeManagement;
 
 public class Book {
     public int primaryKey;
@@ -26,20 +27,20 @@ public class Book {
         this.primaryKey = primaryKey;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public int getPrimaryKey() {
         return primaryKey;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getAuthor() {
@@ -49,6 +50,15 @@ public class Book {
     public boolean isCheckedOut() {
         for(int[] checkedOutInfo : DatabaseOperations.getAllCheckedOut()) {
             if(getPrimaryKey() == checkedOutInfo[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isLost() {
+        for(Integer book_id : DatabaseOperations.getAllLostBookIds()) {
+            if(getPrimaryKey() == book_id) {
                 return true;
             }
         }

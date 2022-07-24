@@ -4,14 +4,16 @@ import controllers.AccountManagement;
 import controllers.Alerter;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Window;
 import models.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,21 +21,23 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     @FXML
     public Pane paneLogin;
+
     public TextField txtUsername;
     public PasswordField txtPassword;
 
     @FXML
     public Button btnLogin;
 
-    public void onClickLogin(ActionEvent event) {
+    public void logIn(Event event){
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         Window owner= btnLogin.getScene().getWindow();
         if (!username.equals("") && !password.equals("")) {
             try {
                 User activeUser = AccountManagement.login(username, password);
-                ChangeScene.changeScene(event, "Browse-pane.fxml");
-            } catch (SecurityException se) {
+                AccountManagement.setActiveUser(activeUser);
+                ChangeScene.changeScene(event, "browse-pane.fxml");
+            } catch (SecurityException | NumberFormatException se) {
                 Alerter.showAlert(Alert.AlertType.ERROR, owner, "Failed Login", "Username and or Password is incorrect.");
             }catch (IOException ioe){
                 ioe.printStackTrace();
@@ -41,12 +45,16 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void onClickLogin(ActionEvent event) {
+        logIn(event);
+    }
+
     @FXML
     public Label lblCreateAccount;
 
     public void onCreateAccountLink(MouseEvent event) {
         try {
-            ChangeScene.changeScene(event, "Create-Account.fxml");
+            ChangeScene.changeScene(event, "createaccount-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
@@ -57,7 +65,7 @@ public class LoginController implements Initializable {
 
     public void onForgotPasswordClick(MouseEvent event) {
         try {
-            ChangeScene.changeScene(event, "Recover-Password.fxml");
+            ChangeScene.changeScene(event, "recoverpassword-pane.fxml");
         } catch(IOException ioe) {
             ioe.printStackTrace();
         }
@@ -65,8 +73,15 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtPassword.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+                logIn(event);
+            }
+        });
         //TODO remove this in final presentation
         txtUsername.setText("TestUser");
         txtPassword.setText("TestPW");
     }
+
+
 }

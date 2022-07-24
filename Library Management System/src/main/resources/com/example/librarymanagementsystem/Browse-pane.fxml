@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
+<BorderPane fx:id="paneBrowseBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.BrowseBooksController">
    <top>
-      <Pane prefHeight="89.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="224.0" layoutY="14.0" text="Browse Books">
+            <Label layoutX="14.0" layoutY="14.0" text="Browse Books">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSearch" layoutX="172.0" layoutY="50.0" promptText="Search books" />
-            <Button fx:id="btnSearch" layoutX="340.0" layoutY="50.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
-            <Button fx:id="btnProfile" layoutX="514.0" layoutY="32.0" mnemonicParsing="false" onAction="#onClickUserProfile" text="Profile" />
+            <TextField fx:id="txtSearch" layoutX="198.0" layoutY="19.0" promptText="Search books" />
+            <Button fx:id="btnSearch" layoutX="360.0" layoutY="19.0" mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
+            <ImageView id="imgPFP" fx:id="imgProfile" fitHeight="50.0" fitWidth="50.0" layoutX="539.0" layoutY="10.0" onMouseClicked="#onClickUserProfile" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/defaultpfp.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ImageView>
          </children>
       </Pane>
    </top>
    <center>
-      <Pane fx:id="panePage" prefHeight="230.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="centerPane" prefHeight="295.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <Pane prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="51.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnNext" layoutX="443.0" layoutY="18.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" />
-            <Button fx:id="btnPrev" layoutX="132.0" layoutY="18.0" mnemonicParsing="false" onAction="#onPrevButtonClick" text="Previous" />
+            <Button fx:id="btnNext" layoutX="444.0" layoutY="14.0" mnemonicParsing="false" onAction="#onNextButtonClick" text="Next" />
+            <Button fx:id="btnPrev" layoutX="134.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPrevButtonClick" text="Previous" />
+            <Label fx:id="lblPageNumbers" layoutX="286.0" layoutY="18.0" text="Label" />
          </children>
       </Pane>
    </bottom>

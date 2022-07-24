@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="scroll" prefHeight="300.0" prefWidth="132.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.NavigationController">
+   <children>
+      <Label id="hyperlink" fx:id="lblChangeName" layoutX="14.0" layoutY="14.0" onMouseClicked="#onChangeName" text="Change Name" underline="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <Label id="hyperlink" fx:id="lblChangePassword" layoutX="14.0" layoutY="47.0" onMouseClicked="#onChangePassword" text="Change Password" underline="true" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <Label id="hyperlink" fx:id="lblLogout" layoutX="14.0" layoutY="269.0" onMouseClicked="#onLogout" text="Logout" underline="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+      <Label id="hyperlink" fx:id="lblThemes" layoutX="14.0" layoutY="245.0" onMouseClicked="#onThemes" text="Themes" underline="true" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Label>
+
+   </children>
+</Pane>

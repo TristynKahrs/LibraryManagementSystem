@@ -4,29 +4,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.ChangeNamePaneController">
+<AnchorPane prefHeight="311.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.ChangeNamePaneController">
    <children>
-      <TextField layoutX="202.0" layoutY="100.0" prefHeight="33.0" prefWidth="196.0" promptText="Username">
+      <TextField fx:id="txtUsername" layoutX="126.0" layoutY="71.0" prefHeight="33.0" prefWidth="196.0" promptText="Username">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="202.0" layoutY="158.0" prefHeight="33.0" prefWidth="196.0" promptText="Password">
+      <TextField fx:id="txtPassword" layoutX="126.0" layoutY="114.0" prefHeight="33.0" prefWidth="196.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField layoutX="202.0" layoutY="215.0" prefHeight="33.0" prefWidth="196.0" promptText="New Full Name">
+      <TextField fx:id="txtNewFullName" layoutX="126.0" layoutY="156.0" prefHeight="33.0" prefWidth="196.0" promptText="New Full Name">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="224.0" layoutY="35.0" text="Change Name">
+      <Label layoutX="167.0" layoutY="28.0" text="Change Name">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="266.0" layoutY="269.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="68.0" text="Submit" />
-      <Label layoutX="251.0" layoutY="330.0" text="Confirmation Here" />
+      <Button fx:id="btnSubmit" layoutX="190.0" layoutY="228.0" mnemonicParsing="false" onAction="#onClickSubmit" prefHeight="33.0" prefWidth="68.0" text="Submit" />
+      <Label fx:id="lblConfirmation" layoutX="209.0" layoutY="279.0" />
    </children>
 </AnchorPane>

@@ -1,63 +1,98 @@
 package viewscontrollers;
 
+import controllers.AccountManagement;
 import controllers.ChangeScene;
-import controllers.DatabaseOperations;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import models.DisplayBooks;
+import models.User;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.module.FindException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ResourceBundle;
 
 public class BrowseBooksController implements Initializable {
-    //TODO try login constructor
     public BorderPane paneBrowseBooks;
 
     //Top
     @FXML
-    public TextField txtSearch; //meh?
-
+    public TextField txtSearch;
     public Button btnSearch;
 
     public void onSearchClick(ActionEvent event) {
-        //TODO get search field, search books, update page pane
-        String strSearch = txtSearch.getText();
-        if (!strSearch.equals("")) {
-            try {
+        searching();
+    }
+
+    public void searching(){
+        try {
+            String strSearch = txtSearch.getText();
                 DisplayBooks.searchBooks(strSearch);
                 updateCenterPane();
-            } catch (FindException ignored) {}
+        } catch (FindException ignored) {
         }
     }
 
-    public Button btnProfile;
-
-    public void onClickUserProfile(ActionEvent event) {
+    public void onClickUserProfile(MouseEvent event) {
         try {
-            ChangeScene.changeScene(event, "User-Profile-pane.fxml");
-        } catch(IOException ioe) {
+            User user = AccountManagement.activeUser;
+            ChangeScene.changeScene(event, "userprofile-pane.fxml");
+            DisplayBooks.setCheckedOutSet(user);
+            UserProfileController.booksCenterPane("CheckIn");
+        } catch (IOException ioe) {
             ioe.printStackTrace();
+        } catch (FindException ignored) {
         }
     }
 
     //Center
-    public Pane panePage;
-    public void updateCenterPane() {
+    public Pane centerPane;
+    public static Pane static_pane;
+
+    public static void updateCenterPane() {
+        static_pane.getChildren().clear();
         try {
-            panePage.getChildren().clear();
-            panePage.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+            PagePaneController.setLocation("Browse");
+            static_pane.getChildren().add(updateScrollPane());
+            updatePageNumbers();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    public Label lblPageNumbers;
+    public static Label static_lblPageNumbers;
+
+    public static void updatePageNumbers() {
+        static_lblPageNumbers.setText((DisplayBooks.pageNumber + 1) + "/" + DisplayBooks.amountOfPages);
+    }
+
+    public static ScrollPane updateScrollPane() throws IOException {
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/page-pane.fxml").toURI().toURL()));
+        sp.setPrefSize(600, 285);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        final double SPEED = 0.0075;
+        sp.getContent().setOnScroll(scrollEvent -> {
+            double deltaY = scrollEvent.getDeltaY() * SPEED;
+            sp.setVvalue(sp.getVvalue() - deltaY);
+        });
+        return sp;
     }
 
 
@@ -80,7 +115,14 @@ public class BrowseBooksController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DisplayBooks.setAllBooks();
+        txtSearch.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER){
+               searching();
+               txtSearch.setText("");
+            }
+        });
+        static_pane = centerPane;
+        static_lblPageNumbers = lblPageNumbers;
         updateCenterPane();
     }
 }

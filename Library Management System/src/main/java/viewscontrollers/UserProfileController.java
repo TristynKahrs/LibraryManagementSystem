@@ -1,102 +1,110 @@
 package viewscontrollers;
 
+import controllers.AccountManagement;
 import controllers.ChangeScene;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import models.DisplayBooks;
+import models.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.module.FindException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserProfileController implements Initializable {
-    //TODO all of the little controllers in here
+    private User activeUser;
     public Label lblGreeting;
-    public ImageView userImg;
+    public static Label static_lblGreeting;
+    private boolean onSetting = false;
+
+    public ImageView imgUser;
+
+    public void switchMenu(MouseEvent mouseEvent) {
+        static_paneDisplay.getChildren().clear();
+        if (onSetting) {
+            try {
+                PagePaneController.setLocation("CheckIn");
+                static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            onSetting = false;
+        } else {
+            try {
+                static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/usersettings-pane.fxml").toURI().toURL()));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            onSetting = true;
+        }
+    }
+
 
     public Pane paneDisplay;
+    public static Pane static_paneDisplay;
 
-    public Button btnBrowse;
-
-    public void onClickBrowse(ActionEvent event) {
-        paneDisplay.getChildren().clear();
+    public static void booksCenterPane(String buttonLocation) {
+        static_paneDisplay.getChildren().clear();
         try {
-            ChangeScene.changeScene(event, "Browse-pane.fxml");
+            PagePaneController.setLocation(buttonLocation);
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    //vbox
-    public Button btnFees;
-
-    public void onClickFees(ActionEvent event) {
-        paneDisplay.getChildren().clear();
+    public static void settingsCenterPane() {
+        static_paneDisplay.getChildren().clear();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/fee-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/usersettings-pane.fxml").toURI().toURL()));
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    public Button btnLostBooks;
+    public Button btnBrowse;
 
-    public void onClickLostBooks(ActionEvent event) {
-        paneDisplay.getChildren().clear();
+    public void onClickBrowse(ActionEvent event) {
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/lostbooks-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
+            PagePaneController.setLocation("CheckIn");
+            DisplayBooks.setAllBooks();
+            DisplayBooks.resetPageNumber();
+            ChangeScene.changeScene(event, "browse-pane.fxml");
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    public Button btnChangeName;
-
-    public void onClickChangeName(ActionEvent event) {
-        paneDisplay.getChildren().clear();
-        try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changename-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+    public void updateActiveUser() {
+        activeUser = AccountManagement.activeUser;
     }
 
-    public Button btnChangePassword;
-
-    public void onClickChangePassword(ActionEvent event) {
-        paneDisplay.getChildren().clear();
-        try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/changepassword-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+    public static void updateGreeting() {
+        static_lblGreeting.setText(AccountManagement.activeUser.getFullName());
     }
-
-    public Button btnCheckedOutBooks;
-
-    public void onClickCheckedOut(ActionEvent event) {
-        paneDisplay.getChildren().clear();
-        try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-        }
-    }
-    //vbox end
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TODO change label to have persons name
+        static_paneDisplay = paneDisplay;
+        static_lblGreeting = lblGreeting;
+        updateActiveUser();
         try {
-            paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/checkedout-pane.fxml").toURI().toURL()));
-        }catch(IOException ioe){
-            ioe.printStackTrace();
+            static_paneDisplay.getChildren().add(FXMLLoader.load(new File("src/main/resources/com/example/librarymanagementsystem/userbookprofile-pane.fxml").toURI().toURL()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        updateGreeting();
     }
 
 }

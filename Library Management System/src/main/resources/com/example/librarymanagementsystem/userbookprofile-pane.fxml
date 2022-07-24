@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="338.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewscontrollers.UserBookController">
+   <children>
+      <TabPane fx:id="tabPane" prefHeight="338.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabCheckIn" text="Check In">
+            <content>
+              <AnchorPane fx:id="pneCheckIn" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblCheckInMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="145.0" text="You have no books checked out" textAlignment="CENTER" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabFees" text="Fees">
+            <content>
+              <AnchorPane fx:id="pneFees" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblFeesMessage" layoutX="224.0" layoutY="145.0" text="You have no books with fees" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabLost" text="Lost">
+              <content>
+                <AnchorPane fx:id="pneLost" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="lblLostMessage" layoutX="238.0" layoutY="145.0" text="You have no lost books" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

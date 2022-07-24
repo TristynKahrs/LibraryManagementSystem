@@ -3,7 +3,6 @@ package controllers;
 import models.Book;
 import models.User;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FeeManagement {
@@ -21,19 +20,35 @@ public class FeeManagement {
     }
 
     /**
+     * This method gets all of the users Lost books
+     * @param user A user Object used to get users lost books
+     * @return Returns an ArrayList of Books
+     */
+    public static ArrayList<Book> usersLostBooks(User user) {
+        ArrayList<Book> allLostBooks = new ArrayList<>();
+        for(Integer book_id : DatabaseOperations.getAllUsersLostBooks(user)) {
+            Book book = new Book(DatabaseOperations.getBook(book_id));
+            allLostBooks.add(book);
+        }
+
+        return allLostBooks;
+    }
+
+    /**
      * This method is used to create a lost book into the lmsdatabase.
      * @param user A user Object used to create lost book.
      * @param book A book Object used to create a lost book.
      */
     public static void lostBook(User user, Book book) {
-        if(LibraryManagement.usersCheckedOutBooks(user).contains(book)){
-            double lostFeeAmount = -20.00;
-            DatabaseOperations.createLostBook(book, user);
-            DatabaseOperations.checkInBook(book, user);
-            if(DatabaseOperations.getCurrentFee(book, user) == 0) {
-                DatabaseOperations.createFee(book, user, lostFeeAmount);
-            } else {
-                DatabaseOperations.updateFee(book, user, lostFeeAmount);
+        for(Book checkedOutBook : LibraryManagement.usersCheckedOutBooks(user)) {
+            if(checkedOutBook.getTitle().equals(book.getTitle())){
+                double lostFeeAmount = 20.00;
+                DatabaseOperations.createLostBook(book, user);
+                if(DatabaseOperations.getCurrentFee(book, user) == 0) {
+                    DatabaseOperations.createFee(book, user, lostFeeAmount);
+                } else {
+                    DatabaseOperations.updateFee(book, user, lostFeeAmount);
+                }
             }
         }
     }
@@ -44,10 +59,15 @@ public class FeeManagement {
      * @param book A book Object used to remove a found book from lost_books.
      */
     public static void foundBook(User user, Book book) {
-        double lostFeeRefund = 20.00;
-        if(allLostBooks().contains(book)) {
-            DatabaseOperations.deleteLostBook(book, user);
-            DatabaseOperations.updateFee(book, user, lostFeeRefund);
+        double lostFeeRefund = -20.00;
+        for(Book lostBook : allLostBooks()) {
+            if(lostBook.getTitle().equals(book.getTitle())) {
+                DatabaseOperations.deleteLostBook(book, user);
+                DatabaseOperations.updateFee(book, user, lostFeeRefund);
+                if(DatabaseOperations.getCurrentFee(book, user) <= 0) {
+                    DatabaseOperations.deleteFee(book, user);
+                }
+            }
         }
     }
 
@@ -81,5 +101,41 @@ public class FeeManagement {
      */
     public static void updateFees(Book book, User user, double feeAmount) {
         DatabaseOperations.updateFee(book, user, feeAmount);
+    }
+
+    /**
+     * This method gets an Arraylist of books that a user has a fee on.
+     * @param user A user Object used to retrieve all of their books that have fees
+     * @return Returns a ArrayList of book Objects
+     */
+    public static ArrayList<Book> getUsersBooksWithFees(User  user) {
+        ArrayList<Book> books = new ArrayList<>();
+        ArrayList<double[]> getBookIds = DatabaseOperations.checkForFees(user);
+        for(double[] bookFee :getBookIds) {
+            Book book = new Book(DatabaseOperations.getBook((int)bookFee[0]));
+            books.add(book);
+        }
+
+        return books;
+    }
+
+    public static int countUsersFees(User user) {
+        int feeCount = 0;
+        ArrayList<double[]> getFees = DatabaseOperations.checkForFees(user);
+        for (double[] bookFee: getFees) {
+            feeCount++;
+        }
+
+        return feeCount;
+    }
+
+    /**
+     * This method gets the fee for a book
+     * @param book A book Object to retrieve the fee
+     * @return Returns fee amount
+     */
+    public static double getUserFee(Book book) {
+        double feeForBook = DatabaseOperations.getBookFee(book);
+        return feeForBook;
     }
 }
